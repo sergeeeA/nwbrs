@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 .wrapper {
-  background-color: #383c47;
+  background-color: #2e2e2e;
   width: 100%;
   min-height: 50px;
   color: #f1f1f3;
@@ -10,15 +11,17 @@
   position: sticky;
   top: 0;
   left: 0;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #C8AC53;
+  box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
 }
 
 .title {
-  margin-left: 20px;
+  font-family: 'Great Vibes', cursive; /* Apply the custom font here */
   font-size: 2rem;
+  color: #ffcf4c;
+  margin-left: 20px;
   cursor: pointer;
   font-weight: bolder;
-  color: #f2505e;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,20 +31,25 @@
   margin-right: 20px;
   font-size: 1rem;
   cursor: pointer;
-  border: 1px solid #464c5a;
-  background-color: #3e4754;
-  border-radius: 1.5rem;
+  border: 1px solid #C8AC53;
+  background-color: #202020;
+  border-radius: 0.5rem;
   padding: 10px;
-  color: #f0f4fa;
+  color: #C8AC53;
   font-weight: bolder;
 }
+.loginBtn:hover {
+  background-color: #9c8436; /* Change to the desired background color on hover */
+ 
+  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
 
+}
 .welcome {
   font-size: 1rem;
   font-weight: bolder;
 }
 
 .accentColor {
-  color: #f2505e;
-  font-weight: bold;
+  color: #C8AC53;
+  font-weight: default;
 }

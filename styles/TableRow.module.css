@@ -1,9 +1,9 @@
 .wrapper {
   width: 100%;
   height: 50px;
-  background-color: #1e222d;
-  border-top: 1px solid #31353e;
-  border-bottom: 1px solid #31353e;
+  background-color: #2e2e2e;
+  border-top: 1px solid #C8AC53;
+  border-bottom: 1px solid #C8AC53;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,21 +15,21 @@
 }
 
 .address {
-  color: #fff;
+  color: #C8AC53;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 250;
   line-height: 1.2;
   letter-spacing: 0.5px;
 }
 
 .ethAmmount {
-  color: #fff;
+  color: #C8AC53;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 250;
   line-height: 1.2;
   letter-spacing: 0.5px;
 }
 
 .goldAccent {
-  color: #ffde3c;
+  color: #C8AC53;
 }

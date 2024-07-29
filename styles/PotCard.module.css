@@ -1,82 +1,138 @@
 .wrapper {
-  background-color: #242833;
-  min-height: 200px;
-  width: 50%;
-  margin: 0 auto;
-  border-radius: 2rem;
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  background-color: #1d1d1d; /* Semi-transparent background color */
+  
+  min-height: 200px; /* Minimum height */
+  width: 50%; /* Width of the element */
+  margin: 0 auto; /* Center horizontally */
+  border-radius: 2rem; /* Rounded corners */
+  box-shadow: 0 0 24px #C8AC53; /* Box shadow on all sides */
+  padding: 20px; /* Space inside the wrapper */
   display: flex;
-  padding: 20px;
-  flex-direction: column;
-  margin-top: 40px;
+  flex-direction: column; /* Arrange children in a column */
+  margin-top: 40px; /* Space above the wrapper */
 }
 
+.lineAfter {
+  border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
+  width: 50%; /* Width of the line */
+  margin: 0 auto; /* Center the line horizontally */
+  /* Optional: Adjust the line height or add spacing */
+  height: 2px; /* Ensure this matches the border thickness */
+}
 .title {
-  font-size: 2rem;
-  font-weight: bolder;
-  color: #fff;
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 2rem; /* Font size for the title */
+  font-weight: 250; /* Font weight for emphasis */
+  color: #C8AC53; /* Text color */
+  text-align: center; /* Center align the text */
+  margin-bottom: 20px; /* Space below the title */
+
+
+
+
 }
 
 .pot {
   font-size: 1.5rem;
-  font-weight: bolder;
-  color: #fff;
+  font-weight: 250;
+  color: #C8AC53;
   text-align: center;
   flex: 1;
 }
 
 .potAmount {
   font-size: 1.5rem;
-  font-weight: bolder;
-  color: #fff;
+  font-weight: 250;
+  color: #C8AC53;
   text-align: center;
 }
 
 .goldAccent {
-  color: #ffdf3d;
+  background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
+  color: white; /* Text color for better contrast */
+  padding: 5px 10px; /* Add some padding around the text */
+  border-radius: 3px; /* Optional: rounded corners */
+  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+  animation: breatheGlow 2s ease-in-out infinite; /* Apply the breathing animation */
+  
+}
+
+@keyframes breatheGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 207, 76, 0.5); /* Increase glow intensity */
+  }
+  
+  100% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+  }
 }
 
 .btn {
-  background-color: #1e2128;
+  background-color: #1d1d1d;
   width: 50%;
   display: flex;
   justify-content: center;
   place-self: center;
-  color: #f45358;
+  color: #C8AC53;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   margin-top: 20px;
   cursor: pointer;
-  border-radius: 1.5rem;
-  font-weight: bolder;
-  font-size: 1.5rem;
-  border: 1px solid #f45358;
+
+  font-weight: 500;
+  font-size: 2rem;
+
+}
+.btn:hover {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+@keyframes flicker {
+
+
+  50% {
+    box-shadow: 0 0 15px rgba(255, 207, 76, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
+  }
 }
 
 .recentWinnerTitle {
   font-size: 1.5rem;
-  font-weight: bolder;
-  color: #fff;
+  font-weight: 250;
+  color: #C8AC53;
   text-align: center;
   margin-top: 20px;
 }
 
 .winner {
   font-size: 1.5rem;
-  font-weight: bolder;
-  color: #fff;
+  font-weight: 400;
   text-align: center;
-  color: #f45358;
+  color: #C8AC53; /* Text color */
+  text-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Shadow effect */
 }
 
 .textAccent {
-  color: #f45358;
+  color: #C8AC53;
+  background: linear-gradient(to bottom, #2e343b, #1e2128); /* Gradient from dark to lighter color */
+  border-radius: 0.5rem; /* Optional: rounded corners */
+  padding: 2px 2px;
+  margin: 5px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #C8AC53;
 }
+
 
 .drawWinnerBtn {
   background-color: #242833;
@@ -85,11 +141,11 @@
   justify-content: center;
   margin: 0 auto;
   width: 20%;
-  border: 1px solid #f2505e;
+  border: 1px solid #C8AC53;
   border-radius: 1.2rem;
   padding: 10px 20px;
   font-size: 1.3rem;
   font-weight: bolder;
   cursor: pointer;
-  color: #f2505e;
+  color: #C8AC53;
 }
