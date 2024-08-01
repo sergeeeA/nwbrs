@@ -63,8 +63,6 @@ const PotCard = () => {
         BUY RAFFLE
       </div>
 
-
-
     </div>
   )
 }
@@ -72,3 +70,7 @@ const PotCard = () => {
 export default PotCard
 
 // This is for admin access
+    
+//   <div className={style.btn} onClick={pickWinner}>
+//   Only Admin
+ //   </div>
