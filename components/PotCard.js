@@ -62,10 +62,8 @@ const PotCard = () => {
       <div className={style.btn} onClick={handleGambooolClick}>
         BUY RAFFLE
       </div>
-      
-      <div className={style.btn} onClick={pickWinner}>
-      Only Admin
-       </div>
+
+
 
     </div>
   )
