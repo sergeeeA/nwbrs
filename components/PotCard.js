@@ -60,13 +60,15 @@ const PotCard = () => {
       )}
 
       <div className={style.btn} onClick={handleGambooolClick}>
-        GAMBOOOL!
+        BUY RAFFLE
       </div>
-      <div className={style.btn} onClick={pickWinner}>
-        Only Admin
-      </div>
+
     </div>
   )
 }
 
 export default PotCard
+//      <div className={style.btn} onClick={pickWinner}>
+// Only Admin
+// </div>
+// This is for admin access

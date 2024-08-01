@@ -22,7 +22,7 @@
 }
 .heading1 {
   font-size: 2rem; /* Adjust font size as needed */
-  font-weight: 500;
+  font-weight: 300;
   text-align: center; /* Center align the text */
   margin-bottom: 20px; /* Space between heading and table */
   color: #C8AC53; /* Optional: heading color */
@@ -51,14 +51,14 @@
 
 .amountTitle {
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 250;
   color: #C8AC53;
   
 }
 
 .addressTitle {
   font-size: 1.3rem;
-  font-weight: 400;
+  font-weight: 250;
   color: #C8AC53;
 }
 

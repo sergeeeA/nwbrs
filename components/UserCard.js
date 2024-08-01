@@ -8,7 +8,7 @@ const UserCard = ({ address }) => {
         
       >
         Bera Morning,{' '}
-        <span className={style.accentColor}>{truncateEthAddress(address)}</span>
+        <span className={style.welcome}>{truncateEthAddress(address)}</span>
       </div>
     </div>
   )

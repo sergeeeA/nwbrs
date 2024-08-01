@@ -13,6 +13,8 @@
   left: 0;
   border-bottom: 1px solid #C8AC53;
   box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
+  cursor: url('../public/curs.png'), auto;
+
 }
 
 .title {
@@ -25,31 +27,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: url('../public/curslink.png'), auto;
 }
 
 .loginBtn {
   margin-right: 20px;
   font-size: 1rem;
-  cursor: pointer;
-  border: 1px solid #C8AC53;
-  background-color: #202020;
-  border-radius: 0.5rem;
+  cursor: url('../public/curs.png'), auto;
+  background-color: #2e2e2e;
   padding: 10px;
   color: #C8AC53;
   font-weight: bolder;
 }
 .loginBtn:hover {
-  background-color: #9c8436; /* Change to the desired background color on hover */
- 
-  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
 
 }
+@keyframes flicker {
+
+
+  50% {
+    box-shadow: 0 0 15px rgba(255, 207, 76, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
+  }
+}
+
 .welcome {
   font-size: 1rem;
   font-weight: bolder;
 }
 
-.accentColor {
-  color: #C8AC53;
-  font-weight: default;
-}
+

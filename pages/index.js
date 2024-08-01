@@ -2,6 +2,7 @@ import Header from '../components/Header'
 import PotCard from '../components/PotCard'
 import Table from '../components/Table'
 
+
 import style from '../styles/Home.module.css'
 export default function Home() {
   return (
@@ -9,6 +10,8 @@ export default function Home() {
       <Header />
       <PotCard />
       <Table />
+
+
     </div>
   )
 }
