@@ -8,10 +8,13 @@ export const AppProvider = ({ children }) => {
   const [address, setAddress] = useState('')
   const [lotteryContract, setLotteryContract] = useState()
   const [lotteryPot, setLotteryPot] = useState()
-  const [lotteryPlayers, setPlayers] = useState([])
+  const [miniGamePool, setMiniGamePool] = useState() 
+  const [getLotteryPlayers, setPlayers] = useState([])
   const [lastWinner, setLastWinner] = useState([])
   const [lotteryId, setLotteryId] = useState()
   const [etherscanUrl, setEtherscanUrl] = useState()
+
+  
 
   useEffect(() => {
     updateLottery()
@@ -20,18 +23,26 @@ export const AppProvider = ({ children }) => {
   const updateLottery = async () => {
     if (lotteryContract) {
       try {
-        const pot = await lotteryContract.methods.getBalance().call()
+        const pot = await lotteryContract.methods.getLotteryBalance().call()
 
         setLotteryPot(web3.utils.fromWei(pot, 'ether'))
 
+        const pool = await lotteryContract.methods.getMiniGamePool().call();
+        setMiniGamePool(web3.utils.fromWei(pool, 'ether'));
+
+
+
         setPlayers(await lotteryContract.methods.getPlayers().call())
 
+
+        
         setLotteryId(await lotteryContract.methods.lotteryId().call())
 
         setLastWinner(await lotteryContract.methods.getWinners().call())
         console.log([...lastWinner], 'Last Winners')
       } catch (error) {
         console.log(error, 'updateLottery')
+        console.error('Error fetching mini game pool:', error);
       }
     }
   }
@@ -41,8 +52,25 @@ export const AppProvider = ({ children }) => {
       console.log('entering lottery')
       await lotteryContract.methods.enter().send({
         from: address,
-        // 0.015 ETH in Wei
-        value: '15000000000000000',
+        // 1 ETH in Wei
+        value: '1000000000000000000',
+        // 0.0003 ETH in Gwei
+        gas: 300000,
+        gasPrice: null,
+      })
+      updateLottery()
+    } catch (err) {
+      console.log(err, 'enter')
+    }
+  }
+  
+  const duel = async () => {
+    try {
+      console.log('entering duel')
+      await lotteryContract.methods.enterMiniGame().send({
+        from: address,
+        // 4 ETH in Wei
+        value: '4000000000000000000',
         // 0.0003 ETH in Gwei
         gas: 300000,
         gasPrice: null,
@@ -108,10 +136,13 @@ export const AppProvider = ({ children }) => {
         address,
         connectWallet,
         lotteryPot,
-        lotteryPlayers,
+        miniGamePool,
+        getLotteryPlayers,
         enterLottery,
+        duel,
         pickWinner,
         lotteryId,
+
         lastWinner,
         etherscanUrl,
       }}

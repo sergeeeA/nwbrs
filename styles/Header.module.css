@@ -14,7 +14,9 @@
   border-bottom: 1px solid #C8AC53;
   box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
   cursor: url('../public/curs.png'), auto;
-
+  background-image: url('../public/tec.png'); /* Path to your X symbol image */
+  background-repeat: repeat; /* Repeat the background image */
+  background-size: 30px 30px; /* Size of the background image */
 }
 
 .title {
@@ -29,15 +31,28 @@
   justify-content: center;
   cursor: url('../public/curslink.png'), auto;
 }
-
+.nav {
+  font-family: 'Great Vibes', cursive; /* Apply the custom font here */
+  font-size: 2rem;
+  color: #ffcf4c;
+  margin-left: 20px;
+  cursor: pointer;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: url('../public/curslink.png'), auto;
+}
 .loginBtn {
   margin-right: 20px;
   font-size: 1rem;
   cursor: url('../public/curs.png'), auto;
-  background-color: #2e2e2e;
+  background-color: transparent;
   padding: 10px;
   color: #C8AC53;
   font-weight: bolder;
+  cursor: url('../public/cursconnect.png'), auto;
+  border: none;
 }
 .loginBtn:hover {
   background-color: #C8AC53; /* Change background color on hover */
@@ -62,5 +77,8 @@
   font-size: 1rem;
   font-weight: bolder;
 }
+/* SELECT NEW PAGE */
+
+
 
 

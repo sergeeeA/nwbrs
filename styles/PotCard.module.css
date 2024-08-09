@@ -1,52 +1,135 @@
+@font-face {
+  font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
+  src: url('../public/monofonto rg.otf') format('opentype'); /* Path and format */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+/* styles/Home.module.css */
+
 .wrapper {
   background-color: #1d1d1d; /* Semi-transparent background color */
-  
-  min-height: 200px; /* Minimum height */
+  flex: 1; /* Allow each card to grow equally */
+  max-width: 455px; /* Example fixed width, adjust as needed */
+  min-height: 355px;
+  max-height: 355px;
   width: 50%; /* Width of the element */
   margin: 0 auto; /* Center horizontally */
   border-radius: 2rem; /* Rounded corners */
-  box-shadow: 0 0 24px #C8AC53; /* Box shadow on all sides */
-  padding: 20px; /* Space inside the wrapper */
+  padding: 5px; /* Space inside the wrapper */
   display: flex;
   flex-direction: column; /* Arrange children in a column */
   margin-top: 40px; /* Space above the wrapper */
+  margin-left: 25px;
+  overflow: hidden; /* Hide overflow content */
+  transition: transform 0.15s ease, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+  perspective: 1000px; /* Perspective for 3D effect */
 }
+
+.wrapper:hover {
+  animation: pulsate 2s infinite; /* Pulsating animation on hover */
+}
+
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 10px #bd9938;
+  }
+  50% {
+    box-shadow: 0 0 30px #ffcf4c;
+  }
+  100% {
+    box-shadow: 0 0 10px #bd9938;
+  }
+}
+
 
 .lineAfter {
   border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
-  width: 15%; /* Width of the line */
+  width: 100%; /* Width of the line */
   margin: 0 auto; /* Center the line horizontally */
   /* Optional: Adjust the line height or add spacing */
   height: 2px; /* Ensure this matches the border thickness */
 }
 .title {
-  font-size: 2rem; /* Font size for the title */
-  font-weight: 250; /* Font weight for emphasis */
-  color: #C8AC53; /* Text color */
-  text-align: center; /* Center align the text */
-  margin-bottom: 20px; /* Space below the title */
+  font-family: 'Great Vibes', cursive; /* Apply the custom font here */
+  font-size: 2rem;
+  color: #ffcf4c;
 
+  cursor: pointer;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: url('../public/curslink.png'), auto;
+  padding: 10px; /* space for title below*/
+  
+}
+.titleBigiron {
+  font-family: 'Monofonto', cursive; /* Apply the custom font here */
+  font-size: 2rem;
+  color: #ffcf4c;
+  margin-left: 20px;
+  cursor: pointer;
+  font-weight: bolder;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: url('../public/curslink.png'), auto;
+  padding: 10px; /* space for title below*/
+  
+  
+}
+.titlebigironbg {
+  background: url('../public/test.png') no-repeat center center;
+  background-size: cover; /* Scale the background image to cover the entire element */
+  color: #ffcf4c;
+  cursor: url('../public/curslink.png'), auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px; /* Space for title below */
 
+  box-sizing: border-box; /* Ensure padding is included in width */
+  width: 100vw; /* 50% of the viewport width */
 
+  max-width: 555px; /* Maximum width */
+  margin: 0; /* Remove margin to use full width */
+  place-self: center;
+}
+.titlebglucky69bg {
+  background: url('../public/Lucky69banner.png') no-repeat center center;
+  background-size: cover; /* Scale the background image to cover the entire element */
+  color: #ffcf4c;
+  cursor: url('../public/curslink.png'), auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px; /* Space for title below */
 
+  box-sizing: border-box; /* Ensure padding is included in width */
+  width: 100vw; /* 50% of the viewport width */
+
+  max-width: 555px; /* Maximum width */
+  margin: 0; /* Remove margin to use full width */
+  place-self: center;
 }
 
 .pot {
+  font-family: 'Monofonto' ;
   font-size: 1.5rem;
   font-weight: 250;
   color: #C8AC53;
   text-align: center;
-  flex: 1;
+  padding: 10px;
+  
 }
 
-.potAmount {
-  font-size: 1.5rem;
-  font-weight: 250;
-  color: #C8AC53;
-  text-align: center;
-}
+
 
 .goldAccent {
+  font-family: 'Monofonto', cursive;
   background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
   color: white; /* Text color for better contrast */
   padding: 5px 10px; /* Add some padding around the text */
@@ -70,23 +153,24 @@
 }
 
 .btn {
-  background-color: #1d1d1d;
-  width: 50%;
+  font-family: 'Monofonto';
+  width: 100%;
   display: flex;
   justify-content: center;
   place-self: center;
   color: #C8AC53;
-  padding: 15px 32px;
+  padding: 15px 64px;
   text-align: center;
-  text-decoration: none;
-  margin-top: 20px;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   cursor: url('../public/curslott.png'), auto;
-
   font-weight: 500;
   font-size: 2rem;
-
+  
 }
 .btn:hover {
+
   background-color: #C8AC53; /* Change background color on hover */
   color: #1e2128; /* Change text color on hover */
   animation: flicker 0.2s ease-out; /* Apply flicker animation */
@@ -104,26 +188,55 @@
     box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
   }
 }
+.btnbigiron {
+  font-family: 'Monofonto';
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  place-self: center;
+  color: #C8AC53;
+  padding: 15px 64px;
+  text-align: center;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  cursor: url('../public/gun.png'), auto;
+  font-weight: 500;
+  font-size: 2rem;
+}
+.btnbigiron:hover {
 
-.recentWinnerTitle {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+
+.rafflefeetitle {
+  font-family: 'Monofonto';
   font-size: 1.5rem;
   font-weight: 250;
   color: #C8AC53;
   text-align: center;
-  margin-top: 20px;
+
 }
 
-.winner {
-  font-size: 1.5rem;
-  font-weight: 400;
+.rafflefee {
+  font-family: 'Monofonto';
   text-align: center;
-  color: #C8AC53; /* Text color */
-  text-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Shadow effect */
-  
+  color: #C8AC53;
+
+  padding: 2px 2px;
+  margin: 5px;
+
+
+  text-align: center;
+  place-self: center;
 }
-
-
-.textAccent {
+.rafflefeebg {
+  font-family: 'Monofonto';
+  text-align: center;
   color: #C8AC53;
   background: linear-gradient(to bottom, #2e343b, #1e2128); /* Gradient from dark to lighter color */
   border-radius: 0.5rem; /* Optional: rounded corners */
@@ -133,10 +246,55 @@
   border-right: none;
   border-top: none;
   border-bottom: 1px solid #C8AC53;
+  max-width: 50%;
+  text-align: center;
+  place-self: center;
 }
 
 
+
+
+.textNotLoaded {
+  font-family: 'Monofonto';
+  color: #C8AC53;
+  background: linear-gradient(to bottom, #2e343b, #1e2128); /* Gradient from dark to lighter color */
+  border-radius: 0.5rem; /* Optional: rounded corners */
+  padding: 10px 20px;
+  margin: 5px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #C8AC53;
+  
+  /* Centering the text */
+  display: flex;           /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  text-align: center;      /* Center text within the flex container */
+}
+.textLoaded {
+  font-family: 'Monofonto';
+  color: #ffffff;
+  background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
+  border-radius: 0.5rem; /* Optional: rounded corners */
+  padding: 10px 20px;
+  margin: 5px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #C8AC53;
+  
+  /* Centering the text */
+  display: flex;           /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  text-align: center;      /* Center text within the flex container */
+  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+  animation: breatheGlow 2s ease-in-out infinite;
+}
+
 .drawWinnerBtn {
+  font-family: 'Monofonto', ;
   background-color: #242833;
   display: flex;
   align-items: center;

@@ -52,7 +52,7 @@ const Header = () => {
 
   return (
     <div className={style.wrapper}>
-      <div className={style.title}>Lucky 69</div>
+      <div className={style.title}>New Beras</div>
       {!address ? (
         <WalletConnectBtn connectWallet={handleConnectWallet} />
       ) : (

@@ -1,94 +1,76 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
 
-contract RandomWinner {
+pragma solidity ^0.8.15;
 
-    address public user1;
-    address public user2;
-    address public winner;
-    address public lastRecipient; // New state variable to store the last recipient address
-    uint256 public constant DEPOSIT_AMOUNT = 1 ether; // Deposit amount set to 1 ETH
-    bool public winnerChosen = false;
+contract Lottery {
+    address public owner;
+    address payable[] public players;
+    address[] public winners;
+    uint public lotteryId;
 
-    event Deposited(address indexed user);
-    event WinnerChosen(address indexed winner);
-    event Reset();
-    event TransferMade(address indexed recipient, uint256 amount);
-
-    modifier onlyBeforeWinnerChosen() {
-        require(!winnerChosen, "Winner has already been chosen");
-        _;
+    constructor() {
+        owner = msg.sender;
+        lotteryId = 0;
     }
 
-    modifier onlyOnce() {
-        require(user1 == address(0) || user2 == address(0), "Both users have already deposited");
-        _;
+    function getWinners() public view returns (address[] memory) {
+        return winners;
     }
 
-    constructor() {}
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
 
-    function deposit() external payable onlyBeforeWinnerChosen onlyOnce {
-        require(msg.value == DEPOSIT_AMOUNT, "Deposit must be exactly 1 ETH");
+    function getPlayers() public view returns (address payable[] memory) {
+        return players;
+    }
 
-        if (user1 == address(0)) {
-            user1 = msg.sender;
-        } else if (user2 == address(0)) {
-            user2 = msg.sender;
-            chooseWinner();
-        } else {
-            revert("Both users have already deposited");
+    function enter() public payable {
+        require(msg.value >= .01 ether, "Minimum entry fee is 0.01 ETH");
+
+        // address of player entering lottery
+        players.push(payable(msg.sender));
+
+        // Check if there are exactly two players
+        if (players.length == 2) {
+            pickWinner();
         }
-
-        emit Deposited(msg.sender);
     }
 
-    function chooseWinner() internal {
-        require(user1 != address(0) && user2 != address(0), "Both users must deposit before choosing a winner");
-
-        // Generate a pseudo-random number to select the winner
-        uint256 random = uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty, user1, user2)));
-        if (random % 2 == 0) {
-            winner = user1;
-        } else {
-            winner = user2;
-        }
-        winnerChosen = true;
-
-        // Transfer the total balance to the winner
-        uint256 amount = address(this).balance;
-        payable(winner).transfer(amount);
-        lastRecipient = winner; // Update the last recipient
-
-        emit WinnerChosen(winner);
-        emit TransferMade(lastRecipient, amount);
-
-        // Automatically reset the contract state
-        reset();
+    function getRandomNumber() public view returns (uint) {
+        return uint(keccak256(abi.encodePacked(owner, block.timestamp)));
     }
 
-    function getLastWinner() external view returns (address) {
-        return lastRecipient; // Return the last recipient address
+    function getLotteryId() public view returns (uint) {
+        return lotteryId;
     }
 
-    function getUser1() external view returns (address) {
-        return user1;
+    function pickWinner() public {
+        require(players.length == 2, "There must be exactly two players to pick a winner");
+
+        uint balance = address(this).balance;
+        uint tax = balance / 10;  // 10% tax
+        uint winnerAmount = balance - tax;
+
+        // Calculate random winner index
+        uint randomIndex = getRandomNumber() % players.length;
+
+        // Transfer the tax to the owner
+        payable(owner).transfer(tax);
+
+        // Transfer the remaining balance to the winner
+        players[randomIndex].transfer(winnerAmount);
+
+        // Record the winner
+        winners.push(players[randomIndex]);
+        lotteryId++;
+
+        // Clear the players array
+        delete players;
     }
 
-    function getUser2() external view returns (address) {
-        return user2;
-    }
-
-    function getWinnerChosenStatus() external view returns (bool) {
-        return winnerChosen;
-    }
-
-    // Reset the contract state to allow for a new round
-    function reset() internal {
-        user1 = address(0);
-        user2 = address(0);
-        winner = address(0);
-        winnerChosen = false;
-
-        emit Reset();
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Caller is not the owner");
+        _;
     }
 }

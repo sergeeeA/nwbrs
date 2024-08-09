@@ -1,16 +1,23 @@
 import Header from '../components/Header'
+import PotCardB from '../components/PotCardB'
+
 import PotCard from '../components/PotCard'
-import Table from '../components/Table'
+import Footer from '../components/Footer'
 
-
+import potCardsContainer from '../styles/potCardsContainer.module.css'
 import style from '../styles/Home.module.css'
+
 export default function Home() {
   return (
     <div className={style.wrapper}>
       <Header />
-      <PotCard />
-      <Table />
+      <div className={potCardsContainer.potCardsContainer}>
 
+        <PotCard />
+        <PotCardB />
+      </div>
+      
+      <Footer />
 
     </div>
   )
