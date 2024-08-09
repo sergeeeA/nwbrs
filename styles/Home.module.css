@@ -1,7 +1,7 @@
 .wrapper {
   background-color: #000000;
   padding-bottom: 30px;
-  cursor: url('../public/curs.png'), auto;
+  cursor: url('/curs.png'), auto;
   
 }
 /*comment*/

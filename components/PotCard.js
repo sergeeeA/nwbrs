@@ -84,12 +84,12 @@ const PotCard = () => {
     <div className={style.wrapper} ref={cardRef}>
       <div className={`${style.titlebglucky69bg}`}>
         <div className={`${style.title}`}>
-          Lucky 69
+          LUCKY 69
         </div>
       </div>
 
       <div className={`${style.pot}`}>
-        Prize: <span className={style.goldAccent}>{lotteryPot} BERA</span>
+        PRIZE: <span className={style.goldAccent}>{lotteryPot} BERA</span>
       </div>
 
       <div className={`${style.rafflefeetitle}`}>

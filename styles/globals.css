@@ -9,7 +9,7 @@ body {
   width: 100vw;
   background-color: #000000;
   font-family: 'Roboto', sans-serif;
-  cursor: url('../public/curs.png'), auto;
+  cursor: url('/curs.png'), auto;
   
 }
 

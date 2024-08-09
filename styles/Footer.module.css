@@ -14,8 +14,8 @@
   left: 0;
   border-top: 1px solid #C8AC53; /* Changed from border-bottom to border-top */
   box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
-  cursor: url('../public/curs.png'), auto;
-  background-image: url('../public/tec.png');
+  cursor: url('/curs.png'), auto;
+  background-image: url('/tec.png');
   background-repeat: repeat;
   background-size: 30px 30px;
 
@@ -32,7 +32,7 @@
   color: #C8AC53;
   font-weight: bolder;
   border: none;
-  cursor: url('../public/dc.png'), auto;
+  cursor: url('/dc.png'), auto;
   
 }
 
@@ -41,14 +41,14 @@
   color: #1e2128;
   animation: flicker 0.2s ease-out;
   animation-iteration-count: 1;
-  cursor: url('../public/dc.png'), auto;
+  cursor: url('/dc.png'), auto;
 }
 
 /*comment*/
 .Link {
   margin-right: 20px;
   font-size: 1rem;
-  cursor: url('../public/bip.png'), auto;
+  cursor: url('/bip.png'), auto;
   background-color: transparent;
   padding: 10px;
   color: #C8AC53;
@@ -62,7 +62,7 @@
   color: #1e2128;
   animation: flicker 0.2s ease-out;
   animation-iteration-count: 1;
-  cursor: url('../public/bip.png'), auto;
+  cursor: url('/bip.png'), auto;
 }
 
 

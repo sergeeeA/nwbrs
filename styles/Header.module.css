@@ -13,14 +13,15 @@
   left: 0;
   border-bottom: 1px solid #C8AC53;
   box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
-  cursor: url('../public/curs.png'), auto;
-  background-image: url('../public/tec.png'); /* Path to your X symbol image */
+  cursor: url('/curs.png'), auto;
+  background-image: url('/tec.png'); /* Path to your X symbol image */
   background-repeat: repeat; /* Repeat the background image */
   background-size: 30px 30px; /* Size of the background image */
 }
 /*comment*/
 .title {
-  font-family: 'Great Vibes', cursive; /* Apply the custom font here */
+  font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
+  src: url('/monofonto rg.otf') format('opentype'); /* Path and format */
   font-size: 2rem;
   color: #ffcf4c;
   margin-left: 20px;
@@ -29,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: url('../public/curslink.png'), auto;
+  cursor: url('/curslink.png'), auto;
 }
 .nav {
   font-family: 'Great Vibes', cursive; /* Apply the custom font here */
@@ -41,17 +42,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: url('../public/curslink.png'), auto;
+  cursor: url('/curslink.png'), auto;
 }
 .loginBtn {
   margin-right: 20px;
   font-size: 1rem;
-  cursor: url('../public/curs.png'), auto;
+  cursor: url('/curs.png'), auto;
   background-color: transparent;
   padding: 10px;
   color: #C8AC53;
   font-weight: bolder;
-  cursor: url('../public/cursconnect.png'), auto;
+  cursor: url('/cursconnect.png'), auto;
   border: none;
 }
 .loginBtn:hover {
