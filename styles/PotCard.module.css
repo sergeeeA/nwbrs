@@ -27,7 +27,7 @@
   transition: transform 0.15s ease, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
   perspective: 1000px; /* Perspective for 3D effect */
 }
-
+/*comment*/
 .wrapper:hover {
   animation: pulsate 2s infinite; /* Pulsating animation on hover */
 }
