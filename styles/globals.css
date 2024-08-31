@@ -10,7 +10,9 @@ body {
   background-color: #000000;
   font-family: 'Roboto', sans-serif;
   cursor: url('/curs.png'), auto;
-  
+  overflow: auto;
+  scrollbar-color: transparent transparent;
+   scrollbar-width: none; /* Thin scrollbar */
 }
 
 a {

@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
     // Simulate a loading period, e.g., 1 second
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1275);
+    }, 1100);
 
     // Cleanup timer if component unmounts
     return () => clearTimeout(timer);

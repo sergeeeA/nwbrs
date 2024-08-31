@@ -1,7 +1,9 @@
-import { useAppContext } from '../context/context'
-import style from '../styles/Header.module.css'
-import UserCard from './UserCard'
-import WalletConnectBtn from './WalletConnectBtn'
+import { useState } from 'react';
+import { useAppContext } from '../context/context';
+import style from '../styles/Header.module.css';
+import UserCard from './UserCard';
+import WalletConnectBtn from './WalletConnectBtn';
+import Modal from './Modal'; // Import the Modal component
 
 // Function to check and switch network
 const checkAndSwitchNetwork = async () => {
@@ -9,24 +11,20 @@ const checkAndSwitchNetwork = async () => {
 
   if (window.ethereum) {
     try {
-      // Get current network chain ID
       const networkId = await window.ethereum.request({ method: 'eth_chainId' });
-
-      // Check if the current network is the target network
       if (networkId !== targetChainId) {
-        // Request to switch to the target network
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
             chainId: targetChainId,
             chainName: 'Berachain bArtio',
-            rpcUrls: ['https://bartio.rpc.berachain.com/'], // Replace with the appropriate RPC URL
+            rpcUrls: ['https://bartio.rpc.berachain.com/'],
             nativeCurrency: {
               name: 'Berachain-bArtio',
               symbol: 'BERA',
               decimals: 18,
             },
-            blockExplorerUrls: ['https://bartio.beratrail.io'], // Replace with the appropriate block explorer URL
+            blockExplorerUrls: ['https://bartio.beratrail.io'],
           }],
         });
       }
@@ -38,29 +36,53 @@ const checkAndSwitchNetwork = async () => {
   }
 };
 
-const Header = () => {
+const Header = ({ onToggleA, onToggleB, onToggleNftduel, isOpenA, isOpenB, isOpenNftduel }) => {
   const { address, connectWallet } = useAppContext();
+  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
 
-  // Handle wallet connection and network switching
   const handleConnectWallet = async () => {
-    // Connect wallet
     await connectWallet();
-
-    // Check and switch network if necessary
     await checkAndSwitchNetwork();
   };
 
   return (
     <div className={style.wrapper}>
-      <div className={style.title}>NEW BERAS</div>
-      {!address ? (
-        <WalletConnectBtn connectWallet={handleConnectWallet} />
-      ) : (
-        <UserCard address={address} />
-      )}
+  <div className={style.title}>
+    NEW BERAS
+    <span className={style.beta}><sup>BETA</sup></span>
+  </div>
+      <div className={style.toggleButtons}>
+        <button
+          onClick={onToggleA}
+          className={`${style.toggleButton} ${isOpenA ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}
+        >
+          {isOpenA ? ' STRIP' : 'STRIP'}
+        </button>
+
+        <button
+          onClick={onToggleNftduel}
+          className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}
+        >
+          {isOpenNftduel ? ' NFT' : 'NFT'}
+        </button>
+
+        {/* Button to open the modal */}
+        <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
+           BIBPOI
+        </button>
+      </div>
+      <div>
+        {!address ? (
+          <WalletConnectBtn connectWallet={handleConnectWallet} />
+        ) : (
+          <UserCard address={address} />
+        )}
+      </div>
+      
+      {/* Modal Component */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
 
 export default Header;
-/*comment*/

@@ -5,3 +5,78 @@
   
 }
 /*comment*/
+.lineAfter {
+  border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
+  width: 50%; /* Width of the line */
+  margin: 0 auto; /* Center the line horizontally */
+  /* Optional: Adjust the line height or add spacing */
+  height: 2px; /* Ensure this matches the border thickness */
+}
+.statsboxToggleButton {
+  position: fixed;
+  z-index: 100;
+  left: 20px;  /* Adjust as needed */
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+  z-index: 1000;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+
+.statsboxToggleButton:hover {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+}
+.chatboxToggleButton {
+  position: fixed;
+  z-index: 100;
+  right: 20px;  /* Adjust as needed */
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+  z-index: 1000;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+
+.chatboxToggleButton:hover {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+@keyframes flicker {
+
+
+  50% {
+    box-shadow: 0 0 35px rgba(255, 207, 76, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 25px rgba(255, 207, 76, 0.5);
+  }
+}
+.stats {
+  position: fixed; /* Make sure this is set to fixed */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+  z-index: 1000;
+  padding: 10px;
+  cursor: url('/curs.png'), auto;
+  border-radius: 0;
+}

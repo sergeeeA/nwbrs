@@ -3,15 +3,8 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { miniGamePool, duel, firstDepositor } = useAppContext(); // Retrieve firstDepositor from context
+  const { miniGamePool, enterNFT, nftTokenId } = useAppContext();
   const cardRef = useRef(null);
-
-  // Helper function to format Ethereum address
-  const formatAddress = (address) => {
-    if (!address || address === '0x0000000000000000000000000000000000000000') return 'NO PLAYER';
-    if (address.length <= 10) return address; // If the address is already short, return it as is
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  };
 
   const handleSwitchNetwork = async () => {
     try {
@@ -37,16 +30,8 @@ const PotCard = () => {
 
   const handleGambooolClick = async () => {
     await handleSwitchNetwork();
-    duel();
+    enterNFT();
   };
-
-  // Determine the class and text based on miniGamePool value
-  const isLoaded = miniGamePool > 0;
-  const potClass = miniGamePool > 0 ? `${style.textNotLoaded} ${style.textLoaded}` : style.pot;
-
-  // Determine class and text based on firstDepositor value
-  const depositorClass = firstDepositor === '0x0000000000000000000000000000000000000000' ? style.textNotLoaded : style.textLoaded;
-  const depositorText = formatAddress(firstDepositor) || 'Loading...';
 
   useEffect(() => {
     const card = cardRef.current;
@@ -95,36 +80,40 @@ const PotCard = () => {
     };
   }, []);
 
-  // Link
+  const nftText = nftTokenId > 1 ? 'BERA DWELLER' : 'NONE';
+
+  // Link click handler
   const handleTitleClick = () => {
-    window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/big-iron'; // Replace with your target URL
+    window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
   };
 
   return (
     <div className={style.wrapper} ref={cardRef}>
-      <div className={`${style.titlebigironbg}`}>
-        <div className={`${style.titleBigiron}`} onClick={handleTitleClick}>
-          BIG IRON
+      <div className={`${style.bierramadrebg}`}>
+        <div
+          className={`${style.title}`}
+          onClick={handleTitleClick} // Add click handler here
+        >
+          LUCKY 69 NFT
         </div>
       </div>
 
-      <div className={depositorClass}>
-        {depositorText}
+      <div className={`${style.pot}`}>
+        NFT: <span className={nftText === 'NONE' ? style.textNotLoaded : style.goldAccent}>{nftText}</span>
       </div>
 
-      <div className={style.pot}>
-        <span className={style.potLabel}>PRIZE:</span> <span className={potClass}>{miniGamePool}</span>
+      <div className={`${style.rafflefeetitle}`}>
+        RAFFLE FEE
       </div>
 
-      <div className={style.rafflefeebg}>
-        <div className={style.rafflefee}>
-          Duel Wager: 1
-        </div>
+      <div className={`${style.rafflefeebg}`}>
+        <div className={`${style.rafflefee}`}>0.25 BERA</div>
       </div>
+
       <div className={`${style.lineAfter}`}></div>
 
-      <div className={style.btnbigiron} onClick={handleGambooolClick}>
-        DUEL
+      <div className={style.btn} onClick={handleGambooolClick}>
+        ENTER
       </div>
     </div>
   );

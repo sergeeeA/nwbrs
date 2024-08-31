@@ -1,17 +1,54 @@
-/* Ensures the wrapper takes up the full height and width of the parent */
-
 .potCardsContainer {
+  background-color: transparent;
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
   gap: 5px; /* Decreased space between the cards (adjust as needed) */
-  max-width: 50%;
+  overflow: hidden;
   align-items: center; /* Center items vertically within the container */
   justify-content: center; /* Center items horizontally within the container */
-  width: 35%; /* Set the width of the container */
+  width: 100%; /* Set the width of the container */
   border-radius: 1rem; /* Rounded corners */
-  margin: 25px auto; /* Center container horizontally with margin above and below */
+  margin: 5px auto; /* Center container horizontally with margin above and below */
   flex-direction: row; /* Arrange items in a row (horizontal layout) */
+  
 }
 
+.potCardsContainer.closed {
+  display: none;
+}
+.btn {
+  font-family: 'Monofonto';
+  width: fit-content; 
+  display: flex;
+  justify-content: center;
+  place-self: center;
+  color: #C8AC53;
+  padding: 15px 32px;
+  text-align: center;
 
-/*comment*/
+  border-radius: 2px;
+  margin: 15px auto; 
+  cursor: url('../public/curslott.png'), auto;
+  font-weight: 500;
+  font-size: 25px;
+  
+}
+.btn:hover {
+
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+@keyframes flicker {
+
+
+  50% {
+    box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+  }
+}

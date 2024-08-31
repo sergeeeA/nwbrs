@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { lotteryPot, enterLottery } = useAppContext();
+  const { lotteryPot, enterLottery, pickWinner } = useAppContext();
   const cardRef = useRef(null);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
 
   useEffect(() => {
     const card = cardRef.current;
@@ -80,12 +81,28 @@ const PotCard = () => {
     enterLottery();
   };
 
+  const handlePickWinner = async () => {
+    await handleSwitchNetwork();
+    pickWinner();
+  };
+
+  const handleTitleClick = () => {
+    window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
+  };
+
   return (
     <div className={style.wrapper} ref={cardRef}>
-      <div className={`${style.titlebglucky69bg}`}>
-        <div className={`${style.title}`}>
+      <div
+        className={`${style.titlebglucky69bg}`}
+
+      >
+        <div
+          className={`${style.title}`}
+          onClick={handleTitleClick} // Add click handler here
+        >
           LUCKY 69
         </div>
+
       </div>
 
       <div className={`${style.pot}`}>
@@ -96,17 +113,16 @@ const PotCard = () => {
         RAFFLE FEE
       </div>
       <div className={`${style.rafflefeebg}`}>
-        <div className={`${style.rafflefee}`}>1 BERA</div>
+        <div className={`${style.rafflefee}`}>0.25 BERA</div>
       </div>
 
       <div className={`${style.lineAfter}`}></div>
 
-      <div className={style.btn} onClick={handleGambooolClick}>
-        BUY RAFFLE
+      <div className={style.btn} onClick={handleGambooolClick}> 
+        ENTER
       </div>
     </div>
   );
 };
 
 export default PotCard;
-/*comment*/

@@ -1,0 +1,115 @@
+/* styles/Chatbox.module.css */
+
+
+@media (max-width: 600px) {
+    .chatbox {
+      width: 90vw;
+      max-height: 60vh; /* Adjust for smaller screens */
+    }
+  }
+.chatbox {
+    z-index: 99;
+    position: absolute;
+    overflow: auto;
+    right: 0; /* Align with the right edge of the viewport */
+    width: 50vw; /* 80% of the viewport width */
+    max-width: 30vh; /* Maximum width */
+    min-height: 40vh;
+    max-height: 70vh;
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+    border: 1px solid rgba(253, 186, 0, 0); /* Fully transparent border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0); /* Fully transparent shadow */
+  
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background-color, border-color, and box-shadow */
+}
+  
+.chatbox:hover {
+    background-color: rgba(255, 153, 0, 0.226); /* More opaque background on hover */
+    border-color: #f8d94f63; /* Visible border on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
+    box-shadow: inset 0 0 10px  #C8AC53;
+}
+  
+.messages {
+    flex: 1;
+    padding: 5px;
+    overflow-y: auto;
+    
+    color: #000; /* Ensure text is visible */
+    font-family: 'Monofonto';
+    max-height: calc(100% - 50px);
+}
+  
+.message {
+    color: #C8AC53;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
+}
+
+.inputContainer {
+    
+    display: flex;
+    border-top: 1px solid rgba(255, 255, 255, 0); /* Fully transparent border */
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth transition for background-color and border-color */
+}
+
+.inputContainer:hover {
+    background-color: rgba(255, 255, 255, 0); /* More opaque background on hover */
+
+}
+  
+.input {
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 0;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+
+    transition: background-color 0.3s ease; /* Smooth transition for background-color */
+}
+
+.input:hover {
+    display: flex;
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    background-color: rgba(255, 255, 255, 0); /* More opaque background on hover */
+}
+  
+.sendButton {
+    
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    border: none;
+    background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+
+.sendButton:hover {
+    background-color: #C8AC53; /* Change background color on hover */
+    color: #1e2128; /* Change text color on hover */
+    animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    animation-iteration-count: 1; /* Run the animation only once */
+}
+@keyframes flicker {
+
+
+    50% {
+      box-shadow: 0 0 35px 5px #C8AC53;
+    }
+  
+    100% {
+      box-shadow: 0 0 25px rgba(255, 207, 76, 0.5);
+    }
+  }
