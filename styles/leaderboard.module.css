@@ -1,0 +1,82 @@
+
+  /*leaderbaord*/
+
+  .statbox {
+    padding: 20px;
+    z-index: 98;
+    bottom: 65px;
+    position: fixed;
+    overflow: auto;
+    right: 0; /* Align with the right edge of the viewport */
+    width: 50vw; /* 80% of the viewport width */
+    max-width: 30vh; /* Maximum width */
+    min-height: 20vh;
+    max-height: 2vw;
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+    border: 1px solid rgba(253, 186, 0, 0); /* Fully transparent border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0); /* Fully transparent shadow */
+    font-size: 1vw;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .statbox:hover {
+    background-color: rgba(255, 153, 0, 0.226); /* More opaque background on hover */
+    border-color: #f8d94f63; /* Visible border on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
+    box-shadow: inset 0 0 10px  #C8AC53;
+}
+  .leaderboard {
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space out columns */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space out columns */
+
+    font-family: 'Monofonto';
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
+    margin: 1px 0;
+  }
+  
+  
+  .column {
+    flex: 1; /* Equal space for both columns */
+    margin-right: 20px; /* Space between columns */
+  }
+  
+  .column:last-child {
+    margin-right: 0; /* Remove margin for the last column */
+  }
+  
+
+  .address:hover {
+    background-color: #e0e0e0; /* Highlight on hover */
+  }
+  
+  
+  .header {
+    color: #C8AC53;
+    font-family: 'Monofonto';
+    text-decoration: underline;
+  }
+  .titlecontent {
+    color: #C8AC53;
+    font-family: 'Monofonto';
+    text-decoration: underline;
+    font-size: 1vw; /* Adjust this value as needed */
+  }
+  .word {
+
+    color: #C8AC53;
+    font-family: 'Monofonto';
+  }
+  .address {
+
+    color: #C8AC53;
+    font-family: 'Monofonto';
+  }
+  .address:hover {
+    background-color: #C8AC53; /* More opaque background on hover */
+    color: #000000;
+
+}

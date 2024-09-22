@@ -119,7 +119,7 @@ const Nftduelwins = () => {
             cursor: 'url("/curs.png"), auto',
           }}
         >
-          <div className={Styles.Button}>GET STATS</div>
+          <div className={Styles.Button}>UPDATE STATS</div>
         </button>
         {totalwins !== null && (
           <p>
@@ -128,7 +128,7 @@ const Nftduelwins = () => {
         )}
         {wins !== null && (
           <p>
-            <span className={Styles.message}>NFT WAGERS WON: {wins}</span>
+            <span className={Styles.message}>NFT DUELS WON: {wins}</span>
           </p>
         )}
         {lotteryWins !== null && (

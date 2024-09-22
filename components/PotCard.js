@@ -3,7 +3,7 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { lotteryPot, enterLottery, pickWinner } = useAppContext();
+  const { lotteryPot, enterLottery, pickWinner, lastWinner } = useAppContext();
   const cardRef = useRef(null);
   const [tooltipVisible, setTooltipVisible] = useState(false);
 
@@ -90,35 +90,37 @@ const PotCard = () => {
     window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
   };
 
+  const formatAddress = (address) => {
+    if (address === "0x0000000000000000000000000000000000000000") {
+      return "None";
+    }
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
+
   return (
     <div className={style.wrapper} ref={cardRef}>
-      <div
-        className={`${style.titlebglucky69bg}`}
-
-      >
-        <div
-          className={`${style.title}`}
-          onClick={handleTitleClick} // Add click handler here
-        >
+      <div className={`${style.titlebglucky69bg}`}>
+        <div className={`${style.title}`} onClick={handleTitleClick}>
           LUCKY 69
         </div>
-
       </div>
 
       <div className={`${style.pot}`}>
         PRIZE: <span className={style.goldAccent}>{lotteryPot} BERA</span>
       </div>
 
-      <div className={`${style.rafflefeetitle}`}>
-        RAFFLE FEE
-      </div>
       <div className={`${style.rafflefeebg}`}>
-        <div className={`${style.rafflefee}`}>0.25 BERA</div>
+        <div className={`${style.rafflefee}`}>RAFFLE FEE: 0.25 BERA</div>
+      </div>
+
+      {/* Display formatted last winner address */}
+      <div className={style.rafflefee}>
+        LAST WINNER: <span className={style.winnerName}>{formatAddress(lastWinner)}</span>
       </div>
 
       <div className={`${style.lineAfter}`}></div>
 
-      <div className={style.btn} onClick={handleGambooolClick}> 
+      <div className={style.btn} onClick={handleGambooolClick}>
         ENTER
       </div>
     </div>

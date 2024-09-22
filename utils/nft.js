@@ -20,23 +20,23 @@ export default {
       "stateMutability": "nonpayable"
     },
     {
-      "type": "function",
-      "name": "balanceOf",
       "inputs": [
         {
-          "type": "address",
+          "internalType": "address",
           "name": "owner",
-          "internalType": "address"
+          "type": "address"
         }
       ],
+      "name": "balanceOf",
       "outputs": [
         {
-          "type": "uint256",
-          "name": "balance", // Added name for output
-          "internalType": "uint256"
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
-      "stateMutability": "view"
-    }
+      "stateMutability": "view",
+      "type": "function"
+    },
   ]
 }

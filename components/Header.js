@@ -1,15 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppContext } from '../context/context';
 import style from '../styles/Header.module.css';
 import UserCard from './UserCard';
 import WalletConnectBtn from './WalletConnectBtn';
-import Modal from './Modal'; // Import the Modal component
+import Modal from './Modal';
 
-// Function to check and switch network
 const checkAndSwitchNetwork = async () => {
-  const targetChainId = '0x138D4'; // 80084 in hexadecimal
+  const targetChainId = '0x138D4';
 
-  if (window.ethereum) {
+  if (typeof window !== 'undefined' && window.ethereum) {
     try {
       const networkId = await window.ethereum.request({ method: 'eth_chainId' });
       if (networkId !== targetChainId) {
@@ -36,9 +35,32 @@ const checkAndSwitchNetwork = async () => {
   }
 };
 
-const Header = ({ onToggleA, onToggleB, onToggleNftduel, isOpenA, isOpenB, isOpenNftduel }) => {
+const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel }) => {
   const { address, connectWallet } = useAppContext();
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+      if (window.innerWidth > 768) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    // Check if window is defined before accessing it
+    if (typeof window !== 'undefined') {
+      setIsMobile(window.innerWidth <= 768);
+      window.addEventListener('resize', handleResize);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+      }
+    };
+  }, []);
 
   const handleConnectWallet = async () => {
     await connectWallet();
@@ -47,29 +69,43 @@ const Header = ({ onToggleA, onToggleB, onToggleNftduel, isOpenA, isOpenB, isOpe
 
   return (
     <div className={style.wrapper}>
-  <div className={style.title}>
-    NEW BERAS
-    <span className={style.beta}><sup>BETA</sup></span>
-  </div>
+      <div className={style.title}>
+        NEW BERAS
+        <span className={style.beta}><sup>BETA</sup></span>
+      </div>
       <div className={style.toggleButtons}>
-        <button
-          onClick={onToggleA}
-          className={`${style.toggleButton} ${isOpenA ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}
-        >
-          {isOpenA ? ' STRIP' : 'STRIP'}
-        </button>
-
-        <button
-          onClick={onToggleNftduel}
-          className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}
-        >
-          {isOpenNftduel ? ' NFT' : 'NFT'}
-        </button>
-
-        {/* Button to open the modal */}
-        <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
-           BIBPOI
-        </button>
+        {isMobile ? (
+          <>
+            <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className={style.toggleButton}>
+              MENU
+            </button>
+            {isDropdownOpen && (
+              <div className={style.dropdownMenu}>
+                <button onClick={onToggleA} className={`${style.toggleButton} ${isOpenA ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+                  {isOpenA ? ' STRIP' : 'STRIP'}
+                </button>
+                <button onClick={onToggleNftduel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+                  {isOpenNftduel ? ' DUEL' : 'DUEL'}
+                </button>
+                <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
+                  BIBPOI
+                </button>
+              </div>
+            )}
+          </>
+        ) : (
+          <>
+            <button onClick={onToggleA} className={`${style.toggleButton} ${isOpenA ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+              {isOpenA ? ' STRIP' : 'STRIP'}
+            </button>
+            <button onClick={onToggleNftduel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+              {isOpenNftduel ? ' DUEL' : 'DUEL'}
+            </button>
+            <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
+              BIBPOI
+            </button>
+          </>
+        )}
       </div>
       <div>
         {!address ? (
@@ -79,7 +115,6 @@ const Header = ({ onToggleA, onToggleB, onToggleNftduel, isOpenA, isOpenB, isOpe
         )}
       </div>
       
-      {/* Modal Component */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );

@@ -2,8 +2,8 @@
 .wrapper {
   background-color: #2e2e2e;
   width: 100%;
-  min-height: 50px;
-  max-height: 50px;
+  min-height: 3vw;
+  max-height: 5vw;
   color: #f1f1f3;
   display: flex;
   align-items: center;
@@ -23,9 +23,10 @@
 }
 /*comment*/
 .title {
+  font-size: 2vw;
   font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
   src: url('/monofonto rg.otf') format('opentype'); /* Path and format */
-  font-size: 2rem;
+
   color: #ffcf4c;
   margin-left: 20px;
   cursor: pointer;
@@ -48,8 +49,9 @@
   cursor: url('/curslink.png'), auto;
 }
 .loginBtn {
+
   margin-right: 20px;
-  font-size: 1rem;
+  font-size: 1vw;
   cursor: url('/curs.png'), auto;
   background-color: transparent;
   padding: 10px;
@@ -78,7 +80,7 @@
 }
 
 .beta {
-  font-size: 15px;
+  font-size: 1vw;
   color: #C8AC53; /* Adjust color as needed */
   position: relative;
   top: -5px; /* Adjust this value to move the text higher */
@@ -96,11 +98,11 @@
 .toggleButton {
   cursor: url('/curs.png'), auto;
   font-family: 'Monofonto';
-
+  font-size: 1vw;
   position: relative;
   top: 10px; /* Adjust as needed */
   left: 10px; /* Adjust as needed */
-  margin: 1;
+
   margin-bottom: 1rem; 
   margin-right: 1rem; 
   padding: 0.5rem 1rem;
@@ -143,4 +145,21 @@
 .potCardsContainer.closed {
   max-height: 0;
   opacity: 0;
+}
+.dropdownMenu {
+  position: absolute;
+  background-color: #c8ad5381; /* Match header background */
+  border: 1px solid #C8AC53;
+  box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
+  z-index: 100; /* Ensure it appears above other elements */
+  margin-top: 5px; /* Space between button and dropdown */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) { /* Adjust based on your breakpoint */
+  .toggleButtons {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
 }

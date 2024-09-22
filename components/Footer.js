@@ -10,9 +10,7 @@ const Header = () => {
   return (
     <div className={style.wrapper}>
       
-      <a className={style.Link} href="https://bipboi.vercel.app" target="_blank" rel="noopener noreferrer">
-        BIPBOI
-      </a>
+
       <a className={style.Linkdc} href="https://discord.gg/WNCK6z3CFA" target="_blank" rel="noopener noreferrer">
         DISCORD
       </a>

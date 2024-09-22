@@ -1,0 +1,174 @@
+/* styles/Chatbox.module.css */
+
+
+@media (max-width: 600px) {
+    .chatbox {
+      width: 90vw;
+      max-height: 60vh; /* Adjust for smaller screens */
+    }
+  }
+.chatbox {
+    padding: 20px;
+    z-index: 99;
+    position: absolute;
+    overflow: auto;
+    right: 0; /* Align with the right edge of the viewport */
+    width: 50vw; /* 80% of the viewport width */
+    max-width: 30vh; /* Maximum width */
+    min-height: 40vh;
+    max-height: 2vw;
+    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
+    border: 1px solid rgba(253, 186, 0, 0); /* Fully transparent border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0); /* Fully transparent shadow */
+    font-size: 1vw;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background-color, border-color, and box-shadow */
+}
+  
+.chatbox:hover {
+    background-color: rgba(255, 153, 0, 0.226); /* More opaque background on hover */
+    border-color: #f8d94f63; /* Visible border on hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
+    box-shadow: inset 0 0 10px  #C8AC53;
+}
+  
+
+
+.message {
+    color: #C8AC53;
+    font-family: 'Monofonto';
+    border-radius: 5px;
+    background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
+    margin: 1px 0;
+
+}
+.gridContainer {
+    overflow-x: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three equal columns */
+    gap: 2px; /* Space between items */
+    width: 100%; /* Ensure the container takes up the full width */
+    max-width: 1200px; /* Set a max-width to prevent overly wide containers */
+    margin: 0 auto; /* Center the container horizontally */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  .nft {
+    font-size: 1.15vw;
+    color: #C8AC53;
+    font-family: 'Monofonto';
+    border-radius: 5px;
+    background: linear-gradient(to bottom, #00000000,  #c8ad53c7); /* Ensure messages background is visible */
+    margin: 10px 0;
+    border: 1px solid #C8AC53;
+    box-shadow: inset 0 0 10px  #C8AC53;
+    text-align: center; 
+}
+.nft2 {
+  font-size: 1.15vw;
+  color: #C8AC53;
+  font-family: 'Monofonto';
+  border-radius: 5px;
+  background: linear-gradient(to bottom, #00000000, #ba04c06b,  #5553c894); /* Ensure messages background is visible */
+  margin: 10px 0;
+  border: 1px solid #C8AC53;
+  box-shadow: inset 0 0 10px  #ba04c06b;
+  text-align: center; 
+}
+.nft3 {
+  font-size: 1.15vw;
+  color: #C8AC53;
+  font-family: 'Monofonto';
+  border-radius: 5px;
+  background: linear-gradient(to bottom, #00000000,   #2fbdff); /* Ensure messages background is visible */
+  margin: 10px 0;
+  border: 1px solid #C8AC53;
+  box-shadow: inset 0 0 10px  #ba04c06b;
+  text-align: center; 
+}
+ /*===========================================*/
+.gridItem {
+  background: linear-gradient(to bottom, #00000000,  #c8ad53ee); 
+    border: 1px solid #C8AC53;
+    border-radius: 4px;
+    text-align: center;
+ }
+
+ .gridItem2 {
+  background: linear-gradient(to bottom, #ba04c06b,  #5553c894);
+    border: 1px solid #C8AC53;
+    border-radius: 4px;
+    text-align: center;
+    
+ }
+ .gridItem3 {
+  background: linear-gradient(to bottom, #00000000,  #2fbdff);
+    border: 1px solid #C8AC53;
+    border-radius: 4px;
+    text-align: center;
+    
+ }
+ .gridItem:active,
+ .gridItem2:active,
+ .gridItem3:active {
+     animation: flicker2 0.1s ease-in-out;
+     animation-iteration-count: 1;
+ }
+ @keyframes flicker2 {
+  0% {
+    box-shadow: 0 0 5px 2px #C8AC53;
+    background: #C8AC53;
+  }
+ 
+   50% {
+     box-shadow: 0 0 15px 5px #C8AC53;
+   }
+   
+ 
+   100% {
+     box-shadow: 0 0 45px rgba(255, 207, 76, 0.5);
+   }
+ }
+ .flicker {
+  animation: flicker2 0.5s ease-in-out;
+  animation-iteration-count: 1;
+}
+ /*===========================================*/
+.input:hover {
+    display: flex;
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    background-color: rgba(255, 255, 255, 0); /* More opaque background on hover */
+}
+  
+.sendButton {
+    
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    border: none;
+    background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+
+.sendButton:hover {
+    background-color: #C8AC53; /* Change background color on hover */
+    color: #1e2128; /* Change text color on hover */
+    animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    animation-iteration-count: 1; /* Run the animation only once */
+}
+@keyframes flicker {
+
+
+    50% {
+      box-shadow: 0 0 35px 5px #C8AC53;
+    }
+  
+    100% {
+      box-shadow: 0 0 25px rgba(255, 207, 76, 0.5);
+    }
+  }
+  

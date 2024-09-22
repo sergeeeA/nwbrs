@@ -3,8 +3,15 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { miniGamePool, enterNFT, nftTokenId } = useAppContext();
+  const { miniGamePool, enterNFT, nftTokenId, lastNFTLotteryWinner } = useAppContext();
   const cardRef = useRef(null);
+
+  // Helper function to format Ethereum address
+  const formatAddress = (address) => {
+    if (!address || address === '0x0000000000000000000000000000000000000000') return '...';
+    if (address.length <= 10) return address; // If the address is already short, return it as is
+    return `${address.slice(0, 6)}...${address.slice(-4)}`;
+  };
 
   const handleSwitchNetwork = async () => {
     try {
@@ -40,40 +47,27 @@ const PotCard = () => {
       const { clientWidth: width, clientHeight: height } = card;
       const { offsetX: x, offsetY: y } = e;
 
-      // Calculate the center position
       const centerX = width / 2;
       const centerY = height / 2;
-
-      // Calculate the distance from the center
       const deltaX = x - centerX;
       const deltaY = y - centerY;
-
-      // Normalize values to the range [-1, 1]
       const normalizedX = deltaX / centerX;
       const normalizedY = deltaY / centerY;
-
-      // Maximum tilt angles
-      const maxTiltX = 20; // Maximum tilt angle for X direction
-      const maxTiltY = 20; // Maximum tilt angle for Y direction
-
-      // Calculate tilt angles based on normalized values
+      const maxTiltX = 20;
+      const maxTiltY = 20;
       const tiltX = normalizedX * maxTiltX;
       const tiltY = -normalizedY * maxTiltY;
 
-      // Apply transform
       card.style.transform = `rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.05)`;
     };
 
     const handleMouseLeave = () => {
-      // Reset transform on mouse leave
       card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
     };
 
-    // Add event listeners
     card.addEventListener('mousemove', handleMouseMove);
     card.addEventListener('mouseleave', handleMouseLeave);
 
-    // Clean up event listeners on component unmount
     return () => {
       card.removeEventListener('mousemove', handleMouseMove);
       card.removeEventListener('mouseleave', handleMouseLeave);
@@ -81,8 +75,8 @@ const PotCard = () => {
   }, []);
 
   const nftText = nftTokenId > 1 ? 'BERA DWELLER' : 'NONE';
+  const lastWinnerStatus = formatAddress(lastNFTLotteryWinner);
 
-  // Link click handler
   const handleTitleClick = () => {
     window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
   };
@@ -102,14 +96,14 @@ const PotCard = () => {
         NFT: <span className={nftText === 'NONE' ? style.textNotLoaded : style.goldAccent}>{nftText}</span>
       </div>
 
-      <div className={`${style.rafflefeetitle}`}>
-        RAFFLE FEE
-      </div>
+    
 
       <div className={`${style.rafflefeebg}`}>
-        <div className={`${style.rafflefee}`}>0.25 BERA</div>
+        <div className={`${style.rafflefee}`}>RAFFLE FEE: 0.25 BERA</div>
       </div>
-
+      <div className={style.rafflefee}>
+        LAST WINNER: <span className={style.winnerName}>{lastWinnerStatus}</span>
+      </div>
       <div className={`${style.lineAfter}`}></div>
 
       <div className={style.btn} onClick={handleGambooolClick}>

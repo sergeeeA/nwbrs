@@ -1,15 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor } = useAppContext();
+  const { duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor, lastMiniGameNFTWinner } = useAppContext();
   const cardRef = useRef(null);
+
+  // State to track whether the button is disabled
+  const [isDuelDisabled, setIsDuelDisabled] = useState(true);
 
   // Helper function to format Ethereum address
   const formatAddress = (address) => {
     if (!address || address === '0x0000000000000000000000000000000000000000') return 'NO PLAYER';
-    if (address.length <= 10) return address; // If the address is already short, return it as is
+    if (address.length <= 10) return address;
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
@@ -36,6 +39,7 @@ const PotCard = () => {
   };
 
   const handleGambooolClick = async () => {
+    if (isDuelDisabled) return; // Prevent action if disabled
     await handleSwitchNetwork();
     duelnft();
   };
@@ -79,8 +83,16 @@ const PotCard = () => {
   const depositorStatusClass = isDepositorLoaded ? style.textLoaded : style.textNotLoaded;
   const depositorStatus = formatAddress(miniGameNFTfirstDepositor);
 
+  // Update duel button state based on NFT presence
+  useEffect(() => {
+    setIsDuelDisabled(nftText === 'NONE');
+  }, [nftText]);
+
+  // Format last winner address
+  const lastWinnerStatus = formatAddress(lastMiniGameNFTWinner);
+
   const handleTitleClick = () => {
-    window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/big-iron'; // Replace with your target URL
+    window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/big-iron';
   };
 
   return (
@@ -98,14 +110,21 @@ const PotCard = () => {
       <div className={style.pot}>
         NFT: <span className={nftText === 'NONE' ? style.textNotLoaded : style.goldAccent}>{nftText}</span>
       </div>
+
       <div className={style.rafflefeebg}>
         <div className={style.rafflefee}>
           Duel Wager: 1
         </div>
       </div>
+      <div className={style.rafflefee}>
+        LAST WINNER: <span className={style.winnerName}>{lastWinnerStatus}</span>
+      </div>
       <div className={style.lineAfter}></div>
 
-      <div className={style.btnbigiron} onClick={handleGambooolClick}>
+      <div
+        className={`${style.btnbigiron} ${isDuelDisabled ? style.disabled : ''}`}
+        onClick={handleGambooolClick}
+      >
         DUEL
       </div>
     </div>

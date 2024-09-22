@@ -3,7 +3,9 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { miniGamePool, duel, firstDepositor } = useAppContext(); // Retrieve firstDepositor from context
+  const { miniGamePool, duel, firstDepositor,lastMiniGameWinner } = useAppContext();
+
+
   const cardRef = useRef(null);
 
   // Helper function to format Ethereum address
@@ -12,7 +14,18 @@ const PotCard = () => {
     if (address.length <= 10) return address; // If the address is already short, return it as is
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
-
+  const fetchLastMiniGameWinner = async () => {
+    if (lotteryContract) {
+      try {
+        const winner = await lotteryContract.methods.lastMiniGameWinner().call();
+        setLastMiniGameWinner(winner);
+        return winner; // Return the winner address
+      } catch (error) {
+        console.error('Error fetching last mini game winner:', error);
+      }
+    }
+    return null;
+  };
   const handleSwitchNetwork = async () => {
     try {
       const chainId = '0x138D4'; // Chain ID 80084 in hexadecimal
@@ -120,6 +133,9 @@ const PotCard = () => {
         <div className={style.rafflefee}>
           Duel Wager: 1
         </div>
+      </div>
+      <div className={style.rafflefee}>
+        LAST WINNER: {formatAddress(lastMiniGameWinner)}
       </div>
       <div className={`${style.lineAfter}`}></div>
 

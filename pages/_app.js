@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '../styles/globals.css';
 import '../styles/loading.css'; // Import the loading CSS
 import { AppProvider } from '../context/context';
-
+import { NftProvider } from '../context/NftContext';
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
 
@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
   };
 
   return (
+    <NftProvider>  
     <AppProvider>
       {loading && (
         <div className={`loading-overlay ${!loading ? 'fade-out' : ''}`} onClick={handleClick}>
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps }) {
       )}
       <Component {...pageProps} />
     </AppProvider>
+    </NftProvider>
   );
 }
 

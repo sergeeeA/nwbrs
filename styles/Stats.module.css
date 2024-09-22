@@ -15,7 +15,7 @@
     width: 50vw; /* 80% of the viewport width */
     max-width: 30vh; /* Maximum width */
     min-height: 40vh;
-    max-height: 70vh;
+    max-height: 2vw;
     background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
     border: 1px solid rgba(253, 186, 0, 0); /* Fully transparent border */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0); /* Fully transparent shadow */
@@ -36,13 +36,14 @@
     flex: 1;
     padding: 5px;
     overflow-y: auto;
-    
+    font-size: 1vw;
     color: #000; /* Ensure text is visible */
     font-family: 'Monofonto';
     max-height: calc(100% - 50px);
 }
   
 .message {
+  font-size: 1vw;
     color: #C8AC53;
     margin-bottom: 5px;
     padding: 5px;
@@ -50,17 +51,20 @@
     background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
 }
 .bigmessage {
+  font-size: 1vw;
     color: #C8AC53;
     margin-bottom: 5px;
     padding: 5px;
     border-radius: 5px;
     box-shadow: inset 0 0 10px  #C8AC53; /* Ensure messages background is visible */
-    border: 1px solid #C8AC53; /* Add a 2px solid border with the same color as the text */
+    border: 1px solid #C8AC53;
+    background: linear-gradient(to bottom, #00000000,  #c8ad5394); /* Add a 2px solid border with the same color as the text */
 }
 
 
 
 .Button {
+  font-size: 1vw;
     width: 25vh;
     font-family: 'Monofonto';
     color: #C8AC53;
@@ -71,12 +75,14 @@
     cursor: pointer;
     border-radius: 0;
     transition: background-color 0.15s ease; /* Smooth transition for background-color */
+    cursor: url('/curs.png'), auto;
 }
 
 .Button:hover {
     background-color: #C8AC53; /* Change background color on hover */
     color: #1e2128; /* Change text color on hover */
     animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    cursor: url('/curs.png'), auto;
     animation-iteration-count: 1; /* Run the animation only once */
 }
 @keyframes flicker {
@@ -90,3 +96,4 @@
       box-shadow: 0 0 25px rgba(255, 207, 76, 0.5);
     }
   }
+

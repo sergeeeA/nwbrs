@@ -17,7 +17,7 @@ const Modal = ({ isOpen, onClose }) => {
   return (
     <div className={style.modalOverlay} onClick={handleOverlayClick}>
       <div className={style.modalContent}>
-        <button onClick={onClose} className={style.closeButton}>Close</button>
+        <button onClick={onClose} className={style.closeButton}>X</button>
         <iframe
           src="https://bipboi.vercel.app"
           title="Bip Boi Website"

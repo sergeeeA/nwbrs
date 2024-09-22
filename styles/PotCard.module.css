@@ -26,7 +26,7 @@
   margin: 40px; /* Space above the wrapper */
 
   overflow: hidden; /* Hide overflow content */
-  transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+  transition: transform 0.35s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
   perspective: 1000px; /* Perspective for 3D effect */
 }
 
@@ -213,23 +213,7 @@
   place-self: center;
   
 }
-.nftduelbg {
-  background: url('../public/nftduelbanner.png') no-repeat center center;
-  background-size: cover; /* Scale the background image to cover the entire element */
-  color: #ffcf4c;
-  cursor: url('../public/curslink.png'), auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px; /* Space for title below */
 
-  box-sizing: border-box; /* Ensure padding is included in width */
-  width: 100vw; /* 50% of the viewport width */
-
-  max-width: 555px; /* Maximum width */
-  margin: 0; /* Remove margin to use full width */
-  place-self: center;
-}
 .pot {
   font-family: 'Monofonto' ;
   font-size: 1.5rem;
@@ -397,14 +381,7 @@
   text-align: center;
 
 }
-.rafflefeetitlesmol {
-  font-family: 'Monofonto';
-  font-size: 1rem;
-  font-weight: 250;
-  color: #C8AC53;
-  text-align: center;
 
-}
 
 .rafflefee {
   font-family: 'Monofonto';
@@ -613,7 +590,32 @@
   visibility: visible;
 }
 /* Tooltip text *//* Tooltip text *//* Tooltip text *//* Tooltip text *//* Tooltip text */
-
+.dropdown {
+  font-family: 'Monofonto';
+  width: 100%; /* Adjust width as needed */
+  padding: 8px;
+  border: 1px solid #C8AC53;
+  border-radius: 2px;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #2c2c2c, #000000);
+  color: #C8AC53;
+  margin-bottom: 15px;
+  cursor: url('/curs.png'), auto;
+}
+.dropdown option {
+  background: #2c2c2c; /* Limited styling support */
+  color: #C8AC53;
+  border: 1px solid #C8AC53;
+  cursor: url('/curs.png'), auto;
+  
+}
+.dropdown:hover {
+  cursor: url('/curs.png'), auto;
+  background: #C8AC53;
+  color: black;
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+}
 
 /* Style for the number input field */
 .numberInput {
@@ -652,13 +654,7 @@
   box-shadow: inset 0 0 15px  #C8AC53;
 }
 
-.centeredContainer {
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center items horizontally */
-  justify-content: center; /* Center items vertically if needed */
-  text-align: center; /* Center text if necessary */
-}
+
 .nftImage {
   width: 200px; /* Adjust size as needed */
   height: 200px;
@@ -668,10 +664,12 @@
   transform: perspective(1000px); /* Perspective for the 3D effect */
   cursor: pointer; /* Indicate that the image is interactive */
   cursor: url('/curs.png'), auto;
+
 }
 
 /* Apply box-shadow on hover */
 .nftImage:hover {
+  
   box-shadow: 0 0 25px #C8AC53;
   border-radius: 5px; /* Rounded corners for the image */
 }

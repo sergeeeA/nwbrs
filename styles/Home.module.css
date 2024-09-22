@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: #000000;
+
   padding-bottom: 30px;
   cursor: url('/curs.png'), auto;
   
@@ -12,6 +12,93 @@
   /* Optional: Adjust the line height or add spacing */
   height: 2px; /* Ensure this matches the border thickness */
 }
+
+.nftduelbutton {
+  position: relative;
+  top: 25px;
+  margin: 0 5px; 
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+.nftduelbutton:hover {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+  border-radius: 2px;
+}
+.nftduelbutton.active {
+  background-color: #C8AC53; /* Set background color to orange */
+  color: #1e2128; /* Set text color to black */
+  border-radius: 4px;
+}
+/*BERAMONIUM*/
+.nftduelbuttonmon {
+  position: relative;
+  top: 25px;
+  margin: 0 5px; 
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background: linear-gradient(to bottom,#5553c894, #00000000, #ba04c06b  ); /* Fully transparent blue background */
+
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+.nftduelbuttonmon:hover {
+  background: #C8AC53;/* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+  border-radius: 2px;
+}
+.nftduelbuttonmon.active {
+  background: linear-gradient(to bottom,#5553c894, #ba04c06b,#C8AC53  ); /* Set background color to orange */
+  color: #C8AC53; /* Set text color to black */
+  border-radius: 4px;
+}
+/*ARENA*/
+.nftduelbuttonarena {
+  position: relative;
+  top: 25px;
+  margin: 0 5px; 
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background: linear-gradient(to bottom,#2fbdff, #00000000  ); /* Fully transparent blue background */
+
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+.nftduelbuttonarena:hover {
+  background: #C8AC53;/* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+  border-radius: 2px;
+}
+.nftduelbuttonarena.active {
+  background:  linear-gradient(to bottom,#2fbdff, #2fbdff57,#C8AC53  ); /* Set background color to orange */
+  color: #C8AC53; /* Set text color to black */
+  border-radius: 4px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center; /* Centers buttons horizontally */
+  margin-bottom: 10px; /* Adjust as needed */
+}
 .statsboxToggleButton {
   position: fixed;
   z-index: 100;
@@ -22,16 +109,17 @@
   background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
   z-index: 1000;
   padding: 10px;
-  cursor: pointer;
+  cursor: url('/curs.png'), auto;
   border-radius: 0;
-  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+  transition: background-color 0.15s ease;
+  font-size: 1vw;
 }
-
 .statsboxToggleButton:hover {
   background-color: #C8AC53; /* Change background color on hover */
   color: #1e2128; /* Change text color on hover */
   animation: flicker 0.2s ease-out; /* Apply flicker animation */
   animation-iteration-count: 1; /* Run the animation only once */
+
 }
 .chatboxToggleButton {
   position: fixed;
@@ -43,9 +131,10 @@
   background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
   z-index: 1000;
   padding: 10px;
-  cursor: pointer;
+  cursor: url('/curs.png'), auto;
   border-radius: 0;
-  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+  transition: background-color 0.15s ease;
+  font-size: 1vw; /* Smooth transition for background-color */
 }
 
 .chatboxToggleButton:hover {
@@ -53,7 +142,32 @@
   color: #1e2128; /* Change text color on hover */
   animation: flicker 0.2s ease-out; /* Apply flicker animation */
   animation-iteration-count: 1; /* Run the animation only once */
+  cursor: url('/curs.png'), auto;
 
+}
+.boardboxToggleButton {
+  position: fixed;
+  z-index: 100;
+  bottom: 50px;
+  right: 20px;  /* Adjust as needed */
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+  z-index: 1000;
+  padding: 10px;
+  cursor: url('/curs.png'), auto;
+  border-radius: 0;
+  transition: background-color 0.15s ease;
+  font-size: 1vw; /* Smooth transition for background-color */
+}
+
+.boardboxToggleButton:hover {
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+  cursor: url('/curs.png'), auto;
 }
 @keyframes flicker {
 
@@ -79,4 +193,39 @@
   padding: 10px;
   cursor: url('/curs.png'), auto;
   border-radius: 0;
+  
+}
+/* Update Home.module.css */
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../public/flip.gif'), 
+                    url('../public/Goingto.gif'), 
+                    url('../public/thirdlayer.png'), 
+                    url('../public/secondlayer.png'),
+                    url('../public/firstlayer.png');
+  background-size: 50% auto, cover, cover, cover, cover; /* Adjust the size of each image as needed */
+  background-position: center; /* Simplified to a single position */
+  background-repeat: no-repeat; /* Simplified to a single repeat */
+  background-attachment: fixed;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 768px) {
+  .background {
+    background-size: cover; /* Use cover for all images on mobile */
+    background-position: center; /* Ensure all images are centered */
+  }
+}
+
+@media (max-width: 480px) {
+  .background {
+    background-size: contain; /* Optionally use contain for very small screens */
+  }
 }

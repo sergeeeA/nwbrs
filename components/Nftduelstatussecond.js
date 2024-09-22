@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import style from '../styles/nftduel.module.css'; // Ensure this file contains the necessary CSS
+import style from '../styles/nftduel.module.css';// Ensure this file contains the necessary CSS
 import { useAppContext } from '../context/context';
 import Web3 from 'web3'; // Import Web3
 
@@ -9,9 +9,9 @@ const NEW_SPECIAL_CONTRACT_ADDRESS = '0x06d9843595A02f0Dc3bfEdc67dC1C78D2D85b005
 
 const NftDuel = () => {
   const {
-    nftPrizePoolContract,
-    nftFirstDepositor,
-    lastNFTPrizeWinner,
+    nftPrizePoolContractSecond,
+    nftFirstDepositorSecond,
+    lastNFTPrizeWinnerSecond,
 
     address,
   } = useAppContext(); // Fetch necessary data and functions from context
@@ -25,23 +25,26 @@ const NftDuel = () => {
   // Determine the display text for nftPrizePoolContract
   let displayText = 'UNKNOWN NFT'; // Default message
 
-  if (nftPrizePoolContract === '0x0000000000000000000000000000000000000000') {
+  if (nftPrizePoolContractSecond === '0x0000000000000000000000000000000000000000') {
     displayText = 'NO NFT';
-  } else if (nftPrizePoolContract === NFT_CONTRACT_ADDRESS) {
+  } else if (nftPrizePoolContractSecond === NFT_CONTRACT_ADDRESS) {
     displayText = 'BERA DWELLER NFT';
-
+  } else if (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS) {
+    displayText = 'BERAMONIUM: BARTIOSIS';
+  } else if (nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS) {
+    displayText = 'BERAARENA';
   } else {
-    displayText = nftPrizePoolContract;
+    displayText = nftPrizePoolContractSecond;
   }
 
   // Determine the CSS classes based on nftPrizePoolContract and nftFirstDepositor
-  const nftClass = nftPrizePoolContract === '0x0000000000000000000000000000000000000000'
+  const nftClass = nftPrizePoolContractSecond === '0x0000000000000000000000000000000000000000'
     ? style.textNotLoaded
-    : style.textLoaded;
+    : style.textLoadedsecond;
 
-  const depositorClass = nftFirstDepositor === '0x0000000000000000000000000000000000000000'
+  const depositorClass = nftFirstDepositorSecond === '0x0000000000000000000000000000000000000000'
     ? style.textNotLoaded
-    : style.textLoaded;
+    : style.textLoadedsecond;
 
   // Format the addresses
   const formatAddress = (address) => {
@@ -51,8 +54,8 @@ const NftDuel = () => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`;
   };
 
-  const challengerText = formatAddress(nftFirstDepositor);
-  const winnerText = formatAddress(lastNFTPrizeWinner); // Format the lastNFTPrizeWinner address
+  const challengerText = formatAddress(nftFirstDepositorSecond);
+  const winnerText = formatAddress(lastNFTPrizeWinnerSecond); // Format the lastNFTPrizeWinner address
 
   const imageRef = useRef(null);
   const specialImageRef = useRef(null); // Separate ref for the special image
@@ -97,19 +100,19 @@ const NftDuel = () => {
       };
     };
 
-    if (specialImage && (nftPrizePoolContract === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContract === NEW_SPECIAL_CONTRACT_ADDRESS)) {
+    if (specialImage && (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS)) {
       apply3DEffect(specialImage);
     } else if (image) {
       apply3DEffect(image);
     }
-  }, [nftPrizePoolContract]);
+  }, [nftPrizePoolContractSecond]);
 
   // Determine the CSS class for the images based on nftPrizePoolContract
-  const imageClass = nftPrizePoolContract === NFT_CONTRACT_ADDRESS
+  const imageClass = nftPrizePoolContractSecond === NFT_CONTRACT_ADDRESS
     ? style.visibleImage
     : style.hiddenImage;
 
-  const specialImageClass = nftPrizePoolContract === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContract === NEW_SPECIAL_CONTRACT_ADDRESS
+  const specialImageClass = nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS
     ? style.visibleImage
     : style.hiddenImage;
 
@@ -117,32 +120,32 @@ const NftDuel = () => {
 
   return (
     <div className={style.parentcontainer}>
-      <div className={style.wrappernft}>
+      <div className={style.wrappernftsecond}>
         <div className={`${style.nftduelbg}`}>
           <h2 className={style.title}></h2>
         </div>
 
         <div className={style.centeredContainer}>
-          <p className={style.rafflefeetitle} style={{ textDecoration: 'underline' }}> BERA DWELLERS </p>
+          <p className={style.rafflefeetitle} style={{ textDecoration: 'underline' }}> BERAMONIUM BARTIOSIS </p>
           <img
             src="/NFTduel.png"
             alt="NFT"
-            className={`${style.nftImage} ${imageClass}`}
+            className={`${style.nftImagesecond} ${imageClass}`}
             ref={imageRef}
           />
-          {nftPrizePoolContract === SPECIAL_CONTRACT_ADDRESS && (
+          {nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS && (
             <img
               src="/beramonium.png"
               alt="Special NFT"
-              className={`${style.nftImage} ${specialImageClass}`}
+              className={`${style.nftImagesecond} ${specialImageClass}`}
               ref={specialImageRef}
             />
           )}
-          {nftPrizePoolContract === NEW_SPECIAL_CONTRACT_ADDRESS && (
+          {nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS && (
             <img
               src="/Beraarena.png"
               alt="New Special NFT"
-              className={`${style.nftImage} ${specialImageClass}`}
+              className={`${style.nftImagesecond} ${specialImageClass}`}
               ref={specialImageRef}
             />
           )}
@@ -153,7 +156,7 @@ const NftDuel = () => {
           <p className={`${style.rafflefeetitle} ${depositorClass}`}>
             <span>{challengerText}</span>
           </p>
-          
+         
           <p className={style.textNotLoaded}>
           LAST WINNER: <span>{winnerText}</span> 
           </p>

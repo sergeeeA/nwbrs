@@ -5,11 +5,11 @@ import { useNftContext } from '../context/NftContext'; // Import the context
 import nftAbi from '../utils/nft'; // Import ABI
 import Web3 from 'web3'; // Import Web3
 
-const NFT_CONTRACT_ADDRESS = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05'; // Fixed contract address
+const NFT_CONTRACT_ADDRESS = '0x06d9843595A02f0Dc3bfEdc67dC1C78D2D85b005'; // Fixed contract address
 const APPROVE_ADDRESS = '0x79066904f44C05B73618E245d9663a6a4D700664'; // LOTTERY CONTRACT Address to approve
 
 const NftDuel = () => {
-  const { depositNFTToPrizePool, withdrawNFTFromPrizePool } = useAppContext();
+  const { depositNFTToPrizePoolThird, withdrawNFTFromPrizePoolThird } = useAppContext();
   const { nftTokenId, setNftTokenId } = useNftContext(); // Use the context
   const [nftContract, setNftContract] = useState(null);
 
@@ -40,7 +40,7 @@ const NftDuel = () => {
         console.log('Approval successful. Depositing NFT...');
 
         // Deposit the NFT to the prize pool
-        await depositNFTToPrizePool(NFT_CONTRACT_ADDRESS, nftTokenId);
+        await depositNFTToPrizePoolThird(NFT_CONTRACT_ADDRESS, nftTokenId);
         console.log('Deposit successful.');
 
       } catch (error) {
@@ -56,7 +56,7 @@ const NftDuel = () => {
     e.preventDefault();
     try {
       const index = 0; // Always use index 0 for withdrawal
-      await withdrawNFTFromPrizePool(index);
+      await withdrawNFTFromPrizePoolThird(index);
       console.log('Withdrawal successful.');
     } catch (error) {
       console.error('Error processing withdrawal:', error);
@@ -86,7 +86,7 @@ const NftDuel = () => {
               className={style.numberInput} // Apply the CSS module class here
             />
             <div className={style.tooltiptext}>
-              Click any token ID in your NFT Inventory!
+            Click any token ID in your NFT Inventory!
             </div>
           </div>
           <div className={style.parentcontainer}>

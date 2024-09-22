@@ -1,0 +1,580 @@
+@font-face {
+    font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
+    src: url('/monofonto rg.otf') format('opentype'); /* Path and format */
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .parentcontainer {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    place-content: center; /* Align items to the start of the flex container's cross axis */
+    flex-direction: column;
+    width: 100%;             /* Full width */
+  
+  }
+  .centeredContainer {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically if needed */
+    text-align: center; /* Center text if necessary */
+  }
+  .nftduelbg {
+    background: url('../public/nftduelbanner.png') no-repeat center center;
+    background-size: cover; /* Scale the background image to cover the entire element */
+    color: #ffcf4c;
+    cursor: url('../public/curslink.png'), auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px; /* Space for title below */
+  
+    box-sizing: border-box; /* Ensure padding is included in width */
+    width: 100vw; /* 50% of the viewport width */
+  
+    max-width: 555px; /* Maximum width */
+    margin: 0; /* Remove margin to use full width */
+    place-self: center;
+  }
+  .title {
+    font-family: 'Monofonto', cursive; /* Apply the custom font here */
+    font-size: 2rem;
+    color: #ffcf4c;
+  
+    cursor: pointer;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: url('/curslink.png'), auto;
+    padding: 10px; /* space for title below*/
+    
+  }
+  /*beradweller*/
+.wrappernft {
+    background: linear-gradient(to bottom, #181818, #181818, #000000);
+    flex: 1; /* Allow each card to grow equally */
+    min-width: 255px;
+    max-width: 555px; /* Example fixed width, adjust as needed */
+    min-height: 455px;
+    max-height: 800px;
+    width: 50%; /* Width of the element */
+    
+    border-radius: 2rem; /* Rounded corners */
+    padding: 5px; /* Space inside the wrapper */
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    margin: 25px; /* Space above the wrapper */
+  
+    overflow: hidden; /* Hide overflow content */
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+    perspective: 1000px; /* Perspective for 3D effect */
+  }
+  
+
+  .wrappernft:hover {
+    animation: pulsate 2s infinite; /* Pulsating animation on hover */
+  }
+  @keyframes pulsate {
+    0% {
+      box-shadow: 0 0 20px #bd9938;
+    }
+    50% {
+      box-shadow: 0 0 40px #ffed4c;
+    }
+    100% {
+      box-shadow: 0 0 20px #bd9938;
+    }
+  }
+    /*beramonium*/
+.wrappernftsecond {
+  background: linear-gradient(to bottom, #181818, #181818, #000000);
+  flex: 1; /* Allow each card to grow equally */
+  min-width: 255px;
+  max-width: 555px; /* Example fixed width, adjust as needed */
+  min-height: 455px;
+  max-height: 800px;
+  width: 50%; /* Width of the element */
+  
+  border-radius: 2rem; /* Rounded corners */
+  padding: 5px; /* Space inside the wrapper */
+  display: flex;
+  flex-direction: column; /* Arrange children in a column */
+  margin: 25px; /* Space above the wrapper */
+
+  overflow: hidden; /* Hide overflow content */
+  transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+  perspective: 1000px; /* Perspective for 3D effect */
+}
+
+
+.wrappernftsecond:hover {
+  animation: pulsatesecond 2s infinite; /* Pulsating animation on hover */
+}
+@keyframes pulsatesecond {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 40px rgb(162, 0, 255);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+  }
+}
+
+    /*bear arena*/
+    .wrappernftthird {
+      background: linear-gradient(to bottom, #181818, #181818, #000000);
+      flex: 1; /* Allow each card to grow equally */
+      min-width: 255px;
+      max-width: 555px; /* Example fixed width, adjust as needed */
+      min-height: 455px;
+      max-height: 800px;
+      width: 50%; /* Width of the element */
+      
+      border-radius: 2rem; /* Rounded corners */
+      padding: 5px; /* Space inside the wrapper */
+      display: flex;
+      flex-direction: column; /* Arrange children in a column */
+      margin: 25px; /* Space above the wrapper */
+    
+      overflow: hidden; /* Hide overflow content */
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+      perspective: 1000px; /* Perspective for 3D effect */
+    }
+    
+    
+    .wrappernftthird:hover {
+      animation: pulsatethird 2s infinite; /* Pulsating animation on hover */
+    }
+    @keyframes pulsatethird {
+      0% {
+        box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 40px rgb(0, 217, 255);
+      }
+      100% {
+        box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+      }
+    }
+
+  .wrapperinput {
+    background: linear-gradient(to bottom, #181818, #000000);
+    flex: 1; /* Allow each card to grow equally */
+    min-width: 25vh;
+    max-width: 50vh; /* Example fixed width, adjust as needed */
+    min-height: 355px;
+    max-height: 100vh;
+    width: 100%; /* Width of the element */
+  
+    border-radius: 25px; /* Rounded corners */
+    padding: 5px; /* Space inside the wrapper */
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    margin: 40px; /* Space above the wrapper */
+  
+    overflow: scroll; /* Hide overflow content */
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+    perspective: 1000px; /* Perspective for 3D effect */
+  }
+  
+  /*comment*/
+  .wrapperinput:hover {
+    animation: pulsate 2s infinite; /* Pulsating animation on hover */
+  }
+  
+
+  
+  .rafflefeetitle {
+    font-family: 'Monofonto';
+    font-size: 1.5rem;
+    font-weight: 250;
+    color: #C8AC53;
+    text-align: center;
+  
+  }
+  .rafflefeetitlesmol {
+    font-family: 'Monofonto';
+    font-size: 1rem;
+    font-weight: 250;
+    color: #C8AC53;
+    text-align: center;
+  
+  }
+  .dropdown {
+    font-family: 'Monofonto';
+    width: 100%; /* Adjust width as needed */
+    padding: 8px;
+    border: 1px solid #C8AC53;
+    border-radius: 2px;
+    font-size: 16px;
+    background: linear-gradient(to bottom, #2c2c2c, #000000);
+    color: #C8AC53;
+    margin-bottom: 15px;
+    cursor: url('/curs.png'), auto;
+  }
+  .dropdown option {
+    background: #2c2c2c; /* Limited styling support */
+    color: #C8AC53;
+    border: 1px solid #C8AC53;
+    cursor: url('/curs.png'), auto;
+    
+  }
+  .dropdown:hover {
+    cursor: url('/curs.png'), auto;
+    background: #C8AC53;
+    color: black;
+    animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    animation-iteration-count: 1; /* Run the animation only once */
+  }
+  .tooltip {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tooltip .tooltiptext {
+    font-family: 'Monofonto';
+    visibility: hidden;
+    width: 220px;
+    background-color: #2c2c2c;
+    color: #C8AC53;
+    text-align: center;
+    border-radius: 3px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the input */
+    left: 50%;
+    margin-left: -110px; /* Center the tooltip */
+    opacity: 0;
+    transform: scaleY(0); /* Start with zero scale on Y axis */
+    transform-origin: center; /* Ensures scaling happens from the center */
+    transition: opacity 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
+  }
+  
+  @keyframes expandTooltip {
+    0% {
+  
+      transform: scaleY(0);
+      opacity: 0;
+      filter: blur(5px); 
+  
+    }
+    50% {
+      transform: scaleY(1);
+      background-color: #C8AC53;
+      opacity: 1;
+      box-shadow: 0 0 45px #C8AC53;
+      filter: blur(5px); 
+  
+    }
+
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+
+    }
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+    animation: expandTooltip 0.2s ease-in both;
+  }
+  
+  
+  .tooltip:not(:hover) .tooltiptext {
+    visibility: visible;
+    animation: expandCollapse 0.15s ease-out reverse forwards;
+  }
+  @keyframes expandCollapse {
+    0% {
+      background-color: #C8AC53;
+  
+      transform: scaleY(0);
+      opacity: 0.25;
+  
+    }
+    50% {
+      transform: scaleY(1);
+      background-color: #C8AC53;
+      opacity: 1;
+      box-shadow: 0 0 55px #C8AC53;
+  
+    }
+  
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+  
+   
+      background-color: #C8AC53;
+    }
+  }
+  .numberInput {
+    cursor: url('/curs.png'), auto;
+    background-color: transparent;
+    width: 200px; /* Adjust the width as needed */
+    padding: 8px; /* Add some padding inside the input */
+    border: 1px solid #C8AC53; /* Set a border color and style */
+    border-radius: 2px; /* Rounded corners for the input box */
+    font-size: 16px; /* Adjust font size */
+    box-sizing: border-box;
+    font-family: Monofonto;
+    color: #C8AC53;
+    outline: none; /* Remove default outline */
+    text-align: center;
+    /* Remove place-self */
+  }
+  /* Optional: Hide spinners for number input */
+  .numberInput::-webkit-inner-spin-button,
+  .numberInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .numberInput {
+    max-width: 300px; /* Set a maximum width for the input */
+    -moz-appearance: textfield;
+    margin: 10px 0; /* Add some margin for spacing */
+  }
+  
+  /* Style for the number input field when focused */
+  .numberInput:focus {
+    
+    border-color: #C8AC53; /* Change border color to yellow on focus */
+  
+    box-shadow: inset 0 0 15px  #C8AC53;
+  }
+  .btn {
+    font-family: 'Monofonto';
+    width: fit-content; 
+    display: flex;
+    justify-content: center;
+    place-self: center;
+    color: #C8AC53;
+    padding: 15px 32px;
+    text-align: center;
+  
+    border-radius: 2px;
+    margin: 15px auto; 
+    cursor: url('../public/curslott.png'), auto;
+    font-weight: 500;
+    font-size: 25px;
+    
+  }
+  .btn:hover {
+  
+    background-color: #C8AC53; /* Change background color on hover */
+    color: #1e2128; /* Change text color on hover */
+    animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    animation-iteration-count: 1; /* Run the animation only once */
+  
+  }
+  /*berdwellers*/
+  .textNotLoaded {
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
+    border-radius: 0.5rem; /* Optional: rounded corners */
+    padding: 10px 20px;
+    margin: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #C8AC53;
+    
+    /* Centering the text */
+    display: column;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
+  }
+  .textLoaded {
+    font-family: 'Monofonto';
+    color: #ffffff;
+    background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
+    border-radius: 0.5rem; /* Optional: rounded corners */
+    padding: 10px 20px;
+    margin: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #C8AC53;
+    display: flex;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+    animation: breatheGlow 2s ease-in-out infinite;
+  }
+    /*beramonium*/
+    .textNotLoadedsecond {
+      font-family: 'Monofonto';
+      color: #C8AC53;
+      background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
+      border-radius: 0.5rem; /* Optional: rounded corners */
+      padding: 10px 20px;
+      margin: 5px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #C8AC53;
+      display: column;           /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;      /* Center text within the flex container */
+    }
+    .textLoadedsecond {
+      font-family: 'Monofonto';
+      color: #ffffff;
+      background: linear-gradient(to bottom,#ad02e094, #ba04c06b,#C8AC53  );;  /* Background color */
+      border-radius: 0.5rem; /* Optional: rounded corners */
+      padding: 10px 20px;
+      margin: 5px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #C8AC53;
+      display: flex;           /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;      /* Center text within the flex container */
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+      animation: breatheGlowsecond 2s ease-in-out infinite;
+    }
+    /*Beararena*/
+    .textNotLoadedthird {
+      font-family: 'Monofonto';
+      color: #C8AC53;
+      background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
+      border-radius: 0.5rem; /* Optional: rounded corners */
+      padding: 10px 20px;
+      margin: 5px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #C8AC53;
+      display: column;           /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;      /* Center text within the flex container */
+    }
+    .textLoadedthird {
+      font-family: 'Monofonto';
+      color: #ffffff;
+      background: linear-gradient(to bottom,#2fbdff ,#C8AC53 );  /* Background color */
+      border-radius: 0.5rem; /* Optional: rounded corners */
+      padding: 10px 20px;
+      margin: 5px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #C8AC53;
+      display: flex;           /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;      /* Center text within the flex container */
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+      animation: breatheGlowthird 2s ease-in-out infinite;
+    }
+  .nftImage {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 2px; /* Rounded corners for the image */
+    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
+    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
+    transform: perspective(1000px); /* Perspective for the 3D effect */
+    cursor: pointer; /* Indicate that the image is interactive */
+    cursor: url('/curs.png'), auto;
+  
+  }
+  .nftImagesecond {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 2px; /* Rounded corners for the image */
+    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
+    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
+    transform: perspective(1000px); /* Perspective for the 3D effect */
+    cursor: pointer; /* Indicate that the image is interactive */
+    cursor: url('/curs.png'), auto;
+  
+  }
+  .nftImagethird {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 2px; /* Rounded corners for the image */
+    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
+    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
+    transform: perspective(1000px); /* Perspective for the 3D effect */
+    cursor: pointer; /* Indicate that the image is interactive */
+    cursor: url('/curs.png'), auto;
+  
+  }
+  /* Apply box-shadow on hover */
+  .nftImage:hover {
+    
+    box-shadow: 0 0 25px #C8AC53;
+    border-radius: 5px; /* Rounded corners for the image */
+  }
+  .nftImagesecond:hover {
+    
+    box-shadow: 0 0 25px #f700ff;
+    border-radius: 5px; /* Rounded corners for the image */
+  }
+  .nftImagethird:hover {
+    
+    box-shadow: 0 0 25px #00aeff;
+    border-radius: 5px; /* Rounded corners for the image */
+  }
+  .hiddenImage {
+    display: none;
+  }
+  
+  .visibleImage {
+    display: block;
+  }
+  @keyframes breatheGlow {
+    0% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 30px rgb(255, 207, 76); /* Increase glow intensity */
+    }
+    
+    100% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+    }
+  }
+  @keyframes breatheGlowsecond {
+    0% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 30px rgb(213, 6, 255); /* Increase glow intensity */
+    }
+    
+    100% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+    }
+  }
+  @keyframes breatheGlowthird {
+    0% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+    }
+    50% {
+      box-shadow: 0 0 30px rgb(0, 217, 255); /* Increase glow intensity */
+    }
+    
+    100% {
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+    }
+  }
