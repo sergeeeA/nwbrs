@@ -148,7 +148,7 @@ export const AppProvider = ({ children }) => {
         const pool = await lotteryContract.methods.getMiniGamePool().call();
         setMiniGamePool(web3.utils.fromWei(pool, 'ether'));
 
-        setPlayers(await lotteryContract.methods.getPlayers().call());
+
         setLotteryId(await lotteryContract.methods.lotteryId().call());
         setLastWinner(await lotteryContract.methods.getWinners().call());
         console.log([...lastWinner], 'Last Winners');

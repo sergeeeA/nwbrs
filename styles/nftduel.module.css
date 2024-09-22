@@ -38,6 +38,40 @@
     margin: 0; /* Remove margin to use full width */
     place-self: center;
   }
+  .nftduelbgsecond {
+    background: url('../public/nftduelberamon.png') no-repeat center center;
+    background-size: cover; /* Scale the background image to cover the entire element */
+    color: #ffcf4c;
+    cursor: url('../public/curslink.png'), auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px; /* Space for title below */
+  
+    box-sizing: border-box; /* Ensure padding is included in width */
+    width: 100vw; /* 50% of the viewport width */
+  
+    max-width: 555px; /* Maximum width */
+    margin: 0; /* Remove margin to use full width */
+    place-self: center;
+  }
+  .nftduelbgthird {
+    background: url('../public/nftduelarena.png') no-repeat center center;
+    background-size: cover; /* Scale the background image to cover the entire element */
+    color: #ffcf4c;
+    cursor: url('../public/curslink.png'), auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px; /* Space for title below */
+  
+    box-sizing: border-box; /* Ensure padding is included in width */
+    width: 100vw; /* 50% of the viewport width */
+  
+    max-width: 555px; /* Maximum width */
+    margin: 0; /* Remove margin to use full width */
+    place-self: center;
+  }
   .title {
     font-family: 'Monofonto', cursive; /* Apply the custom font here */
     font-size: 2rem;

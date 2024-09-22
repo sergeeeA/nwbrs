@@ -121,7 +121,7 @@ const NftDuel = () => {
   return (
     <div className={style.parentcontainer}>
       <div className={style.wrappernftsecond}>
-        <div className={`${style.nftduelbg}`}>
+        <div className={`${style.nftduelbgsecond}`}>
           <h2 className={style.title}></h2>
         </div>
 
