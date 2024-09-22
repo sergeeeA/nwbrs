@@ -38,7 +38,7 @@
     margin: 0; /* Remove margin to use full width */
     place-self: center;
   }
-  .nftduelbgsecond {
+  .nftduelbgseconds {
     background: url('../public/nftduelberamon.png') no-repeat center center;
     background-size: cover; /* Scale the background image to cover the entire element */
     color: #ffcf4c;
@@ -55,7 +55,7 @@
     margin: 0; /* Remove margin to use full width */
     place-self: center;
   }
-  .nftduelbgthird {
+  .nftduelbgthirds {
     background: url('../public/nftduelarena.png') no-repeat center center;
     background-size: cover; /* Scale the background image to cover the entire element */
     color: #ffcf4c;

@@ -195,7 +195,7 @@ export const AppProvider = ({ children }) => {
       }
     }
   };
-
+//comment
   const fetchPlayerWinsNFTLottery = async (playerAddress) => {
     if (lotteryContract && playerAddress) {
       try {
