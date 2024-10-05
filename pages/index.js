@@ -190,3 +190,9 @@ export default function Home() {
     </div>
   );
 }
+//               <button 
+//onClick={() => handlePageChange('third')} 
+//className={`${homeStyle.nftduelbuttonarena} ${activeButton === 'third' ? homeStyle.active : ''}`}
+//>
+//BEAR ARENA
+//</button>
