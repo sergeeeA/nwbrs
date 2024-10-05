@@ -119,7 +119,7 @@ const Nftduelwins = () => {
             cursor: 'url("/curs.png"), auto',
           }}
         >
-          <div className={Styles.Button}>UPDATE STATS</div>
+          <div className={Styles.Button}>UPDATE</div>
         </button>
         {totalwins !== null && (
           <p>
@@ -128,27 +128,27 @@ const Nftduelwins = () => {
         )}
         {wins !== null && (
           <p>
-            <span className={Styles.message}>NFT DUELS WON: {wins}</span>
+            <span className={Styles.message}>NFT DUEL: {wins}</span>
           </p>
         )}
         {lotteryWins !== null && (
           <p>
-            <span className={Styles.message}>LUCKY 69 WINS: {lotteryWins}</span>
+            <span className={Styles.message}>LUCKY 69: {lotteryWins}</span>
           </p>
         )}
         {miniGameWins !== null && (
           <p>
-            <span className={Styles.message}>BIGIRON WINS: {miniGameWins}</span>
+            <span className={Styles.message}>BIGIRON: {miniGameWins}</span>
           </p>
         )}
         {nftLotteryWins !== null && (
           <p>
-            <span className={Styles.message}>LUCKY 69 NFT WINS: {nftLotteryWins}</span>
+            <span className={Styles.message}>LUCKY 69 NFT: {nftLotteryWins}</span>
           </p>
         )}
         {miniGameNftWins !== null && (
           <p>
-            <span className={Styles.message}>BIGIRON NFT WINS: {miniGameNftWins}</span>
+            <span className={Styles.message}>BIGIRON NFT: {miniGameNftWins}</span>
           </p>
         )}
       </div>

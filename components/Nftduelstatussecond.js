@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import style from '../styles/nftduel.module.css';// Ensure this file contains the necessary CSS
+import style from '../styles/nftduel.module.css'; // Ensure this file contains the necessary CSS
 import { useAppContext } from '../context/context';
 import Web3 from 'web3'; // Import Web3
 
@@ -12,12 +12,11 @@ const NftDuel = () => {
     nftPrizePoolContractSecond,
     nftFirstDepositorSecond,
     lastNFTPrizeWinnerSecond,
-
-    address,
   } = useAppContext(); // Fetch necessary data and functions from context
 
   // State for player wins
   const [wins, setWins] = useState(null);
+  const backgroundRef = useRef(null); // Reference for background
 
   // Initialize Web3 and the contract
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
@@ -32,7 +31,7 @@ const NftDuel = () => {
   } else if (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS) {
     displayText = 'BERAMONIUM: BARTIOSIS';
   } else if (nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS) {
-    displayText = 'BERAARENA';
+    displayText = 'BERA ARENA';
   } else {
     displayText = nftPrizePoolContractSecond;
   }
@@ -64,8 +63,19 @@ const NftDuel = () => {
     const image = imageRef.current;
     const specialImage = specialImageRef.current;
 
+    const handleMouseMove = (event) => {
+      if (backgroundRef.current) {
+        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        backgroundRef.current.style.backgroundPosition = `${x * 0}px, 
+                                                          ${x * 12}px, 
+                                                          ${x * -9}px,
+                                                          ${x * 4}px`;
+      }
+    };
+
+    // 3D effect for images
     const apply3DEffect = (img) => {
-      const handleMouseMove = (e) => {
+      const handleMouseMoveImage = (e) => {
         if (!img) return;
         const { clientWidth: width, clientHeight: height } = img;
         const { offsetX: x, offsetY: y } = e;
@@ -89,22 +99,29 @@ const NftDuel = () => {
         img.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
       };
 
-      img.addEventListener('mousemove', handleMouseMove);
+      img.addEventListener('mousemove', handleMouseMoveImage);
       img.addEventListener('mouseleave', handleMouseLeave);
 
       return () => {
         if (img) {
-          img.removeEventListener('mousemove', handleMouseMove);
+          img.removeEventListener('mousemove', handleMouseMoveImage);
           img.removeEventListener('mouseleave', handleMouseLeave);
         }
       };
     };
 
+    // Apply 3D effect to the appropriate image
     if (specialImage && (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS)) {
       apply3DEffect(specialImage);
     } else if (image) {
       apply3DEffect(image);
     }
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, [nftPrizePoolContractSecond]);
 
   // Determine the CSS class for the images based on nftPrizePoolContract
@@ -116,12 +133,10 @@ const NftDuel = () => {
     ? style.visibleImage
     : style.hiddenImage;
 
-
-
   return (
-    <div className={style.parentcontainer}>
+    <div className={style.parentcontainer} >
       <div className={style.wrappernftsecond}>
-        <div className={`${style.nftduelbgseconds}`}>
+        <div className={`${style.nftduelbgseconds}`}ref={backgroundRef}>
           <h2 className={style.title}></h2>
         </div>
 
@@ -156,9 +171,9 @@ const NftDuel = () => {
           <p className={`${style.rafflefeetitle} ${depositorClass}`}>
             <span>{challengerText}</span>
           </p>
-         
+
           <p className={style.textNotLoaded}>
-          LAST WINNER: <span>{winnerText}</span> 
+            LAST WINNER: <span>{winnerText}</span>
           </p>
         </div>
       </div>

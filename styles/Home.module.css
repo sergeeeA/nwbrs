@@ -203,12 +203,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../public/flip.gif'), 
+  background-image: 
                     url('../public/Goingto.gif'), 
                     url('../public/thirdlayer.png'), 
                     url('../public/secondlayer.png'),
                     url('../public/firstlayer.png');
-  background-size: 50% auto, cover, cover, cover, cover; /* Adjust the size of each image as needed */
+  background-size: cover, cover, cover, cover; /* Adjust the size of each image as needed */
   background-position: center; /* Simplified to a single position */
   background-repeat: no-repeat; /* Simplified to a single repeat */
   background-attachment: fixed;

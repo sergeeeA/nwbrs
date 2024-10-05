@@ -18,7 +18,7 @@ const NftDuel = () => {
 
   // State for player wins
   const [wins, setWins] = useState(null);
-
+  const backgroundRef = useRef(null); // Reference for background
   // Initialize Web3 and the contract
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 
@@ -60,7 +60,15 @@ const NftDuel = () => {
   useEffect(() => {
     const image = imageRef.current;
     const specialImage = specialImageRef.current;
-
+    const handleMouseMove = (event) => {
+      if (backgroundRef.current) {
+        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        backgroundRef.current.style.backgroundPosition = `${x * 0}px, 
+                                                          ${x * 12}px, 
+                                                          ${x * -9}px,
+                                                          ${x * 4}px`;
+      }
+    };
     const apply3DEffect = (img) => {
       const handleMouseMove = (e) => {
         if (!img) return;
@@ -102,6 +110,11 @@ const NftDuel = () => {
     } else if (image) {
       apply3DEffect(image);
     }
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, [nftPrizePoolContract]);
 
   // Determine the CSS class for the images based on nftPrizePoolContract
@@ -118,7 +131,7 @@ const NftDuel = () => {
   return (
     <div className={style.parentcontainer}>
       <div className={style.wrappernft}>
-        <div className={`${style.nftduelbg}`}>
+        <div className={`${style.nftduelbg}`} ref={backgroundRef}>
           <h2 className={style.title}></h2>
         </div>
 

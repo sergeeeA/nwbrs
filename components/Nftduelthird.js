@@ -6,7 +6,7 @@ import nftAbi from '../utils/nft'; // Import ABI
 import Web3 from 'web3'; // Import Web3
 
 const NFT_CONTRACT_ADDRESS = '0x06d9843595A02f0Dc3bfEdc67dC1C78D2D85b005'; // Fixed contract address
-const APPROVE_ADDRESS = '0x79066904f44C05B73618E245d9663a6a4D700664'; // LOTTERY CONTRACT Address to approve
+const APPROVE_ADDRESS = '0x2087d590a1833A8b4883FfA5b404F053981a2FF8'; // LOTTERY CONTRACT Address to approve
 
 const NftDuel = () => {
   const { depositNFTToPrizePoolThird, withdrawNFTFromPrizePoolThird } = useAppContext();
@@ -40,7 +40,7 @@ const NftDuel = () => {
         console.log('Approval successful. Depositing NFT...');
 
         // Deposit the NFT to the prize pool
-        await depositNFTToPrizePoolThird(NFT_CONTRACT_ADDRESS, nftTokenId);
+        await depositNFTToPrizePoolThird(NFT_CONTRACT_ADDRESS, nftTokenId, web3.utils.toWei('1', 'ether'));
         console.log('Deposit successful.');
 
       } catch (error) {

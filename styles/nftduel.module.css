@@ -21,57 +21,74 @@
     justify-content: center; /* Center items vertically if needed */
     text-align: center; /* Center text if necessary */
   }
+
   .nftduelbg {
-    background: url('../public/nftduelbanner.png') no-repeat center center;
-    background-size: cover; /* Scale the background image to cover the entire element */
-    color: #ffcf4c;
-    cursor: url('../public/curslink.png'), auto;
+    position: relative;
+    width: 150%;
+    min-height: 15vh; /* Set a minimum height */
+    right: 6px;
+    background-image: url('../public/nftduelFirst.png'), 
+                      url('../public/nftduelSecond.png'),
+                      url('../public/nftduelThird.png'),
+                      url('../public/nftduellast.png');
+    
+    background-size: 70% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    pointer-events: none;
+    z-index: 0;
+    
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px; /* Space for title below */
-  
-    box-sizing: border-box; /* Ensure padding is included in width */
-    width: 100vw; /* 50% of the viewport width */
-  
-    max-width: 555px; /* Maximum width */
-    margin: 0; /* Remove margin to use full width */
-    place-self: center;
-  }
+    border-radius: 5px;
+}
   .nftduelbgseconds {
-    background: url('../public/nftduelberamon.png') no-repeat center center;
-    background-size: cover; /* Scale the background image to cover the entire element */
-    color: #ffcf4c;
-    cursor: url('../public/curslink.png'), auto;
+    position: relative;
+    width: 150%;
+    min-height: 15vh; /* Set a minimum height */
+    right: 6px;
+    background-image: url('../public/Beramoniumfirst.png'), 
+                      url('../public/Beramoniumsecnd.png'),
+                      url('../public/Beramoniumthird.png'),
+                      url('../public/Beramoniumlast.png');
+    
+    background-size: 70% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    pointer-events: none;
+    z-index: 0;
+    
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px; /* Space for title below */
-  
-    box-sizing: border-box; /* Ensure padding is included in width */
-    width: 100vw; /* 50% of the viewport width */
-  
-    max-width: 555px; /* Maximum width */
-    margin: 0; /* Remove margin to use full width */
-    place-self: center;
-  }
+    border-radius: 5px;
+}
+
   .nftduelbgthirds {
-    background: url('../public/nftduelarena.png') no-repeat center center;
-    background-size: cover; /* Scale the background image to cover the entire element */
-    color: #ffcf4c;
-    cursor: url('../public/curslink.png'), auto;
+    position: relative;
+    width: 150%;
+    min-height: 15vh; /* Set a minimum height */
+    right: 6px;
+    background-image: url('../public/beraarenafirst.png'), 
+                      url('../public/beraarenamid.png'),
+                      url('../public/beraarenalast.png');
+    
+    background-size: 75% auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    pointer-events: none;
+    z-index: 0;
+    
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px; /* Space for title below */
-  
-    box-sizing: border-box; /* Ensure padding is included in width */
-    width: 100vw; /* 50% of the viewport width */
-  
-    max-width: 555px; /* Maximum width */
-    margin: 0; /* Remove margin to use full width */
-    place-self: center;
-  }
+    border-radius: 5px;
+}
+
   .title {
     font-family: 'Monofonto', cursive; /* Apply the custom font here */
     font-size: 2rem;
@@ -113,13 +130,13 @@
   }
   @keyframes pulsate {
     0% {
-      box-shadow: 0 0 20px #bd9938;
+      box-shadow: 0 0 5px #bd9938;
     }
     50% {
-      box-shadow: 0 0 40px #ffed4c;
+      box-shadow: 0 0 15px #ffed4c;
     }
     100% {
-      box-shadow: 0 0 20px #bd9938;
+      box-shadow: 0 0 5px #bd9938;
     }
   }
     /*beramonium*/
@@ -149,13 +166,13 @@
 }
 @keyframes pulsatesecond {
   0% {
-    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+    box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
   }
   50% {
-    box-shadow: 0 0 40px rgb(162, 0, 255);
+    box-shadow: 0 0 15px rgb(162, 0, 255);
   }
   100% {
-    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+    box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
   }
 }
 
@@ -186,13 +203,13 @@
     }
     @keyframes pulsatethird {
       0% {
-        box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+        box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
       }
       50% {
-        box-shadow: 0 0 40px rgb(0, 217, 255);
+        box-shadow: 0 0 15px rgb(0, 217, 255);
       }
       100% {
-        box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+        box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
       }
     }
 
@@ -610,5 +627,16 @@
     
     100% {
       box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+    }
+  }
+  @keyframes flicker {
+
+
+    50% {
+      box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
+    }
+  
+    100% {
+      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
     }
   }

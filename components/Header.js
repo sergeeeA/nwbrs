@@ -35,7 +35,7 @@ const checkAndSwitchNetwork = async () => {
   }
 };
 
-const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel }) => {
+const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel, onToggleKoth, isOpenKoth }) => {
   const { address, connectWallet } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -87,6 +87,9 @@ const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel }) => {
                 <button onClick={onToggleNftduel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
                   {isOpenNftduel ? ' DUEL' : 'DUEL'}
                 </button>
+                <button onClick={onToggleKoth} className={`${style.toggleButton} ${isOpenKoth ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+                  {isOpenKoth ? '  HOBEAR DAM' : ' HOBEAR DAM'}
+                </button>
                 <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
                   BIBPOI
                 </button>
@@ -100,6 +103,9 @@ const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel }) => {
             </button>
             <button onClick={onToggleNftduel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
               {isOpenNftduel ? ' DUEL' : 'DUEL'}
+            </button>
+            <button onClick={onToggleKoth} className={`${style.toggleButton} ${isOpenKoth ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+              {isOpenKoth ? '  HOBEAR DAM' : ' HOBEAR DAM'}
             </button>
             <button onClick={() => setIsModalOpen(true)} className={style.toggleButton}>
               BIBPOI

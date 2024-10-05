@@ -13,6 +13,8 @@ import Nftduelstatus from '../components/Nftduelstatus';
 import Leaderboard from '../components/Leaderboard';
 import Nftduelstatussecond from '../components/Nftduelstatussecond';
 import Nftduelstatusthird from '../components/Nftduelstatusthird';
+import KOTH from '../components/KOTH';
+import KOTHLeader from '../components/KOTHLeader';
 import Inventory from '../components/Inventory';
 
 import potCardsContainer from '../styles/potCardsContainer.module.css'; // style //
@@ -24,9 +26,17 @@ export default function Home() {
   const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false); // New state for leaderboard
   const [isOpenNftduel, setIsOpenNftduel] = useState(false);
   const [isNftduelwinsOpen, setIsNftduelwinsOpen] = useState(false);
+  const [isOpenKoth, setIsOpenKoth] = useState(false); // New state for KOTH
   const [currentPage, setCurrentPage] = useState('duel'); 
   const [activeButton, setActiveButton] = useState('duel'); // Track active button
   const backgroundRef = useRef(null);
+
+
+  const toggleOpenKoth = () => {
+    setIsOpenKoth(!isOpenKoth);
+    setIsOpenA(false);
+    setIsOpenNftduel(false);
+  };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -36,11 +46,13 @@ export default function Home() {
   const toggleOpenA = () => {
     setIsOpenA(!isOpenA);
     setIsOpenNftduel(false);
+    setIsOpenKoth(false);
   };
 
   const toggleOpenNftduel = () => {
     setIsOpenNftduel(!isOpenNftduel);
     setIsOpenA(false);
+    setIsOpenKoth(false);
   };
 
   const toggleChatbox = () => {
@@ -58,9 +70,9 @@ export default function Home() {
   useEffect(() => {
     const handleMouseMove = (event) => {
       if (backgroundRef.current && !(isOpenA || isOpenNftduel)) {
-        const x = event.clientX / window.innerWidth;
-        const y = event.clientY / window.innerHeight;
-        backgroundRef.current.style.backgroundPosition = `${x * 1000}px ${y * 500}px, 
+        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        const y = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+        backgroundRef.current.style.backgroundPosition = `
                                                           ${x * 100}px ${y * 25}px, 
                                                           ${x * 75}px ${y * 25}px, 
                                                           ${x * 50}px ${y * 25}px, 
@@ -79,14 +91,16 @@ export default function Home() {
       <div
         ref={backgroundRef}
         className={homeStyle.background}
-        style={{ visibility: isOpenA || isOpenNftduel ? 'hidden' : 'visible' }}
+        style={{ visibility: isOpenA || isOpenNftduel || isOpenKoth ? 'hidden' : 'visible' }}
       ></div>
       <div className={homeStyle.wrapper}>
         <Header 
-          onToggleA={toggleOpenA} 
-          onToggleNftduel={toggleOpenNftduel} 
-          isOpenA={isOpenA} 
-          isOpenNftduel={isOpenNftduel} 
+        onToggleA={toggleOpenA} 
+        onToggleNftduel={toggleOpenNftduel} 
+        onToggleKoth={toggleOpenKoth} // Pass toggle function if needed
+        isOpenA={isOpenA} 
+        isOpenNftduel={isOpenNftduel}
+        isOpenKoth={isOpenKoth} // Pass KOTH state if needed
         />
         
         <button
@@ -111,7 +125,7 @@ export default function Home() {
           className={homeStyle.boardboxToggleButton}
           onClick={toggleLeaderboard}
         >
-          {isLeaderboardOpen ? 'CLOSE LEADERBOARD' : 'OPEN LEADERBOARD'}
+          {isLeaderboardOpen ? ' LEADERBOARD' : ' LEADERBOARD'}
         </button>
 
         {isLeaderboardOpen && <Leaderboard />}
@@ -162,7 +176,10 @@ export default function Home() {
             )}
           </div>
         )}
-
+      <div className={`${potCardsContainer.potCardsContainer} ${isOpenKoth ? potCardsContainer.open : potCardsContainer.closed}`}>
+      <KOTHLeader />
+        <KOTH /> 
+      </div>
         <div className={`${potCardsContainer.potCardsContainer} ${isOpenA ? potCardsContainer.open : potCardsContainer.closed}`}>
           <PotCard />
           <PotCardC />

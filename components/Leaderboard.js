@@ -3,7 +3,7 @@ import Styles from '../styles/leaderboard.module.css';
 import { useAppContext } from '../context/context';
 
 const Leaderboard = () => {
-  const { leaderboardAddresses, leaderboardScores } = useAppContext();
+  const { address, leaderboardAddresses, leaderboardScores } = useAppContext();
 
   // Function to format the address
   const formatAddress = (address) => {
@@ -21,16 +21,34 @@ const Leaderboard = () => {
       });
   };
 
+  // Combine addresses and scores into an array of objects
+  const combinedData = leaderboardAddresses.map((address, index) => ({
+    address,
+    score: leaderboardScores[index],
+  }));
+
+  // Sort the combined data by score in descending order
+  const sortedData = combinedData.sort((a, b) => b.score - a.score);
+
+  // Get the score for the connected wallet address
+  const connectedWalletScore = sortedData.find(entry => entry.address === address)?.score || 0;
+
   return (
     <div className={Styles.statbox}>
       <h2 className={Styles.header}>LEADERBOARD</h2>
-      {leaderboardAddresses.length === 0 ? (
-        <p>No data available</p>
+      
+      {/* Display connected wallet's score */}
+      <div className={Styles.word}>
+        <h3>YOUR SCORE: {connectedWalletScore}</h3>
+      </div>
+
+      {sortedData.length === 0 ? (
+        <p className={Styles.address}>NOT AVAILABLE</p>
       ) : (
         <div className={Styles.leaderboard}>
           <div className={Styles.column}>
             <strong className={Styles.titlecontent}>ADDRESS</strong>
-            {leaderboardAddresses.map((address, index) => (
+            {sortedData.map(({ address }) => (
               <div key={address} onClick={() => copyToClipboard(address)} className={Styles.address}>
                 {formatAddress(address)}
               </div>
@@ -38,7 +56,7 @@ const Leaderboard = () => {
           </div>
           <div className={Styles.column}>
             <strong className={Styles.titlecontent}>SCORE</strong>
-            {leaderboardScores.map((score, index) => (
+            {sortedData.map(({ score }, index) => (
               <div key={index} className={Styles.word}>
                 {score}
               </div>

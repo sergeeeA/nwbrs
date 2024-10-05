@@ -41,7 +41,7 @@
 			],
 			"name": "depositNFTToPrizePool",
 			"outputs": [],
-			"stateMutability": "nonpayable",
+			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -59,7 +59,7 @@
 			],
 			"name": "depositNFTToPrizePoolSecond",
 			"outputs": [],
-			"stateMutability": "nonpayable",
+			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -77,7 +77,7 @@
 			],
 			"name": "depositNFTToPrizePoolThird",
 			"outputs": [],
-			"stateMutability": "nonpayable",
+			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -109,9 +109,28 @@
 			"type": "function"
 		},
 		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "tokenId",
+					"type": "uint256"
+				}
+			],
+			"name": "KOTH",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
 			"inputs": [],
 			"stateMutability": "nonpayable",
 			"type": "constructor"
+		},
+		{
+			"anonymous": false,
+			"inputs": [],
+			"name": "KOTHDonationsReset",
+			"type": "event"
 		},
 		{
 			"anonymous": false,
@@ -171,6 +190,25 @@
 			"type": "event"
 		},
 		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "address",
+					"name": "donor",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
+			],
+			"name": "nftsburnt",
+			"type": "event"
+		},
+		{
 			"inputs": [],
 			"name": "pickNFTLotteryWinner",
 			"outputs": [],
@@ -180,6 +218,13 @@
 		{
 			"inputs": [],
 			"name": "pickWinner",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "resetKOTH",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -253,6 +298,45 @@
 		},
 		{
 			"inputs": [],
+			"name": "entryFee",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "entryFeeSecond",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "entryFeeThird",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
 			"name": "getBalance",
 			"outputs": [
 				{
@@ -267,6 +351,24 @@
 		{
 			"inputs": [],
 			"name": "getLeaderboard",
+			"outputs": [
+				{
+					"internalType": "address[]",
+					"name": "",
+					"type": "address[]"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "",
+					"type": "uint256[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "getLeaderboardKOTH",
 			"outputs": [
 				{
 					"internalType": "address[]",
@@ -411,6 +513,25 @@
 					"internalType": "address[]",
 					"name": "",
 					"type": "address[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "kingofthehill",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
 				}
 			],
 			"stateMutability": "view",
@@ -998,6 +1119,25 @@
 				}
 			],
 			"name": "players",
+			"outputs": [
+				{
+					"internalType": "address",
+					"name": "",
+					"type": "address"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "playerskoth",
 			"outputs": [
 				{
 					"internalType": "address",

@@ -12,7 +12,6 @@ const NftDuel = () => {
     nftPrizePoolContractThird,
     nftFirstDepositorThird,
     lastNFTPrizeWinnerThird,
-
     address,
   } = useAppContext(); // Fetch necessary data and functions from context
 
@@ -59,6 +58,7 @@ const NftDuel = () => {
 
   const imageRef = useRef(null);
   const specialImageRef = useRef(null); // Separate ref for the special image
+  const backgroundRef = useRef(null); // Ref for the background
 
   useEffect(() => {
     const image = imageRef.current;
@@ -107,6 +107,24 @@ const NftDuel = () => {
     }
   }, [nftPrizePoolContractThird]);
 
+  // Handle mouse movement for the parallax effect
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (backgroundRef.current) {
+        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        backgroundRef.current.style.backgroundPosition = `${x * 0}px, 
+                                                          ${x * 12}px, 
+                                                          ${x * -9}px`;
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
+
   // Determine the CSS class for the images based on nftPrizePoolContract
   const imageClass = nftPrizePoolContractThird === NFT_CONTRACT_ADDRESS
     ? style.visibleImage
@@ -116,12 +134,10 @@ const NftDuel = () => {
     ? style.visibleImage
     : style.hiddenImage;
 
-
-
   return (
     <div className={style.parentcontainer}>
       <div className={style.wrappernftthird}>
-        <div className={`${style.nftduelbgthirds}`}>
+        <div className={`${style.nftduelbgthirds}`} ref={backgroundRef}>
           <h2 className={style.title}></h2>
         </div>
 
@@ -145,7 +161,7 @@ const NftDuel = () => {
           </p>
         
           <p className={style.textNotLoaded}>
-          LAST WINNER: <span>{winnerText}</span> 
+            LAST WINNER: <span>{winnerText}</span> 
           </p>
         </div>
       </div>

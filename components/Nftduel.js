@@ -6,7 +6,7 @@ import nftAbi from '../utils/nft'; // Import ABI
 import Web3 from 'web3'; // Import Web3
 
 const NFT_CONTRACT_ADDRESS = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05'; // Fixed contract address
-const APPROVE_ADDRESS = '0x79066904f44C05B73618E245d9663a6a4D700664'; // LOTTERY CONTRACT Address to approve
+const APPROVE_ADDRESS = '0x2087d590a1833A8b4883FfA5b404F053981a2FF8'; // LOTTERY CONTRACT Address to approve
 
 const NftDuel = () => {
   const { depositNFTToPrizePool, withdrawNFTFromPrizePool } = useAppContext();

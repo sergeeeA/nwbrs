@@ -81,11 +81,7 @@ const PotCard = () => {
     enterLottery();
   };
 
-  const handlePickWinner = async () => {
-    await handleSwitchNetwork();
-    pickWinner();
-  };
-
+  
   const handleTitleClick = () => {
     window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
   };
