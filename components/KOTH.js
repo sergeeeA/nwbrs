@@ -6,7 +6,7 @@ import nftAbi from '../utils/nft';
 import Web3 from 'web3';
 
 const NFT_CONTRACT_ADDRESS = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05';
-const APPROVE_ADDRESS = '0x2087d590a1833A8b4883FfA5b404F053981a2FF8';
+const APPROVE_ADDRESS = '0xD40CB0bc61228053299524031217747780DB88Cd';
 
 const NftDuel = () => {
   const { enterKOTH } = useAppContext();
