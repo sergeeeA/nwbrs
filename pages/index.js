@@ -149,12 +149,7 @@ export default function Home() {
                 >
                   BERAMONIUM
                 </button>
-                <button 
-                  onClick={() => handlePageChange('third')} 
-                  className={`${homeStyle.nftduelbuttonarena} ${activeButton === 'third' ? homeStyle.active : ''}`}
-                >
-                  BEAR ARENA
-                </button>
+ 
               </div>
             </div>
 
