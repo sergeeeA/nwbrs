@@ -156,15 +156,16 @@ export const AppProvider = ({ children }) => {
       const lotteryId = await lotteryContract.methods.lotteryId().call();
       const winner = await lotteryContract.methods.lastWinner().call();
       const miniGameWinner = await lotteryContract.methods.lastMiniGameWinner().call();
-
+  
+      // Fetch the first depositor
+      await fetchFirstDepositor();
   
       setLotteryPot(web3.utils.fromWei(pot, 'ether'));
       setMiniGamePool(web3.utils.fromWei(pool, 'ether'));
       setLotteryId(lotteryId);
       setLastWinner(winner);
       setLastMiniGameWinner(miniGameWinner); 
-      
-      
+  
       console.log('Last winner set to:', winner); // Debugging line
     } catch (error) {
       console.error('Error fetching lottery data:', error);

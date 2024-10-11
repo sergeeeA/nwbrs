@@ -318,3 +318,16 @@
     color: #000000;
 
 }
+.loadingCircle {
+  border: 6px solid #f3f3f300; /* Light grey */
+  border-top: 6px solid #C8AC53; /* Blue */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { box-shadow: 0 0 15px rgba(255, 207, 76, 0.5); transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

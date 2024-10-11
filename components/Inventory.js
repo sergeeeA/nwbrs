@@ -14,48 +14,55 @@ export default function Inventory() {
   const { address } = useAppContext();
   const { setNftTokenId } = useNftContext();
 
+  const fetchNFTInventory = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api?module=account&action=addresstokennftinventory&address=${address}&contractaddress=0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05&page=1&offset=100&apikey=YourApiKeyToken`);
+      const data = await response.json();
+      if (data.status === "1") {
+        setNftInventory(data.result || []);
+      } else {
+        setError('Failed to fetch NFT inventory');
+      }
+    } catch (err) {
+      setError('Failed to fetch NFT inventory');
+      console.error('Error fetching NFT inventory:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchNewNFTInventory = async () => {
+    setNewLoading(true);
+    setNewError(null);
+    try {
+      const response = await fetch(`https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api?module=account&action=addresstokennftinventory&address=${address}&contractaddress=0x46B4b78d1Cd660819C934e5456363A359fde43f4&page=1&offset=100&apikey=YourApiKeyToken`);
+      const data = await response.json();
+      if (data.status === "1") {
+        setNewNftInventory(data.result || []);
+      } else {
+        setNewError('Failed to fetch new NFT inventory');
+      }
+    } catch (err) {
+      setNewError('Failed to fetch new NFT inventory');
+      console.error('Error fetching new NFT inventory:', err);
+    } finally {
+      setNewLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (address) {
-      const fetchNFTInventory = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-          const response = await fetch(`https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api?module=account&action=addresstokennftinventory&address=${address}&contractaddress=0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05&page=1&offset=100&apikey=YourApiKeyToken`);
-          const data = await response.json();
-          if (data.status === "1") {
-            setNftInventory(data.result || []);
-          } else {
-            setError('Failed to fetch NFT inventory');
-          }
-        } catch (err) {
-          setError('Failed to fetch NFT inventory');
-          console.error('Error fetching NFT inventory:', err);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      const fetchNewNFTInventory = async () => {
-        setNewLoading(true);
-        setNewError(null);
-        try {
-          const response = await fetch(`https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api?module=account&action=addresstokennftinventory&address=${address}&contractaddress=0x46B4b78d1Cd660819C934e5456363A359fde43f4&page=1&offset=100&apikey=YourApiKeyToken`);
-          const data = await response.json();
-          if (data.status === "1") {
-            setNewNftInventory(data.result || []);
-          } else {
-            setNewError('Failed to fetch new NFT inventory');
-          }
-        } catch (err) {
-          setNewError('Failed to fetch new NFT inventory');
-          console.error('Error fetching new NFT inventory:', err);
-        } finally {
-          setNewLoading(false);
-        }
-      };
-
       fetchNFTInventory();
       fetchNewNFTInventory();
+
+      const intervalId = setInterval(() => {
+        fetchNFTInventory();
+        fetchNewNFTInventory();
+      }, 10000); // Refresh every 10 seconds
+
+      return () => clearInterval(intervalId); // Clean up the interval on unmount
     }
   }, [address]);
 

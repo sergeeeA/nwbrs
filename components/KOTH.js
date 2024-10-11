@@ -12,6 +12,7 @@ const NftDuel = () => {
   const { enterKOTH } = useAppContext();
   const { nftTokenId, setNftTokenId } = useNftContext();
   const [nftContract, setNftContract] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
   const backgroundRef = useRef(null);
 
@@ -21,24 +22,23 @@ const NftDuel = () => {
   }, []); // Runs only once
 
   useEffect(() => {
-      const handleMouseMove = (event) => {
-    if (backgroundRef.current) {
-      const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-      const y = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-      
-      backgroundRef.current.style.backgroundPosition = `${x * -25}px, 
-                                                          ${x * 12}px, 
-                                                          ${x * -7}px, 
- 
-                                                          ${x * 4}px`;
-    }
-  };
+    const handleMouseMove = (event) => {
+      if (backgroundRef.current) {
+        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+        const y = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+        
+        backgroundRef.current.style.backgroundPosition = `${x * -25}px, 
+                                                            ${x * 12}px, 
+                                                            ${x * -7}px, 
+                                                            ${x * 4}px`;
+      }
+    };
 
-  window.addEventListener('mousemove', handleMouseMove);
-  return () => {
-    window.removeEventListener('mousemove', handleMouseMove);
-  };
-}, []);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,6 +50,7 @@ const NftDuel = () => {
           return;
         }
 
+        setLoading(true); // Start loading
         const approveResult = await nftContract.methods.approve(APPROVE_ADDRESS, nftTokenId).send({ from: accounts[0] });
         console.log('Approval result:', approveResult);
 
@@ -60,6 +61,8 @@ const NftDuel = () => {
       } catch (error) {
         console.error('Error processing transaction:', error);
         alert('An error occurred: ' + error.message);
+      } finally {
+        setLoading(false); // End loading
       }
     } else {
       alert('Please provide an NFT Token ID.');
@@ -70,59 +73,62 @@ const NftDuel = () => {
     <div className={style.parentcontainer}>
       <div className={style.wrappernft}>
         <div className={style.background} ref={backgroundRef}>
-     
         </div>
         
         <div className={style.parentcontainer}>
-          
-        <label className={style.title} htmlFor="nftTokenId" style={{ cursor: 'url("/curs.png"), auto' }}>
-          SEND DWELLER
-        </label>
-        <form onSubmit={handleSubmit}>
-          <div className={style.tooltip}>
-            <input
-              type="number"
-              id="nftTokenId"
-              value={nftTokenId}
-              onChange={(e) => setNftTokenId(e.target.value)}
-              required
-              className={style.numberInput}
-            />
-            <div className={style.tooltiptext}>
-              Click any token ID in your NFT Inventory!
+          <label className={style.title} htmlFor="nftTokenId" style={{ cursor: 'url("/curs.png"), auto' }}>
+            SEND DWELLER
+          </label>
+          <form onSubmit={handleSubmit}>
+            <div className={style.tooltip}>
+              <input
+                type="number"
+                id="nftTokenId"
+                value={nftTokenId}
+                onChange={(e) => setNftTokenId(e.target.value)}
+                required
+                className={style.numberInput}
+              />
+              <div className={style.tooltiptext}>
+                Click any token ID in your NFT Inventory!
+              </div>
             </div>
-          </div>
-          <div className={style.parentcontainer}>
-            <button
-              type="submit"
-              style={{
-                width: '50%',
-                height: '40%',
-                padding: '10px 10px',
-                backgroundColor: 'transparent',
-                color: '#C8AC53',
-                fontSize: '20px',
-                fontFamily: 'Monofonto',
-                border: 'none',
-                cursor: 'pointer',
-                textAlign: 'center',
-                boxSizing: 'border-box',
-                transformOrigin: 'center',
-              }}
-            >
-              <div className={style.btnWrapper}>
-              <div className={style.tooltipw}>
-                <div className={style.btn}>
-                  ENTER
-                </div>
-                  <div className={style.tooltiptextw}>
-                   YOU ARE BURNING YOUR NFT!
+            <div className={style.parentcontainer}>
+              <button
+                type="submit"
+                disabled={loading} // Disable button during loading
+                style={{
+                  width: '50%',
+                  height: '40%',
+                  padding: '10px 10px',
+                  backgroundColor: 'transparent',
+                  color: '#C8AC53',
+                  fontSize: '20px',
+                  fontFamily: 'Monofonto',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  boxSizing: 'border-box',
+                  transformOrigin: 'center',
+                }}
+              >
+                <div className={style.btnWrapper}>
+                  <div className={style.tooltipw}>
+                    <div className={style.btn}>
+                      {loading ? (
+                        <div className={style.loadingCircle}></div> // Loading circle
+                      ) : (
+                        'ENTER'
+                      )}
+                    </div>
+                    <div className={style.tooltiptextw}>
+                      YOU ARE BURNING YOUR NFT!
+                    </div>
                   </div>
                 </div>
-              </div>
-            </button>
-          </div>
-        </form>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
