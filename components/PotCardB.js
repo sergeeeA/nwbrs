@@ -134,7 +134,7 @@ const PotCard = () => {
         </div>
       ) : (address === firstDepositor ? (
         <div className={style.rafflefee}>
-          You can't duel again.
+          You cant duel again.
         </div>
       ) : (
         <div className={`${style.btnbigiron}`} onClick={handleGambooolClick}>
