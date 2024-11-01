@@ -130,7 +130,7 @@ const PotCard = () => {
         </div>
       ) : (miniGameNFTfirstDepositor === address ? (
         <div className={style.rafflefee}>
-          You can't duel again.
+          You cant duel again.
         </div>
       ) : (
         <div className={`${style.btnbigiron} ${isDuelDisabled ? style.disabled : ''}`} onClick={handleGambooolClick}>
