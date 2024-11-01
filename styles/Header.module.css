@@ -37,7 +37,7 @@
   cursor: url('/curslink.png'), auto;
 }
 .nav {
-  font-family: 'Great Vibes', cursive; /* Apply the custom font here */
+  font-family: 'Monofonto'; /* Apply the custom font here */
   font-size: 2rem;
   color: #ffcf4c;
   margin-left: 20px;
@@ -47,6 +47,7 @@
   align-items: center;
   justify-content: center;
   cursor: url('/curslink.png'), auto;
+
 }
 .loginBtn {
 

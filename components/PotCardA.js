@@ -3,11 +3,12 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor, lastMiniGameNFTWinner } = useAppContext();
+  const {address, duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor, lastMiniGameNFTWinner } = useAppContext();
   const cardRef = useRef(null);
 
-  // State to track whether the button is disabled
+  // State to track whether the button is disabled and for loading state
   const [isDuelDisabled, setIsDuelDisabled] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   // Helper function to format Ethereum address
   const formatAddress = (address) => {
@@ -40,8 +41,10 @@ const PotCard = () => {
 
   const handleGambooolClick = async () => {
     if (isDuelDisabled) return; // Prevent action if disabled
+    setLoading(true); // Start loading
     await handleSwitchNetwork();
-    duelnft();
+    await duelnft(); // Ensure duel is awaited if it's a promise
+    setLoading(false); // End loading
   };
 
   useEffect(() => {
@@ -102,15 +105,15 @@ const PotCard = () => {
           BIG IRON NFT
         </div>
       </div>
-
+  
       <div className={`${style.depositorStatus} ${depositorStatusClass}`}>
         {depositorStatus}
       </div>
-
+  
       <div className={style.pot}>
         NFT: <span className={nftText === 'NONE' ? style.textNotLoaded : style.goldAccent}>{nftText}</span>
       </div>
-
+  
       <div className={style.rafflefeebg}>
         <div className={style.rafflefee}>
           Duel Wager: 1
@@ -120,15 +123,23 @@ const PotCard = () => {
         LAST WINNER: <span className={style.winnerName}>{lastWinnerStatus}</span>
       </div>
       <div className={style.lineAfter}></div>
-
-      <div
-        className={`${style.btnbigiron} ${isDuelDisabled ? style.disabled : ''}`}
-        onClick={handleGambooolClick}
-      >
-        DUEL
-      </div>
+  
+      {loading ? (
+        <div className={`${style.loading} ${loading ? style.visible : ''}`}>
+          <div className={style.loadingCircle}></div>
+        </div>
+      ) : (miniGameNFTfirstDepositor === address ? (
+        <div className={style.rafflefee}>
+          You can't duel again.
+        </div>
+      ) : (
+        <div className={`${style.btnbigiron} ${isDuelDisabled ? style.disabled : ''}`} onClick={handleGambooolClick}>
+          DUEL
+        </div>
+      ))}
     </div>
   );
+  
 };
 
 export default PotCard;

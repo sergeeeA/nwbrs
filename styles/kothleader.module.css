@@ -11,36 +11,20 @@
     align-items: center;     /* Center vertically */
     flex-direction: column;  /* Stack children vertically */
     width: 30%;              /* Fixed width */
-    min-width: 200px;     
-    max-width: 300px;       /* Optional: set a maximum width for better control */
-    overflow: hidden;        /* Ensure the pseudo-element doesn't overflow */
-    padding-bottom: 20px;   /* Space for the taper effect */
-    max-height: 120px; /* Set an initial max-height */
+    max-height: 500px;
+    min-width: 400px;
+    max-width: 600px;      
+    overflow: hidden;        
+    padding-bottom: 20px;   
+    
     transition:  0.15s ease-in; /* Use ease-in for the transition */
 }
 
-.expanded {
-    max-height: 500px;
-    min-width: 400px;
-    max-width: 600px; /* Expanded max-height */
-}
-.parentcontainer::after {
-    content: '';
-    position: absolute;
-    background: linear-gradient(to bottom, #d6c2a100, #e4b87781); /* Light brown gradient */
-    left: 0;
-    right: 0;
-    bottom: 100%; /* Position above the container */
-    height: 100px; /* Height of the taper */
-    border-left: 2px solid #C8AC53; /* Left border */
-    border-right: 2px solid #C8AC53; /* Right border */
-    border-bottom: 2px solid #C8AC53; /* Bottom border */
-    transform: translateY(100%) rotate(180deg); /* Flip to point down */
-}
+
 
 
   .wrappernft {
-    background: linear-gradient(to bottom, #181818, #181818, #000000);
+    background:   linear-gradient(to bottom,#000000, #161616,#1f1f1f,#000000, #000000);
     flex: 1; /* Allow each card to grow equally */
     min-width: 255px;
     max-width: 555px; /* Example fixed width, adjust as needed */
@@ -68,13 +52,13 @@
   }
   @keyframes pulsate {
     0% {
-      box-shadow: 0 0 20px #bd9938;
+      box-shadow: 0 0 5px #bd9938;
     }
     50% {
-      box-shadow: 0 0 40px #ffed4c;
+      box-shadow: 0 0 10px #ffed4c;
     }
     100% {
-      box-shadow: 0 0 20px #bd9938;
+      box-shadow: 0 0 5px #bd9938;
     }
   }
   .title {
@@ -132,36 +116,7 @@
     transition: opacity 0.3s, box-shadow 0.3s;
     box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
   }
-  
-  @keyframes expandTooltip {
-    0% {
-  
-      transform: scaleY(0);
-      opacity: 0;
-      filter: blur(5px); 
-  
-    }
-    50% {
-      transform: scaleY(1);
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 45px #C8AC53;
-      filter: blur(5px); 
-  
-    }
 
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-
-    }
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-    animation: expandTooltip 0.2s ease-in both;
-  }
   
   
   .tooltip:not(:hover) .tooltiptext {
@@ -234,33 +189,7 @@
     width: 100%;
     background: transparent; /* Make the background transparent */
 }
-  .btn {
-    font-family: 'Monofonto';
-    width: fit-content;
-    max-width: 300px; /* adjust as needed */
-    color: #C8AC53;
-    padding: 15px 32px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
-    cursor: url('../public/curslott.png'), auto;
-    font-weight: 500;
-    font-size: 25px;
-    margin: auto;
-    display: block;
-    background: transparent; /* Make button background transparent */
-    border: none; /* Remove any default borders */
-  }
-  .btn:hover {
-  
-    background-color: #C8AC53; /* Change background color on hover */
-    color: #1e2128; /* Change text color on hover */
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    animation-iteration-count: 1; /* Run the animation only once */
-  
-  }
+ 
   @keyframes flicker {
 
 
@@ -278,25 +207,47 @@
     font-family: 'Monofonto';
     text-align: center; /* Center the text */
   }
-  .address:hover {
-    background-color: #C8AC53; /* More opaque background on hover */
-    color: #000000;
 
-}
     .topAddressContainer {
-        display: flex;
-        justify-content: space-between; /* Space between address and score */
-        padding: 5px; /* Inner padding */
-        border: 1px solid #C8AC53; /* Divider between entries */
+      font-family: 'Monofonto';
+      color: #ffffff;
+      background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
+      border-radius: 0.5rem; /* Optional: rounded corners */
+      padding: 10px 20px;
+      margin: 5px;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid #C8AC53;
+      
+      /* Centering the text */
+      display: flex;           /* Use flexbox for centering */
+      justify-content: center; /* Center horizontally */
+      align-items: center;     /* Center vertically */
+      text-align: center;      /* Center text within the flex container */
+      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+      animation: breatheGlow 2s ease-in-out infinite;
     }
+    
+@keyframes breatheGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 207, 76, 0.5); /* Increase glow intensity */
+  }
+  
+  100% {
+    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
+  }
+}
     .topAddress {
         font-size: 1.5rem; /* Larger font size for top address */
         margin: 5px;
-        color: #C8AC53;
         font-weight: bold; /* Bold style */
     }
     .topAddress:hover {
-        background-color: #C8AC53; /* More opaque background on hover */
+
         color: #000000;
 
     }
@@ -309,10 +260,22 @@
       overflow-x: auto; /* Optional: hide horizontal overflow */
   }
   .scoreContainer {
-    display: flex;
-    justify-content: space-between; /* Space between address and score */
-    padding: 5px; /* Inner padding */
-
+    font-family: 'Monofonto';
+    color: #C8AC53;
+    background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
+    border-radius: 0.5rem; /* Optional: rounded corners */
+    padding: 10px 20px;
+    margin: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #C8AC53;
+    
+    /* Centering the text */
+    display: column;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
   }
   
   .scoreContainer:last-child {
@@ -329,10 +292,22 @@
   }
   
  
-  .score {
-    margin: 1rem;
-    color: #c8ad53a8;
+  .inabox {
     font-family: 'Monofonto';
+    color: #C8AC53;
+    background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
+    border-radius: 0.5rem; /* Optional: rounded corners */
+    padding: 10px 20px;
+    margin: 5px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #C8AC53;
     
+    /* Centering the text */
+    display: column;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
   }
   

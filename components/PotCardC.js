@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
   const { miniGamePool, enterNFT, nftTokenId, lastNFTLotteryWinner } = useAppContext();
   const cardRef = useRef(null);
+  const [loading, setLoading] = useState(false); // Added loading state
 
   // Helper function to format Ethereum address
   const formatAddress = (address) => {
@@ -36,8 +37,10 @@ const PotCard = () => {
   };
 
   const handleGambooolClick = async () => {
+    setLoading(true); // Start loading
     await handleSwitchNetwork();
-    enterNFT();
+    await enterNFT(); // Ensure enterNFT is awaited if it's a promise
+    setLoading(false); // End loading
   };
 
   useEffect(() => {
@@ -84,10 +87,7 @@ const PotCard = () => {
   return (
     <div className={style.wrapper} ref={cardRef}>
       <div className={`${style.bierramadrebg}`}>
-        <div
-          className={`${style.title}`}
-          onClick={handleTitleClick} // Add click handler here
-        >
+        <div className={`${style.title}`} onClick={handleTitleClick}>
           LUCKY 69 NFT
         </div>
       </div>
@@ -95,8 +95,6 @@ const PotCard = () => {
       <div className={`${style.pot}`}>
         NFT: <span className={nftText === 'NONE' ? style.textNotLoaded : style.goldAccent}>{nftText}</span>
       </div>
-
-    
 
       <div className={`${style.rafflefeebg}`}>
         <div className={`${style.rafflefee}`}>RAFFLE FEE: 0.25 BERA</div>
@@ -106,9 +104,15 @@ const PotCard = () => {
       </div>
       <div className={`${style.lineAfter}`}></div>
 
-      <div className={style.btn} onClick={handleGambooolClick}>
-        ENTER
-      </div>
+      {loading ? (
+        <div className={`${style.loading} ${loading ? style.visible : ''}`}>
+          <div className={style.loadingCircle}></div>
+        </div>
+      ) : (
+        <div className={style.btn} onClick={handleGambooolClick}>
+          ENTER
+        </div>
+      )}
     </div>
   );
 };

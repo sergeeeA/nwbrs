@@ -11,13 +11,14 @@
     place-content: center; /* Align items to the start of the flex container's cross axis */
     flex-direction: column;
     width: 100%;             /* Full width */
-  
+   
   }
   .background {
     position: fixed;
     place-self: center;
     top: 0;
     left: 0;
+    box-shadow: inset 0vh  0px  4vh 2vh  #000000;
     width: 150%;
     height: 35%;
     min-height: 35%;
@@ -26,7 +27,7 @@
                       url('../public/Hobeardamnthird.png'),
                       url('../public/Hobeardamnfourth.png'); 
     
-    background-size: 75% auto; /* Make second image 100% wide */
+    background-size: 85% auto; /* Make second image 100% wide */
     background-position: center;/* Adjust second image to the left */
     background-repeat: no-repeat; /* Ensure no repetition of images */
     background-attachment: local;
@@ -38,7 +39,7 @@
     border-radius: 5px;
   }
   .wrappernft {
-    background: linear-gradient(to bottom, #181818, #181818, #000000);
+    background: linear-gradient(to bottom,#000000, #161616,#1f1f1f,#000000, #000000);
     flex: 1; /* Allow each card to grow equally */
     min-width: 255px;
     max-width: 555px; /* Example fixed width, adjust as needed */
@@ -49,7 +50,7 @@
     align-items: center;
     place-content: center; /* Align items to the start of the flex container's cross axis */
  
-    border-radius: 2rem; /* Rounded corners */
+    border-radius: 1vh; /* Rounded corners */
     padding: 5px; /* Space inside the wrapper */
     display: flex;
     flex-direction: column; /* Arrange children in a column */

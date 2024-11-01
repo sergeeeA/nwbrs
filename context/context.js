@@ -10,8 +10,10 @@ export const AppProvider = ({ children }) => {
   const [lotteryContract, setLotteryContract] = useState();
   const [lotteryPot, setLotteryPot] = useState();
   const [miniGamePool, setMiniGamePool] = useState();
-  const [getLotteryPlayers, setPlayers] = useState([]);
 
+  //plyaers
+  const [lotteryPlayers, setLotteryPlayers] = useState([]);
+  const [nftLotteryPlayers, setNftLotteryPlayers] = useState([]);
   //lederbrd
   const [leaderboardAddresses, setLeaderboardAddresses] = useState([]);
   const [leaderboardScores, setLeaderboardScores] = useState([]);
@@ -40,33 +42,77 @@ export const AppProvider = ({ children }) => {
   const [lastNFTPrizeWinner, setLastNFTPrizeWinner] = useState(''); 
   const [lastNFTPrizeWinnerSecond, setLastNFTPrizeWinnerSecond] = useState(''); // New state
   const [lastNFTPrizeWinnerThird, setLastNFTPrizeWinnerThird] = useState(''); // New state
-  
-  const [playerWinsNFTduel, setPlayerWins] = useState(); // New state for player wins
-  const [playerTotaWins, setPlayerTotalWins] = useState(); 
-  const [playerWinsLottery, setPlayerWinsLottery] = useState(); // New state for player wins lottery
-  const [playerWinsMiniGame, setPlayerWinsMiniGame] = useState(); // New state for player wins mini game
-  const [playerWinsMiniGameNFT, setPlayerWinsMiniGameNFT] = useState(); // New state for player wins mini game NFT
-  const [playerWinsNFTLottery, setPlayerWinsNFTLottery] = useState(); // New state for player wins NFT lottery
+
+ //ROUNDS
+ const [miniGameRounds, setMiniGameRounds] = useState([]);
+ const [miniGameNFTRounds, setMiniGameNFTRounds] = useState([]);
+ const [nftPrizeRounds, setNftPrizeRounds] = useState([]);
+ const [nftPrizeSecondRounds, setNftPrizeSecondRounds] = useState([]);
+
+
+  const fetchLotteryData = async () => {
+    try {
+      const data = await updateLottery(); // Call the backend function
+      setLotteryPot(data.lotteryPot);
+      setMiniGamePool(data.miniGamePool);
+      setLastWinner(data.lastWinner);
+      setLastMiniGameWinner(data.lastMiniGameWinner);
+      setMiniGameNFTTokenId(data.miniGameNFTTokenId);
+      setMiniGameNFTfirstDepositor(data.miniGameNFTfirstDepositor);
+      setLastMiniGameNFTWinner(data.lastMiniGameNFTWinner);
+      setNftTokenId(data.nftTokenId); // Add nftTokenId
+      setLastNFTLotteryWinner(data.lastNFTLotteryWinner); // Add lastNFTLotteryWinner
+    } catch (error) {
+
+    }
+  };
+
+  useEffect(() => {
+    fetchLotteryData(); // Fetch data on initial load
+  }, []);
+
+
 
   const refreshData = async () => {
     if (lotteryContract && address) {
       try {
         console.log('Refreshing data...');
+  
+        // Group 1
+        await Promise.all([
+          fetchNftPrizePoolTokenId(0),
+          fetchNFTFirstDepositor(),
+          fetchLastNFTPrizeWinner(),
+          fetchNftPrizePoolContract(),
+    
+          
+        ]);
+  
+        // Wait 2 seconds before fetching the next group
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+  
+        // Group 2
+        await Promise.all([
+          fetchNftPrizePoolTokenIdSecond(0),
+          fetchLastNFTPrizeWinnerSecond(),
+          fetchNftPrizePoolContractSecond(),
+          fetchNFTFirstDepositorSecond(),
+          
+          
+        ]);
+  
+        // Wait 2 seconds before fetching the last group
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+  
+        // Group 3
+        await Promise.all([
+          fetchLeaderboardKOTH(),
+          fetchLeaderboard(),
+        //  fetchNftPrizePoolContractThird(),
+         // fetchNFTFirstDepositorThird(),
+         // fetchLastNFTPrizeWinnerThird(),
 
-        await fetchNftPrizePoolContract();
-        await fetchNftPrizePoolContractSecond();
-        await fetchNftPrizePoolContractThird();
-        await fetchNFTFirstDepositor();
-        await fetchNFTFirstDepositorSecond();
-        await fetchNFTFirstDepositorThird();
-        await fetchLastNFTLotteryWinner();
-        await fetchLastNFTPrizeWinner();
-        await fetchLastNFTPrizeWinnerSecond();
-        await fetchLastNFTPrizeWinnerThird();
-        await fetchLeaderboardKOTH();
-        await fetchLeaderboard();
-
-
+        ]);
         
       } catch (error) {
         console.error('Error refreshing data:', error);
@@ -77,7 +123,7 @@ export const AppProvider = ({ children }) => {
   const refreshDataWithInterval = async () => {
     await refreshData(); // Refresh data
   };
-
+  
   const fetchLeaderboard = async () => {
     if (lotteryContract) {
       try {
@@ -114,37 +160,80 @@ export const AppProvider = ({ children }) => {
   };
   
   useEffect(() => {
-    updateLottery();
-    if (address) {
-      fetchNFTTokenId();
-      fetchMiniGameNFTTokenId(); 
-      fetchFirstDepositor(); 
-      fetchMiniGameNFTFirstDepositor(); 
-       fetchNFTTokenId();
-       fetchMiniGameNFTTokenId();
-       fetchFirstDepositor();
-       fetchMiniGameNFTFirstDepositor();
-       fetchNftPrizePoolContract();
-       fetchNftPrizePoolContractSecond();
-       fetchNftPrizePoolContractThird();
-       fetchNFTFirstDepositor();
-       fetchNFTFirstDepositorSecond();
-       fetchNFTFirstDepositorThird();
-       fetchLastNFTLotteryWinner();
-       fetchLastNFTPrizeWinner();
-       fetchLastNFTPrizeWinnerSecond();
-       fetchLastNFTPrizeWinnerThird();
-       fetchLeaderboard();
-       fetchLeaderboardKOTH();
+    const fetchData = async () => {
+      // Group 1
+      updateLottery();
+      if (address) {
+        await Promise.all([
+          fetchLastWinner(),
+          fetchLastNFTLotteryWinner(),
+        ]);
+  
+        // Wait 2 seconds before fetching the next group
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+        // Group 2
+        await Promise.all([
+          fetchNFTTokenId(),
+          fetchLastNFTLotteryWinner(),
+          fetchFirstDepositor(),
+          
+        ]);
+  
+        // Wait 2 seconds before fetching the next group
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+        // Group 3
+        await Promise.all([
+          fetchLastMiniGameWinner(),
 
-      //LAST WINNERS
-      fetchLastWinner();
-      fetchLastMiniGameWinner();
-      fetchLastMiniGameNFTWinner();
-      fetchLastNFTLotteryWinner();
+        ]);
+  
+        // Wait 2 seconds before fetching the last group
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+        // Group 4
+        await Promise.all([
 
-// Fetch player wins NFT lottery // Fetch player wins on address change
-    }
+          fetchLeaderboard(),
+          fetchLeaderboardKOTH(),
+
+          fetchMiniGameNFTFirstDepositor(),
+          fetchMiniGameNFTTokenId(),
+          fetchLastMiniGameNFTWinner(),
+          
+
+       
+        ]);
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+        // Group 5
+        //await Promise.all([
+          
+          //fetchNftPrizePoolTokenId(0),
+          //fetchLastNFTPrizeWinner(),
+          //fetchLastNFTPrizeWinnerSecond(),
+          //fetchNftPrizePoolTokenIdSecond(0),
+      
+          //fetchNftPrizePoolContract(),
+          //fetchNftPrizePoolContractSecond(),
+    
+          //fetchNFTFirstDepositor(),
+          //fetchNFTFirstDepositorSecond(),
+        
+
+          //fetchLastNFTPrizeWinnerThird(),
+          //fetchNFTFirstDepositorThird(),
+          //fetchNftPrizePoolContractThird(),
+
+       
+        //]);
+        
+      }
+    };
+  
+    fetchData();
   }, [lotteryContract, address]);
 
   const updateLottery = async () => {
@@ -156,73 +245,190 @@ export const AppProvider = ({ children }) => {
       const lotteryId = await lotteryContract.methods.lotteryId().call();
       const winner = await lotteryContract.methods.lastWinner().call();
       const miniGameWinner = await lotteryContract.methods.lastMiniGameWinner().call();
-  
+      const miniGameNFTWinner = await lotteryContract.methods.lastMiniGameNFTWinner().call();
+      const MiniGameNFTfirstDepositor = await lotteryContract.methods.MiniGameNFTfirstDepositor().call();
+      const MiniGameNFTTokenId = await lotteryContract.methods.miniGameNFTTokenId().call();
       // Fetch the first depositor
       await fetchFirstDepositor();
-  
+
+      
       setLotteryPot(web3.utils.fromWei(pot, 'ether'));
       setMiniGamePool(web3.utils.fromWei(pool, 'ether'));
       setLotteryId(lotteryId);
       setLastWinner(winner);
       setLastMiniGameWinner(miniGameWinner); 
-  
+      setLastMiniGameNFTWinner(miniGameNFTWinner);
+      setMiniGameNFTfirstDepositor(MiniGameNFTfirstDepositor);
+      setMiniGameNFTTokenId(MiniGameNFTTokenId);
       console.log('Last winner set to:', winner); // Debugging line
     } catch (error) {
       console.error('Error fetching lottery data:', error);
     }
   };
+
+  const fetchAllMiniGameRounds = async () => {
+    if (lotteryContract) {
+      try {
+        const allRoundsData = [];
+        let index = 0; // Start from index 0
+
+        while (true) { // Infinite loop, will break when no valid round data is found
+          try {
+            const roundData = await lotteryContract.methods.minigameRounds(index).call();
+
+            // Check for valid data (adjust according to your contract's return values)
+            if (roundData.winner !== '0x0000000000000000000000000000000000000000') {
+              allRoundsData.push(roundData); // Add valid round data to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if no valid data is found
+            }
+          } catch (innerError) {
+            
+            break; // Exit loop if there's an error fetching the round
+          }
+        }
+        setMiniGameRounds(allRoundsData); // Update state with the valid rounds
+      } catch (error) {
+
+      }
+    }
+  };
   
-  const fetchPlayerWinsLottery = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
+  const fetchAllMiniGameNFTRounds = async () => {
+    if (lotteryContract) {
       try {
-        console.log('Fetching player wins lottery for address:', playerAddress);
-        const lotteryWins = await lotteryContract.methods.playerWinsLottery(playerAddress).call();
-        console.log('Fetched player wins lottery:', lotteryWins);
-        setPlayerWinsLottery(lotteryWins);
+        const allNFTRoundsData = [];
+        let index = 0;
+
+        while (true) {
+          try {
+            const nftRoundData = await lotteryContract.methods.miniGameNFTRounds(index).call();
+            if (nftRoundData.winner !== '0x0000000000000000000000000000000000000000') {
+              allNFTRoundsData.push(nftRoundData);
+              index++;
+            } else {
+              break;
+            }
+          } catch (innerError) {
+            break;
+          }
+        }
+        setMiniGameNFTRounds(allNFTRoundsData);
       } catch (error) {
-        console.error('Error fetching player wins lottery:', error);
+        // Handle error if needed
       }
     }
   };
 
-  const fetchPlayerWinsMiniGame = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
+  const fetchAllNftPrizeRounds = async () => {
+    if (nftPrizePoolContract) {
       try {
-        console.log('Fetching player wins mini game for address:', playerAddress);
-        const wins = await lotteryContract.methods.playerWinsMiniGame(playerAddress).call();
-        console.log('Fetched player wins mini game:', wins);
-        setPlayerWinsMiniGame(wins);
+        const allRoundsData = [];
+        let index = 0; // Start from index 0
+  
+        while (true) { // Infinite loop, will break when no valid round data is found
+          try {
+            const roundData = await lotteryContract.methods.nftPrizeRounds(index).call();
+  
+            // Check for valid data (adjust according to your contract's return values)
+            if (roundData.winner !== '0x0000000000000000000000000000000000000000') {
+              allRoundsData.push(roundData); // Add valid round data to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if no valid data is found
+            }
+          } catch (innerError) {
+            break; // Exit loop if there's an error fetching the round
+          }
+        }
+        setNftPrizeRounds(allRoundsData); // Update state with the valid rounds
       } catch (error) {
-        console.error('Error fetching player wins mini game:', error);
+        // Handle any errors here if necessary
       }
     }
   };
+  const fetchAllNftPrizeSecondRounds = async () => {
+    if (nftPrizePoolContractSecond) {
+      try {
+        const allRoundsData = [];
+        let index = 0; // Start from index 0
+  
+        while (true) { // Infinite loop, will break when no valid round data is found
+          try {
+            const roundData = await lotteryContract.methods.nftPrizeSecondRounds(index).call();
+  
+            // Check for valid data (adjust according to your contract's return values)
+            if (roundData.winner !== '0x0000000000000000000000000000000000000000') {
+              allRoundsData.push(roundData); // Add valid round data to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if no valid data is found
+            }
+          } catch (innerError) {
+            break; // Exit loop if there's an error fetching the round
+          }
+        }
+        setNftPrizeSecondRounds(allRoundsData); // Update state with the valid rounds
+      } catch (error) {
+        // Handle any errors here if necessary
+      }
+    }
+  };
+  
 
-  const fetchPlayerWinsMiniGameNFT = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
+  const fetchLotteryPlayers = async () => {
+    if (lotteryContract) {
       try {
-        console.log('Fetching player wins mini game NFT for address:', playerAddress);
-        const wins = await lotteryContract.methods.playerWinsMiniGameNFT(playerAddress).call();
-        console.log('Fetched player wins mini game NFT:', wins);
-        setPlayerWinsMiniGameNFT(wins);
+        const players = [];
+        let index = 0; // Start from index 0
+        while (true) { // Infinite loop, will break when no player is found
+          try {
+            const player = await lotteryContract.methods.lotteryPlayers(index).call();
+            if (player !== '0x0000000000000000000000000000000000000000') {
+              players.push(player); // Add valid player to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if the address is zero
+            }
+          } catch (innerError) {
+            console.warn(`Error fetching player at index ${index}:`, innerError);
+            break; // Exit loop if there's an error fetching the player
+          }
+        }
+        setLotteryPlayers(players); // Update state with the valid players
       } catch (error) {
-        console.error('Error fetching player wins mini game NFT:', error);
+        console.error('Error fetching lottery players:', error);
       }
     }
   };
-//comment
-  const fetchPlayerWinsNFTLottery = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
+  const fetchNftLotteryPlayers = async () => {
+    if (lotteryContract) {
       try {
-        console.log('Fetching player wins NFT lottery for address:', playerAddress);
-        const wins = await lotteryContract.methods.playerWinsNFTLottery(playerAddress).call();
-        console.log('Fetched player wins NFT lottery:', wins);
-        setPlayerWinsNFTLottery(wins);
+        const players = [];
+        let index = 0; // Start from index 0
+        while (true) { // Infinite loop, will break when no player is found
+          try {
+            const player = await lotteryContract.methods.nftLotteryPlayers(index).call();
+            if (player !== '0x0000000000000000000000000000000000000000') {
+              players.push(player); // Add valid player to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if the address is zero
+            }
+          } catch (innerError) {
+            console.warn(`Error fetching NFT lottery player at index ${index}:`, innerError);
+            break; // Exit loop if there's an error fetching the player
+          }
+        }
+        setNftLotteryPlayers(players); // Update state with the valid players
       } catch (error) {
-        console.error('Error fetching player wins NFT lottery:', error);
+        console.error('Error fetching NFT lottery players:', error);
       }
     }
   };
+  
+  
   //LAST WINNERS//
   const fetchLastWinner = async () => {
     if (lotteryContract) {
@@ -274,32 +480,7 @@ export const AppProvider = ({ children }) => {
       }
     }
   };
-  // New function to fetch player wins
-  const fetchPlayerWins = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
-      try {
-        console.log('Fetching player wins for address:', playerAddress);
-        const wins = await lotteryContract.methods.playerWinsNFTduel(playerAddress).call();
-        console.log('Fetched player wins:', wins);
-        setPlayerWins(wins);
-      } catch (error) {
-        console.error('Error fetching player wins:', error);
-      }
-    }
-  };
-  const fetchPlayerTotalWins = async (playerAddress) => {
-    if (lotteryContract && playerAddress) {
-      try {
-        console.log('Fetching player total wins for address:', playerAddress);
-        const totalwins = await lotteryContract.methods.playerTotaWins(playerAddress).call();
-        console.log('Fetched player total wins:', totalwins); // Debugging line
-        setPlayerTotalWins(totalwins);
-      } catch (error) {
-        console.error('Error fetching player total wins:', error);
-      }
-    }
-  };
-  
+
 
   const fetchNFTTokenId = async () => {
     if (lotteryContract && address) {
@@ -314,18 +495,6 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const fetchMiniGameNFTTokenId = async () => {
-    if (lotteryContract && address) {
-      try {
-        console.log('Fetching MiniGame NFT token ID for address:', address);
-        const tokenId = await lotteryContract.methods.miniGameNFTTokenId().call({ from: address });
-        console.log('Fetched MiniGame NFT token ID:', tokenId);
-        setMiniGameNFTTokenId(tokenId); 
-      } catch (error) {
-        console.error('Error fetching MiniGame NFT token ID:', error);
-      }
-    }
-  };
 
   const fetchFirstDepositor = async () => {
     if (lotteryContract) {
@@ -336,6 +505,18 @@ export const AppProvider = ({ children }) => {
         setFirstDepositor(depositor); 
       } catch (error) {
         console.error('Error fetching first depositor:', error);
+      }
+    }
+  };
+  const fetchMiniGameNFTTokenId = async () => {
+    if (lotteryContract && address) {
+      try {
+        console.log('Fetching MiniGame NFT token ID for address:', address);
+        const tokenId = await lotteryContract.methods.miniGameNFTTokenId().call({ from: address });
+        console.log('Fetched MiniGame NFT token ID:', tokenId);
+        setMiniGameNFTTokenId(tokenId); 
+      } catch (error) {
+        console.error('Error fetching MiniGame NFT token ID:', error);
       }
     }
   };
@@ -352,7 +533,25 @@ export const AppProvider = ({ children }) => {
       }
     }
   };
+  const fetchNftPrizePoolTokenId = async (index) => {
+    console.log('Fetching token ID for index:', index);
+    try {
+        const tokenId = await lotteryContract.methods.nftPrizePoolTokenIds(index).call();
+        return tokenId;
+    } catch (error) {
+    
+        return null; // Return null for invalid indices
+    }
+  };
+  const fetchNftPrizePoolTokenIdSecond = async (index) => {
+    try {
+        const tokenId = await lotteryContract.methods.nftPrizePoolTokenIdsSecond(index).call();
+        return tokenId;
+    } catch (error) {
 
+        return null;
+    }
+};
   const fetchNftPrizePoolContract = async () => {
     if (lotteryContract) {
       try {
@@ -769,8 +968,7 @@ const enterKOTH = async (tokenId) => {
           const accounts = await web3.eth.getAccounts();
           setAddress(accounts[0]);
         });
-        updateLottery();
-        refreshDataWithInterval(); 
+
       } catch (err) {
         console.error('Error connecting wallet:', err);
       }
@@ -782,11 +980,20 @@ const enterKOTH = async (tokenId) => {
   return (
     <appContext.Provider
       value={{
+        //tab refresh data
+        fetchLotteryData,
+        refreshData,
+
         address,
         connectWallet,
         lotteryPot,
         miniGamePool,
-        getLotteryPlayers,
+
+        lotteryPlayers, // Add lotteryPlayers here
+        fetchLotteryPlayers, // If you want to expose the fetch function
+        nftLotteryPlayers, // New NFT lottery players
+        fetchNftLotteryPlayers,
+        
         enterLottery,
         duel,
         duelnft,
@@ -817,6 +1024,10 @@ const enterKOTH = async (tokenId) => {
         nftFirstDepositor, 
         nftFirstDepositorSecond, // New state
         nftFirstDepositorThird, // New state
+
+        fetchNftPrizePoolTokenId,
+        fetchNftPrizePoolTokenIdSecond,
+
         depositNFTToPrizePool, 
         depositNFTToPrizePoolSecond, // New function
         depositNFTToPrizePoolThird, // New function
@@ -827,18 +1038,16 @@ const enterKOTH = async (tokenId) => {
         nftPrizePoolContractSecond,
         nftPrizePoolContractThird,
 
-        playerWinsNFTduel,
-        playerWinsLottery,
-        playerWinsMiniGame,
-        playerWinsMiniGameNFT,
-        playerTotaWins,
-        playerWinsNFTLottery,
-        fetchPlayerWins,
-        fetchPlayerTotalWins ,
-        fetchPlayerWinsLottery,
-        fetchPlayerWinsMiniGame,
-        fetchPlayerWinsMiniGameNFT,
-        fetchPlayerWinsNFTLottery
+        //ROUNDS
+        miniGameRounds, // Expose the minigame rounds data
+        fetchAllMiniGameRounds, // Expose the fetch function
+        miniGameNFTRounds,
+        fetchAllMiniGameNFTRounds,
+        nftPrizeRounds, // Expose the nftPrizeRounds data
+        fetchAllNftPrizeRounds, // Expose the fetch function
+        nftPrizeSecondRounds, // Expose the nftPrizeSecondRounds data
+        fetchAllNftPrizeSecondRounds, // Expose the fetch function for second rounds
+
 
       }}
     >

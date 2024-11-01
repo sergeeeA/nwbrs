@@ -1,0 +1,221 @@
+@font-face {
+    font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
+    src: url('/monofonto rg.otf') format('opentype'); /* Path and format */
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  
+.wrapper {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;
+  place-content: center; /* Align items to the start of the flex container's cross axis */
+  flex-direction: column;
+  width: 100%;             /* Full width */
+
+  }
+  .centeredContainer {
+    background: linear-gradient(to bottom, #000000,#000000, #181818, #181818, #000000, #000000);
+    flex: 1; /* Allow each card to grow equally */
+    min-width: 255px;
+    max-width: 555px; /* Example fixed width, adjust as needed */
+    min-height: 455px;
+    max-height: 800px;
+    width: 50%; /* Width of the element */
+    
+    border-radius: 3px; /* Rounded corners */
+    padding: 5px; /* Space inside the wrapper */
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    margin: 25px; /* Space above the wrapper */
+  
+    overflow: hidden; /* Hide overflow content */
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
+    perspective: 1000px; /* Perspective for 3D effect */
+  }
+
+  .scrollableList {
+    max-height: 255px; /* Adjust this height as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px; /* Optional: add some padding */
+    cursor: url('/curs.png'), auto;
+    
+  }
+  .rafflefee {
+    font-family: 'Monofonto';
+    text-align: center;
+    color: #C8AC53;
+  
+    padding: 2px 2px;
+    margin: 5px;
+  
+  
+    text-align: center;
+    place-self: center;
+  }
+  .smolwords {
+    font-family: 'Monofonto';
+    text-align: center;
+    color: #C8AC53;
+    font-size: 10px;
+    padding: 2px 2px;
+    margin: 5px;
+  
+  
+    text-align: center;
+    place-self: center;
+  }
+  .lineAfter {
+    border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
+    width: 100%; /* Width of the line */
+    margin: 0 auto; /* Center the line horizontally */
+    /* Optional: Adjust the line height or add spacing */
+    height: 2px; /* Ensure this matches the border thickness */
+  }
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 25px;
+  
+    opacity: 0; /* Start invisible */
+    transform: scale(0); /* Start at scale 0 */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition */
+    
+    height: 90%; /* Ensure it takes the full height of the parent */
+  }
+  
+  .loading.visible {
+    opacity: 1; /* Fully visible */
+    transform: scale(1); /* Scale to 100% */
+  }
+  
+  .loadingCircle {
+    border: 6px solid #f3f3f300; /* Light grey */
+    border-top: 6px solid #C8AC53; /* Color for the spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: loadingspin 1s linear infinite;
+    /* Center the spinner itself */
+    margin: auto; /* Optional: add margin for better centering */
+  }
+  
+  @keyframes loadingspin {
+    0% { box-shadow: 0 0 15px rgba(255, 207, 76, 0.5); transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .refreshButton {
+    cursor: url('/curs.png'), auto;
+    background-color: #C8AC53; /* Green background */
+    border: none;
+    border-radius: 50%; /* Circular shape */
+    cursor: pointer;
+    width: 40px; /* Size of the button */
+    height: 40px; /* Size of the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease-in-out, transform 0.3s ease-in-out;
+    position: absolute; /* Position relative to the wrapper */
+    top: 20px; /* Adjust position as needed */
+    right: 20px; /* Adjust position as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  }
+  
+  .refreshButton:hover {
+    background-color: #C8AC53;
+    cursor: url('/curs.png'), auto;
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  .spinning {
+    animation: spin 0.3s linear; /* Spin animation */
+  }
+  
+  @keyframes spin {
+    0% {
+      color: #C8AC53;
+      background-color: #c8ad5300;
+      box-shadow: 0 0 35px 5px rgba(255, 207, 76, 0.5);
+      transform: rotate(0deg);
+    }
+    50% {
+      color: #c8ad5386;
+      background-color: #c8ad537a;
+      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .you {
+    font-weight: bold;
+    color: #c8ad5386; /* Or any color of your choice */
+    margin-right: 5px; /* Add some space between YOU and the address */
+  }
+  .btn {
+    font-family: 'Monofonto';
+    width: fit-content; 
+    display: flex;
+    justify-content: center;
+    place-self: center;
+    color: #C8AC53;
+    padding: 10px 10px;
+    text-align: center;
+  
+    border-radius: 3px;
+    margin: 10px auto; 
+    cursor: url('/curs.png'), auto;
+ 
+    font-size: 10px;
+    
+  }
+  .btn:hover {
+  
+    background-color: #C8AC53; /* Change background color on hover */
+    color: #1e2128; /* Change text color on hover */
+    animation: flicker 0.2s ease-out; /* Apply flicker animation */
+    animation-iteration-count: 1; /* Run the animation only once */
+  
+  }
+  @keyframes flicker {
+
+
+    50% {
+      box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
+    }
+  
+    100% {
+      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+    }
+  }
+  .nftDuelHistoryContainer {
+    margin: 10px 0;
+  }
+  
+  .toggleButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+  }
+  
+  .dropdownContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  
+  .dropdownContent.open {
+    max-height: 500px; /* adjust based on expected content size */
+    transition: max-height 0.5s ease-in;
+  }
+  
+  .dropdownContent.closed {
+    max-height: 0;
+  }

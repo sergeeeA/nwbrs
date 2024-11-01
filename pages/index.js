@@ -1,198 +1,290 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import PotCardA from '../components/PotCardA';
 import PotCardB from '../components/PotCardB';
 import PotCardC from '../components/PotCardC';
 import PotCard from '../components/PotCard';
+import PotCardPlayers from '../components/PotCardPlayers';
+import PotCardNFTPlayers from '../components/PotCardNFTPlayers';
 import Footer from '../components/Footer';
 import Nftduel from '../components/Nftduel';
+
 import Nftduelsecond from '../components/Nftduelsecond';
 import Nftduelthird from '../components/Nftduelthird'; 
-import Nftduelwins from '../components/Nftduelwins';
+//nftduel history
+import NftDuelhistory from '../components/NftDuelhistory'; 
+import NftDuelhistorySecond from '../components/NftDuelhistorySecond'; 
+
+
+//this is big iron history
+import PotCardAPlayers from '../components/PotCardAPlayers';
+import PotCardBPlayers from '../components/PotCardBPlayers';
+
 import Nftduelstatus from '../components/Nftduelstatus';
-import Leaderboard from '../components/Leaderboard';
 import Nftduelstatussecond from '../components/Nftduelstatussecond';
 import Nftduelstatusthird from '../components/Nftduelstatusthird';
 import KOTH from '../components/KOTH';
 import KOTHLeader from '../components/KOTHLeader';
 import Inventory from '../components/Inventory';
+import Stats from '../components/Stats';
+import potCardsContainer from '../styles/potCardsContainer.module.css';
+import homeStyle from '../styles/Home.module.css'; 
 
-import potCardsContainer from '../styles/potCardsContainer.module.css'; // style //
-import homeStyle from '../styles/Home.module.css'; // style //
+const translations = ['Welcome', '欢迎', 'Willkommen', 'Добро пожаловать', 'いらっしゃいませ', 'स्वागत है', 'Bienvenido', '🐻⛓️'];
 
 export default function Home() {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [targetText, setTargetText] = useState(translations[0]);
+  const [isGlowing, setIsGlowing] = useState(false);
+  
   const [isOpenA, setIsOpenA] = useState(false);
-  const [isChatboxOpen, setIsChatboxOpen] = useState(false);
-  const [isLeaderboardOpen, setIsLeaderboardOpen] = useState(false); // New state for leaderboard
   const [isOpenNftduel, setIsOpenNftduel] = useState(false);
-  const [isNftduelwinsOpen, setIsNftduelwinsOpen] = useState(false);
-  const [isOpenKoth, setIsOpenKoth] = useState(false); // New state for KOTH
+  const [isOpenKoth, setIsOpenKoth] = useState(false);
   const [currentPage, setCurrentPage] = useState('duel'); 
-  const [activeButton, setActiveButton] = useState('duel'); // Track active button
-  const backgroundRef = useRef(null);
+  const [activeButton, setActiveButton] = useState('duel');
+  const [showPlayers, setShowPlayers] = useState(false);
+  const [showGroupAPlayers, setShowGroupAPlayers] = useState(false);
+  const [isStatsOpen, setIsStatsOpen] = useState(false); // State for Stats visibility
+  const [showInventory, setShowInventory] = useState(false);
+  const [isDuelHistoryOpen, setIsDuelHistoryOpen] = useState(false);
+  const [isDuelHistorySecondOpen, setIsDuelHistorySecondOpen] = useState(false);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % translations.length);
+      setTargetText(translations[(currentIndex + 1) % translations.length]);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  useEffect(() => {
+    const changeText = () => {
+      let index = 0;
+      const targetLength = targetText.length;
+      const interval = setInterval(() => {
+        if (index < targetLength) {
+          const targetChar = targetText[index];
+          const charSet = getSimilarCharacters(targetChar);
+          const randomChar = charSet[Math.floor(Math.random() * charSet.length)];
+
+          setDisplayText((prev) => 
+            prev.substring(0, index) + randomChar + prev.substring(index + 1)
+          );
+          index++;
+        } else {
+          clearInterval(interval);
+          setDisplayText(targetText);
+          setIsGlowing(true);
+        }
+      }, 50);
+    };
+
+    changeText();
+  }, [targetText]);
+
+  const getSimilarCharacters = (char) => {
+    const similarChars = {
+      'W': ['W', 'V', 'U', 'M', '你'],
+      'e': ['e', '3', 'é', 'ë', 'ê', '好'],
+      'l': ['l', '1', 'i', '|', '鱼'],
+      'o': ['o', '0', 'ô', 'ö', 'ʕ•ᴥ•ʔ'],
+      'c': ['c', 'k', 's', '🧸'],
+      'a': ['a', '4', '@','🐻'],
+      's': ['s', '5', '$' , '🐻⛓️'],
+      't': ['t', '7', '+'],
+      '0': ['0', 'O', 'o'],
+      '1': ['1', 'l', 'I', '-'],
+      '5': ['5', 'S', 's','%'],
+      '2': ['2', 'Z', 'z'],
+    };
+    return similarChars[char] || [char];
+  };
 
   const toggleOpenKoth = () => {
     setIsOpenKoth(!isOpenKoth);
     setIsOpenA(false);
     setIsOpenNftduel(false);
+    setIsStatsOpen(false); // Close Stats if KOTH is opened
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    setActiveButton(page); // Set the active button
+    setActiveButton(page);
   };
 
   const toggleOpenA = () => {
     setIsOpenA(!isOpenA);
     setIsOpenNftduel(false);
     setIsOpenKoth(false);
+    setIsStatsOpen(false); // Close Stats if A is opened
   };
 
   const toggleOpenNftduel = () => {
     setIsOpenNftduel(!isOpenNftduel);
     setIsOpenA(false);
     setIsOpenKoth(false);
+    setIsStatsOpen(false); // Close Stats if Nftduel is opened
+  };
+      const toggleDuelHistory = () => {
+        setIsDuelHistoryOpen((prev) => !prev);
+      };
+      const toggleDuelHistorySecond = () => {
+        setIsDuelHistorySecondOpen((prev) => !prev);
+      };
+
+
+  const toggleStats = () => {
+    setIsStatsOpen((prev) => !prev);
+    // Close other sections if Stats is opened
+    if (!isStatsOpen) {
+      setIsOpenA(false);
+      setIsOpenNftduel(false);
+      setIsOpenKoth(false);
+      setShowPlayers(false);
+    }
   };
 
-  const toggleChatbox = () => {
-    setIsChatboxOpen(!isChatboxOpen);
-  };
-
-  const toggleLeaderboard = () => {
-    setIsLeaderboardOpen(!isLeaderboardOpen); // Toggle leaderboard visibility
-  };
-
-  const toggleNftduelwins = () => {
-    setIsNftduelwinsOpen(!isNftduelwinsOpen);
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      if (backgroundRef.current && !(isOpenA || isOpenNftduel)) {
-        const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-        const y = (event.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-        backgroundRef.current.style.backgroundPosition = `
-                                                          ${x * 100}px ${y * 25}px, 
-                                                          ${x * 75}px ${y * 25}px, 
-                                                          ${x * 50}px ${y * 25}px, 
-                                                          ${x * 25}px ${y * 7.5}px`;
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [isOpenA, isOpenNftduel]);
-
-  return (
-    <div>
-      <div
-        ref={backgroundRef}
-        className={homeStyle.background}
-        style={{ visibility: isOpenA || isOpenNftduel || isOpenKoth ? 'hidden' : 'visible' }}
-      ></div>
+return (
+  <div>
       <div className={homeStyle.wrapper}>
         <Header 
-        onToggleA={toggleOpenA} 
-        onToggleNftduel={toggleOpenNftduel} 
-        onToggleKoth={toggleOpenKoth} // Pass toggle function if needed
-        isOpenA={isOpenA} 
-        isOpenNftduel={isOpenNftduel}
-        isOpenKoth={isOpenKoth} // Pass KOTH state if needed
+          onToggleA={toggleOpenA} 
+          onToggleNftduel={toggleOpenNftduel} 
+          onToggleKoth={toggleOpenKoth}
+          toggleStats={toggleStats} 
         />
-        
-        <button
-          className={homeStyle.statsboxToggleButton}
-          onClick={toggleNftduelwins}
-        >
-          {isNftduelwinsOpen ? 'WALLET STATS' : 'WALLET STATS'}
-        </button>
 
-        {isNftduelwinsOpen && <Nftduelwins />}
-
-        <button
-          className={homeStyle.chatboxToggleButton}
-          onClick={toggleChatbox}
-        >
-          {isChatboxOpen ? 'NFT INVENTORY' : 'NFT INVENTORY'}
-        </button>
-
-        {isChatboxOpen && <Inventory />}
-
-        <button
-          className={homeStyle.boardboxToggleButton}
-          onClick={toggleLeaderboard}
-        >
-          {isLeaderboardOpen ? ' LEADERBOARD' : ' LEADERBOARD'}
-        </button>
-
-        {isLeaderboardOpen && <Leaderboard />}
-
-        {isOpenNftduel && (
-          <div className={homeStyle.potCardsContainer}>
-            <div 
-              className={homeStyle.pageSelection} 
-              style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}
-            >
-              <div className={homeStyle.buttonContainer}>
-                <button 
-                  onClick={() => handlePageChange('duel')} 
-                  className={`${homeStyle.nftduelbutton} ${activeButton === 'duel' ? homeStyle.active : ''}`}
-                >
-                  BERA DWELLERS
-                </button>
-                <button 
-                  onClick={() => handlePageChange('second')} 
-                  className={`${homeStyle.nftduelbuttonmon} ${activeButton === 'second' ? homeStyle.active : ''}`}
-                >
-                  BERAMONIUM
-                </button>
- 
+        {isStatsOpen ? (
+          <Stats />
+        ) : (
+          <>
+            {!isOpenA && !isOpenNftduel && !isOpenKoth && (
+              <div className={`${homeStyle.welcomeText} ${isGlowing ? homeStyle.glow : ''}`}>
+                {displayText}
               </div>
+            )}
+
+            <button
+              className={homeStyle.chatboxToggleButton}
+              onClick={() => setShowInventory(!showInventory)}
+            >
+              {showInventory ? 'CLOSE INVENTORY' : 'OPEN INVENTORY'}
+            </button>
+            {showInventory && <Inventory />}
+
+            <div className={`${potCardsContainer.potCardsContainer} ${isOpenA ? potCardsContainer.open : potCardsContainer.closed}`}>
+              <button className={homeStyle.players} onClick={() => setShowPlayers(!showPlayers)}>
+                {showPlayers ? 'LUCKY69' : 'PLAYERS'}
+              </button>
+              
+              {showPlayers ? (
+                <>
+                  <PotCardPlayers />
+                  <PotCardNFTPlayers />
+                </>
+              ) : (
+                <>
+                  <PotCard />
+                  <PotCardC />
+                </>
+              )}
             </div>
 
-            {currentPage === 'duel' ? (
-              <>
-                <Nftduelstatus /> 
-                <Nftduel />
-              </>
-            ) : currentPage === 'second' ? (
-              <>
-                <Nftduelstatussecond />
-                <Nftduelsecond />
-              </>
-            ) : (
-              <>
-                <Nftduelstatusthird />
-                <Nftduelthird />
-              </>
-            )}
-          </div>
-        )}
-      <div className={`${potCardsContainer.potCardsContainer} ${isOpenKoth ? potCardsContainer.open : potCardsContainer.closed}`}>
-      <KOTHLeader />
-        <KOTH /> 
-      </div>
-        <div className={`${potCardsContainer.potCardsContainer} ${isOpenA ? potCardsContainer.open : potCardsContainer.closed}`}>
-          <PotCard />
-          <PotCardC />
-        </div>
+            {(showPlayers || isOpenA) && <div className={homeStyle.lineAfter}></div>}
 
-        <div className={`${potCardsContainer.potCardsContainer} ${isOpenA ? potCardsContainer.open : potCardsContainer.closed}`}>
-          <PotCardB />
-          <PotCardA />
-        </div>
+            {isOpenNftduel && (
+              <div className={homeStyle.potCardsContainer}>
+                <div 
+                  className={homeStyle.pageSelection} 
+                  style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}
+                >
+                  <div className={homeStyle.buttonContainer}>
+                    <button 
+                      onClick={() => handlePageChange('duel')} 
+                      className={`${homeStyle.nftduelbutton} ${activeButton === 'duel' ? homeStyle.active : ''}`}
+                    >
+                      BERA DWELLERS
+                    </button>
+                    <button 
+                      onClick={() => handlePageChange('second')} 
+                      className={`${homeStyle.nftduelbuttonmon} ${activeButton === 'second' ? homeStyle.active : ''}`}
+                    >
+                      BERAMONIUM
+                    </button>
+                  </div>
+                </div>
+
+                {currentPage === 'duel' ? (
+                  <>
+                    <Nftduelstatus /> 
+                    <div className={homeStyle.nftDuelHistoryContainer}>
+                      <div onClick={toggleDuelHistory} className={homeStyle.toggleButton}>
+                        {isDuelHistoryOpen ? '↑' : '↓'} DUEL HISTORY
+                      </div>
+                      
+                      <div
+                        className={`${homeStyle.dropdownContent} ${isDuelHistoryOpen ? homeStyle.open : homeStyle.closed}`}
+                      >
+                        <NftDuelhistory />
+                      </div>
+                    </div>
+                    <Nftduel />
+                  </>
+                ) : currentPage === 'second' ? (
+                  <>
+                    <Nftduelstatussecond />
+                    <div className={homeStyle.nftDuelHistoryContainer}>
+                      <div onClick={toggleDuelHistorySecond} className={homeStyle.toggleButton}>
+                        {isDuelHistorySecondOpen ? '↑' : '↓'} DUEL HISTORY 
+                      </div>
+                      
+                      <div
+                        className={`${homeStyle.dropdownContent} ${isDuelHistorySecondOpen ? homeStyle.open : homeStyle.closed}`}
+                      >
+                        <NftDuelhistorySecond />
+                      </div>
+                    </div>
+                    <Nftduelsecond />
+                  </>
+                ) : (
+                  <>
+                    <Nftduelstatusthird />
+                    <Nftduelthird />
+                  </>
+                )}
+              </div>
+            )}
+
+            <div className={`${potCardsContainer.potCardsContainer} ${isOpenKoth ? potCardsContainer.open : potCardsContainer.closed}`}>
+              <KOTHLeader/>
+              <KOTH /> 
+            </div>
+
+            <div className={`${potCardsContainer.potCardsContainer} ${isOpenA ? potCardsContainer.open : potCardsContainer.closed}`}>
+              <button className={homeStyle.players} onClick={() => setShowGroupAPlayers(!showGroupAPlayers)}>
+                {showGroupAPlayers ? 'BIGIRON ' : ' HISTORY'}
+              </button>
+              
+              {showGroupAPlayers ? (
+                <>
+                  <PotCardBPlayers />
+                  <PotCardAPlayers />
+                </>
+              ) : (
+                <>
+                  <PotCardB />
+                  <PotCardA />
+                </>
+              )}
+            </div>
+          </>
+        )}
 
         <Footer />
       </div>
     </div>
   );
+
 }
-//               <button 
-//onClick={() => handlePageChange('third')} 
-//className={`${homeStyle.nftduelbuttonarena} ${activeButton === 'third' ? homeStyle.active : ''}`}
-//>
-//BEAR ARENA
-//</button>

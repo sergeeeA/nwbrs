@@ -3,9 +3,9 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const { lotteryPot, enterLottery, pickWinner, lastWinner } = useAppContext();
+  const { lotteryPot, enterLottery, lastWinner } = useAppContext();
   const cardRef = useRef(null);
-  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [loading, setLoading] = useState(false); // Added loading state
 
   useEffect(() => {
     const card = cardRef.current;
@@ -14,40 +14,27 @@ const PotCard = () => {
       const { clientWidth: width, clientHeight: height } = card;
       const { offsetX: x, offsetY: y } = e;
 
-      // Calculate the center position
       const centerX = width / 2;
       const centerY = height / 2;
-
-      // Calculate the distance from the center
       const deltaX = x - centerX;
       const deltaY = y - centerY;
-
-      // Normalize values to the range [-1, 1]
       const normalizedX = deltaX / centerX;
       const normalizedY = deltaY / centerY;
-
-      // Maximum tilt angles
-      const maxTiltX = 20; // Maximum tilt angle for X direction
-      const maxTiltY = 20; // Maximum tilt angle for Y direction
-
-      // Calculate tilt angles based on normalized values
+      const maxTiltX = 20;
+      const maxTiltY = 20;
       const tiltX = normalizedX * maxTiltX;
       const tiltY = -normalizedY * maxTiltY;
 
-      // Apply transform
       card.style.transform = `rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.05)`;
     };
 
     const handleMouseLeave = () => {
-      // Reset transform on mouse leave
       card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
     };
 
-    // Add event listeners
     card.addEventListener('mousemove', handleMouseMove);
     card.addEventListener('mouseleave', handleMouseLeave);
 
-    // Clean up event listeners on component unmount
     return () => {
       card.removeEventListener('mousemove', handleMouseMove);
       card.removeEventListener('mouseleave', handleMouseLeave);
@@ -77,11 +64,12 @@ const PotCard = () => {
   };
 
   const handleGambooolClick = async () => {
+    setLoading(true); // Start loading
     await handleSwitchNetwork();
-    enterLottery();
+    await enterLottery(); // Ensure enterLottery is awaited if it's a promise
+    setLoading(false); // End loading
   };
 
-  
   const handleTitleClick = () => {
     window.location.href = 'https://bera-tec.gitbook.io/bera-tec/testnet-guide/new-beras/lucky-69'; // Replace with your target URL
   };
@@ -109,16 +97,23 @@ const PotCard = () => {
         <div className={`${style.rafflefee}`}>RAFFLE FEE: 0.25 BERA</div>
       </div>
 
-      {/* Display formatted last winner address */}
       <div className={style.rafflefee}>
         LAST WINNER: <span className={style.winnerName}>{formatAddress(lastWinner)}</span>
       </div>
 
       <div className={`${style.lineAfter}`}></div>
 
-      <div className={style.btn} onClick={handleGambooolClick}>
-        ENTER
-      </div>
+      {loading ? (
+        <div className={`${style.loading} ${loading ? style.visible : ''}`}>
+          <div className={style.loadingCircle}></div>
+        </div>
+      ) : (
+        <div className={style.btn} onClick={handleGambooolClick}>
+          ENTER
+        </div>
+        
+      )}
+      
     </div>
   );
 };

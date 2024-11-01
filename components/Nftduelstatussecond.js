@@ -3,40 +3,36 @@ import style from '../styles/nftduel.module.css'; // Ensure this file contains t
 import { useAppContext } from '../context/context';
 import Web3 from 'web3'; // Import Web3
 
-const NFT_CONTRACT_ADDRESS = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05';
-const SPECIAL_CONTRACT_ADDRESS = '0x46B4b78d1Cd660819C934e5456363A359fde43f4';
-const NEW_SPECIAL_CONTRACT_ADDRESS = '0x06d9843595A02f0Dc3bfEdc67dC1C78D2D85b005';
+const BERAMONIUM = '0x46B4b78d1Cd660819C934e5456363A359fde43f4';
 
 const NftDuel = () => {
   const {
     nftPrizePoolContractSecond,
     nftFirstDepositorSecond,
     lastNFTPrizeWinnerSecond,
+    fetchNftPrizePoolTokenIdSecond,
   } = useAppContext(); // Fetch necessary data and functions from context
 
-  // State for player wins
-  const [wins, setWins] = useState(null);
+  // State for the NFT token ID, image, attributes, and hover status
+  const [nftTokenId, setNftTokenId] = useState(null);
+  const [nftImage, setNftImage] = useState(''); // State to hold the NFT image URL
+  const [nftAttributes, setNftAttributes] = useState([]); // State to hold NFT attributes
+  const [isHovered, setIsHovered] = useState(false); // State for hover status
   const backgroundRef = useRef(null); // Reference for background
-
   // Initialize Web3 and the contract
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
 
   // Determine the display text for nftPrizePoolContract
   let displayText = 'UNKNOWN NFT'; // Default message
-
   if (nftPrizePoolContractSecond === '0x0000000000000000000000000000000000000000') {
     displayText = 'NO NFT';
-  } else if (nftPrizePoolContractSecond === NFT_CONTRACT_ADDRESS) {
-    displayText = 'BERA DWELLER NFT';
-  } else if (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS) {
+  } else if (nftPrizePoolContractSecond === BERAMONIUM) {
     displayText = 'BERAMONIUM: BARTIOSIS';
-  } else if (nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS) {
-    displayText = 'BERA ARENA';
   } else {
     displayText = nftPrizePoolContractSecond;
   }
 
-  // Determine the CSS classes based on nftPrizePoolContract and nftFirstDepositor
+  // Determine the CSS classes based on nftPrizePoolContract
   const nftClass = nftPrizePoolContractSecond === '0x0000000000000000000000000000000000000000'
     ? style.textNotLoaded
     : style.textLoadedsecond;
@@ -58,6 +54,36 @@ const NftDuel = () => {
 
   const imageRef = useRef(null);
   const specialImageRef = useRef(null); // Separate ref for the special image
+
+  useEffect(() => {
+    const fetchTokenId = async () => {
+      if (nftPrizePoolContractSecond && nftPrizePoolContractSecond !== '0x0000000000000000000000000000000000000000') {
+        try {
+          const tokenId = await fetchNftPrizePoolTokenIdSecond(0);
+          console.log('Fetched Second Token ID:', tokenId);
+
+          if (tokenId) {
+            setNftTokenId(tokenId);
+            console.log('Token ID set to:', tokenId);
+
+            const imageUrl = `https://ipfs.io/ipfs/bafybeidutrluxzzeo3jjjugitblg634zbkgqbr7oo32g7zvwdvd2pbxjla/${tokenId}.png`;
+            setNftImage(imageUrl);
+
+            // Fetch metadata from the new API
+            const response = await fetch(`https://beramonium-gemhunters-api-bartio-2wsvsugfrq-wl.a.run.app/api/armory/genesis/metadata/${tokenId}`);
+            const metadata = await response.json();
+            setNftAttributes(metadata.attributes || []); // Set attributes from API response
+          } else {
+            console.warn('Token ID is null.');
+          }
+        } catch (error) {
+          console.error('Error fetching NFT Token ID:', error);
+        }
+      }
+    };
+
+    fetchTokenId();
+  }, [nftPrizePoolContractSecond, fetchNftPrizePoolTokenIdSecond]);
 
   useEffect(() => {
     const image = imageRef.current;
@@ -111,7 +137,7 @@ const NftDuel = () => {
     };
 
     // Apply 3D effect to the appropriate image
-    if (specialImage && (nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS)) {
+    if (specialImage && (nftPrizePoolContractSecond === BERAMONIUM)) {
       apply3DEffect(specialImage);
     } else if (image) {
       apply3DEffect(image);
@@ -122,51 +148,86 @@ const NftDuel = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [nftPrizePoolContractSecond]);
+  }, [nftPrizePoolContractSecond, nftImage]);
 
   // Determine the CSS class for the images based on nftPrizePoolContract
-  const imageClass = nftPrizePoolContractSecond === NFT_CONTRACT_ADDRESS
-    ? style.visibleImage
-    : style.hiddenImage;
-
-  const specialImageClass = nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS || nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS
+  const specialImageClass = nftPrizePoolContractSecond === BERAMONIUM
     ? style.visibleImage
     : style.hiddenImage;
 
   return (
-    <div className={style.parentcontainer} >
+<div className={style.parentcontainer}>
+  {isHovered && nftAttributes.length > 0 && (
+    <div className={style.traitsContainerSecond}>
+      
+      {/* Gear Score */}
+      {nftAttributes
+        .filter(attr => attr.trait_type === 'Gear Score')
+        .map((attr, index) => {
+          let color;
+          const gearScore = parseFloat(attr.value); // Convert value to float
+
+          // Determine color based on gear score value
+          if (gearScore <= 12.5) {
+            color = '#39FF14'; // Neon green
+          } else if (gearScore <= 25) {
+            color = '#4682B4'; // Neon blue
+          } else if (gearScore <= 37.5) {
+            color = '#A45DBA'; // Purple
+          } else if (gearScore <= 50) {
+            color = '#FFFF00'; // Yellow
+          } else {
+            color = 'inherit'; // Default color if out of range
+          }
+
+          return (
+            <div key={index}>
+              <strong style={{ color }}>{attr.trait_type.toUpperCase()}:</strong> {attr.value}
+            </div>
+          );
+        })}
+
+      {/* Class and Spec */}
+      {['Class', 'Spec'].map(trait => {
+        const attr = nftAttributes.find(attr => attr.trait_type === trait);
+        return attr ? (
+          <div key={trait}>
+            <strong>{attr.trait_type.toUpperCase()}:</strong> {attr.value}
+          </div>
+        ) : null;
+      })}
+
+    </div>
+  )}
       <div className={style.wrappernftsecond}>
-        <div className={`${style.nftduelbgseconds}`}ref={backgroundRef}>
+        <div className={`${style.nftduelbgseconds}`} ref={backgroundRef}>
           <h2 className={style.title}></h2>
         </div>
 
         <div className={style.centeredContainer}>
           <p className={style.rafflefeetitle} style={{ textDecoration: 'underline' }}> BERAMONIUM BARTIOSIS </p>
-          <img
-            src="/NFTduel.png"
-            alt="NFT"
-            className={`${style.nftImagesecond} ${imageClass}`}
-            ref={imageRef}
-          />
-          {nftPrizePoolContractSecond === SPECIAL_CONTRACT_ADDRESS && (
-            <img
-              src="/beramonium.png"
-              alt="Special NFT"
-              className={`${style.nftImagesecond} ${specialImageClass}`}
-              ref={specialImageRef}
-            />
+
+          {nftPrizePoolContractSecond === BERAMONIUM && nftImage && (
+            <div
+              onMouseEnter={() => setIsHovered(true)} // Show traits on hover
+              onMouseLeave={() => setIsHovered(false)} // Hide traits on mouse leave
+            >
+              <img
+                src={nftImage || "/beramonium.png"} // Use the IPFS link from state
+                alt="Special NFT"
+                className={`${style.nftImagesecond} ${specialImageClass}`}
+                ref={specialImageRef}
+              />
+
+            </div>
           )}
-          {nftPrizePoolContractSecond === NEW_SPECIAL_CONTRACT_ADDRESS && (
-            <img
-              src="/Beraarena.png"
-              alt="New Special NFT"
-              className={`${style.nftImagesecond} ${specialImageClass}`}
-              ref={specialImageRef}
-            />
-          )}
+
           <p className={`${style.rafflefeetitle} ${nftClass}`}>
             <span>{displayText}</span>
           </p>
+          {nftTokenId !== null && nftPrizePoolContractSecond !== '0x0000000000000000000000000000000000000000' && (
+            <p className={style.textNotLoaded}>TOKEN ID: {nftTokenId}</p>
+          )}
           <p className={style.rafflefeetitle} style={{ textDecoration: 'underline' }}> CHALLENGER </p>
           <p className={`${style.rafflefeetitle} ${depositorClass}`}>
             <span>{challengerText}</span>

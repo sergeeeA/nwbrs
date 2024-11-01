@@ -11,19 +11,19 @@
 
 
 .wrapper {
-  background: linear-gradient(to bottom, #2c2c2c, #000000);
+  background: linear-gradient(to bottom, #2c2c2c,#1f1f1f,#000000, #000000);
   flex: 1; /* Allow each card to grow equally */
   min-width: 255px;
   max-width: 455px; /* Example fixed width, adjust as needed */
   min-height: 355px;
   max-height: 455px;
   width: 50%; /* Width of the element */
-  
-  border-radius: 2rem; /* Rounded corners */
+
+  border-radius: 3px; /* Rounded corners */
   padding: 5px; /* Space inside the wrapper */
   display: flex;
   flex-direction: column; /* Arrange children in a column */
-  margin: 40px; /* Space above the wrapper */
+  margin: 15px; /* Space above the wrapper */
 
   overflow: hidden; /* Hide overflow content */
   transition: transform 0.35s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
@@ -98,13 +98,13 @@
 
 @keyframes pulsate {
   0% {
-    box-shadow: 0 0 20px #bd9938;
+    box-shadow: 0 0 5px #bd9938;
   }
   50% {
-    box-shadow: 0 0 40px #ffed4c;
+    box-shadow: 0 0 10px #ffed4c;
   }
   100% {
-    box-shadow: 0 0 20px #bd9938;
+    box-shadow: 0 0 5px #bd9938;
   }
 }
 
@@ -120,7 +120,7 @@
   font-size: 2rem;
   color: #ffcf4c;
 
-  cursor: pointer;
+
   font-weight: bolder;
   display: flex;
   align-items: center;
@@ -274,7 +274,7 @@
 
   border-radius: 2px;
   margin: 15px auto; 
-  cursor: url('../public/curslott.png'), auto;
+  cursor: url('/curs.png'), auto;
   font-weight: 500;
   font-size: 25px;
   
@@ -299,7 +299,7 @@
 
   border-radius: 2px;
   margin: 15px auto; 
-  cursor: url('../public/curslott.png'), auto;
+  cursor: url('/curs.png'), auto;
   font-weight: 500;
   font-size: 25px; 
 }
@@ -360,7 +360,7 @@
 
   border-radius: 2px;
   margin: 15px auto; 
-  cursor: url('../public/gun.png'), auto;
+  cursor: url('/curs.png'), auto;
   font-weight: 500;
   font-size: 25px;
 }
@@ -662,7 +662,7 @@
   transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
   transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
   transform: perspective(1000px); /* Perspective for the 3D effect */
-  cursor: pointer; /* Indicate that the image is interactive */
+ 
   cursor: url('/curs.png'), auto;
 
 }
@@ -680,4 +680,34 @@
 
 .visibleImage {
   display: block;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  
+  margin: 5px;
+
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition */
+  
+  height: 100%; /* Ensure it takes the full height of the parent */
+}
+
+
+.loadingCircle {
+  border: 6px solid #f3f3f300; /* Light grey */
+
+  border-left: 6px solid #C8AC53; /* Left border */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  /* Center the spinner itself */
+  margin: auto; /* Optional: add margin for better centering */
+}
+
+@keyframes spin {
+  0% { box-shadow: 0 0 55px rgba(255, 207, 76, 0.753); transform: rotate(0deg);}
+  100% { transform: rotate(360deg); }
 }

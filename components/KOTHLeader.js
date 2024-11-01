@@ -48,47 +48,39 @@ const NftDuel = () => {
   // Get the score for the connected wallet address
   const connectedWalletScore = leaderboardData.find(entry => entry.address === address)?.score || 0;
 
-  const toggleExpansion = () => {
-    setIsExpanded(!isExpanded); // Toggle the expanded state
-  };
+
 
   return (
-    <div className={`${style.parentcontainer} ${isExpanded ? style.expanded : ''}`} onClick={toggleExpansion}>
-      <h3></h3>
-      <h3></h3>
-      {nftQuantity !== null && (
-        <h3 className={style.address}>TOTAL NFTs BURNED: {nftQuantity}</h3>
-      )}
-      <div className={style.address}>TOP BURNER</div>
-      <div className={style.topAddressContainer}>
-        {leaderboardData[0] && (
-          <>
-            <span className={style.topAddress} onClick={() => copyToClipboard(leaderboardData[0].address)}>
-              {formatAddress(leaderboardData[0].address)}
-            </span>
-            <span className={style.topScore}>{leaderboardData[0].score}</span>
-          </>
-        )}
-      </div>
+    <div className={style.wrappernft}>
 
-      <div className={style.container}>
-        <h2 className={style.title} style={{ textDecoration: 'underline' }}>LEADERBOARD</h2>
-
-        <div className={style.address}>
-          <h3>YOUR DWELLERS BURNED: {connectedWalletScore}</h3>
+      <div className={`${style.parentcontainer}`}>
+        <div className={style.address} style={{ textDecoration: 'underline' }}>OCCUPIED BY</div>
+        <div className={style.topAddressContainer}>
+          {leaderboardData[0] ? (
+            <>
+              <span 
+                className={style.topAddress} 
+                onClick={() => copyToClipboard(leaderboardData[0].address)}
+              >
+                {formatAddress(leaderboardData[0].address)}
+              </span>
+              <span className={style.topScore}>{leaderboardData[0].score}</span>
+            </>
+          ) : (
+            <span className={style.topAddress}>NO ONE</span>
+          )}
         </div>
-
-        <div className={style.scrollableContainer}>
-          {leaderboardData.map((entry, index) => (
-            index === 0 ? null : (  // Skip the first entry since it's already displayed above
-              <div className={style.scoreContainer} key={entry.address}>
-                <span className={style.address} onClick={() => copyToClipboard(entry.address)}>
-                  {formatAddress(entry.address)}
-                </span>
-                <span className={style.score}>{entry.score}</span>
-              </div>
-            )
-          ))}
+  
+        <div className={style.container}>
+        <h3 className={style.address}  style={{ textDecoration: 'underline' }}>TOTAL NFTs BURNED</h3>
+          {nftQuantity !== null && (
+            <h3 className={style.inabox} >{nftQuantity}</h3>
+            
+          )}
+          <h3 className={style.address} style={{ textDecoration: 'underline' }}>YOUR DWELLERS BURNED</h3>
+          <div className={style.address}>
+            <h3  className={style.inabox} >{connectedWalletScore}</h3>
+          </div>
         </div>
       </div>
     </div>

@@ -31,11 +31,11 @@
     justify-content: space-between; /* Space out columns */
     display: flex; /* Flexbox layout */
     justify-content: space-between; /* Space out columns */
-
+ 
     font-family: 'Monofonto';
     border-radius: 5px;
     background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
-    margin: 1px 0;
+   
   }
   
   

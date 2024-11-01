@@ -6,7 +6,8 @@ import nftAbi from '../utils/nft';
 import Web3 from 'web3';
 
 const NFT_CONTRACT_ADDRESS = '0x46B4b78d1Cd660819C934e5456363A359fde43f4';
-const APPROVE_ADDRESS = '0xD40CB0bc61228053299524031217747780DB88Cd';
+const APPROVE_ADDRESS = '0x0230959cB5fF0BEa92f49e8bddA49e44446a4768';
+const TARGET_CHAIN_ID = '0x138D4'; // Chain ID 80084 in hexadecimal
 
 const NftDuel = () => {
   const { depositNFTToPrizePoolSecond, withdrawNFTFromPrizePoolSecond, nftFirstDepositorSecond } = useAppContext();
@@ -35,9 +36,30 @@ const NftDuel = () => {
     checkDepositor();
   }, [nftFirstDepositorSecond]);
 
+  const checkAndSwitchNetwork = async () => {
+    try {
+      const currentChainId = await web3.eth.getChainId();
+      if (currentChainId !== parseInt(TARGET_CHAIN_ID, 16)) {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: TARGET_CHAIN_ID }],
+        });
+        return false; // Network was incorrect, switched it
+      }
+      return true; // Network is correct
+    } catch (error) {
+      console.error('Failed to switch network:', error);
+      alert('Please switch to the correct network.');
+      return false; // Network is incorrect
+    }
+  };
+
   const handleDeposit = async (e) => {
     e.preventDefault();
     if (nftTokenId && nftContract) {
+      const isCorrectNetwork = await checkAndSwitchNetwork();
+      if (!isCorrectNetwork) return; // Exit if the network is not correct
+
       try {
         const accounts = await web3.eth.getAccounts();
         if (accounts.length === 0) {
@@ -67,6 +89,10 @@ const NftDuel = () => {
 
   const handleWithdraw = async (e) => {
     e.preventDefault();
+    
+    const isCorrectNetwork = await checkAndSwitchNetwork();
+    if (!isCorrectNetwork) return; // Exit if the network is not correct
+
     try {
       const index = 0;
       setLoadingWithdraw(true);
@@ -83,7 +109,7 @@ const NftDuel = () => {
   return (
     <div className={style.parentcontainer}>
       <div className={style.wrappernft}>
-        <h2 className={style.title} style={{ textDecoration: 'underline' }}>WAGER NFT</h2>
+        <h2 className={style.title} style={{ textDecoration: 'underline' }}>NFT DUEL</h2>
 
         <label className={style.rafflefeetitle} htmlFor="nftTokenId" style={{ cursor: 'url("/curs.png"), auto' }}>
           TOKEN ID:
@@ -103,31 +129,34 @@ const NftDuel = () => {
             </div>
           </div>
           <div className={style.parentcontainer}>
-            <button
-              type="submit"
-              disabled={loadingDeposit || isDepositor} // Disable if loading or is depositor
-              style={{
-                width: '50%',
-                height: '40%',
-                padding: '10px 10px',
-                backgroundColor: 'transparent',
-                color: '#C8AC53',
-                fontSize: '20px',
-                fontFamily: 'Monofonto',
-                border: 'none',
-                cursor: 'pointer',
-                textAlign: 'center',
-                boxSizing: 'border-box',
-                transformOrigin: 'center',
-                cursor: 'url("/curs.png"), auto',
-              }}
-            >
-              {loadingDeposit ? (
-                <div className={style.loadingCircle}></div>
-              ) : (
-                <div className={style.btn}>DEPOSIT NFT</div>
-              )}
-            </button>
+            {/* Conditionally render the deposit button */}
+            {!isDepositor && (
+              <button
+                type="submit"
+                disabled={loadingDeposit} // Disable if loading
+                style={{
+                  width: '50%',
+                  height: '40%',
+                  padding: '10px 10px',
+                  backgroundColor: 'transparent',
+                  color: '#C8AC53',
+                  fontSize: '20px',
+                  fontFamily: 'Monofonto',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  boxSizing: 'border-box',
+                  transformOrigin: 'center',
+                  cursor: 'url("/curs.png"), auto',
+                }}
+              >
+                {loadingDeposit ? (
+                  <div className={style.loadingCircle}></div>
+                ) : (
+                  <div className={style.btn}>WAGER</div>
+                )}
+              </button>
+            )}
           </div>
         </form>
 
@@ -155,7 +184,7 @@ const NftDuel = () => {
               {loadingWithdraw ? (
                 <div className={style.loadingCircle}></div>
               ) : (
-                <div className={style.btn}>WITHDRAW NFT</div>
+                <div className={style.btn}>WITHDRAW</div>
               )}
             </button>
           </div>

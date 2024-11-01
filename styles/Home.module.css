@@ -2,11 +2,11 @@
 
   padding-bottom: 30px;
   cursor: url('/curs.png'), auto;
-  
+
 }
 /*comment*/
 .lineAfter {
-  border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
+  background: linear-gradient(to right, rgba(255, 207, 76, 0) 0%, rgba(255, 207, 76, 1) 50%, rgba(255, 207, 76, 0) 100%);
   width: 50%; /* Width of the line */
   margin: 0 auto; /* Center the line horizontally */
   /* Optional: Adjust the line height or add spacing */
@@ -228,4 +228,87 @@
   .background {
     background-size: contain; /* Optionally use contain for very small screens */
   }
+}
+.players {
+  position: relative;
+
+
+  font-family: 'Monofonto';
+  color: #c8ad5360;
+  border: none;
+  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
+  cursor: url('/curs.png'), auto;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.15s ease; /* Smooth transition for background-color */
+}
+.players:hover {
+  cursor: url('/curs.png'), auto;
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+  border-radius: 2px;
+}
+.welcomeText {
+
+  font-size: 2rem; /* Adjust the size as needed */
+  color: #ffcf4c; /* Change to your desired text color */
+  text-align: center; /* Center the text */
+  margin: 20px 0; /* Add some spacing around the text */
+  font-weight: bold; /* Make the text bold */
+  text-shadow: 0px 0px 22px #ffcf4c; /* Optional: add some shadow for effect */
+  display: flex; /* Use flexbox to center */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  animation: fadeIn 1s ease-in-out backwards; /* Added fade-in effect */
+  height: 100vh; /* Optional: set full viewport height */
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.nftDuelHistoryContainer {
+  margin: 10px 0;
+}
+
+.toggleButton {
+  font-family: 'Monofonto';
+  width: fit-content; 
+  display: flex;
+  justify-content: center;
+  place-self: center;
+  color: #C8AC53;
+  padding: 15px 32px;
+  text-align: center;
+
+  border-radius: 2px;
+  margin: 15px auto; 
+  cursor: url('../public/curs.png'), auto;
+  font-weight: 500;
+  font-size: 25px;
+}
+.toggleButton:hover {
+
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+.dropdownContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.dropdownContent.open {
+  max-height: 500px; /* adjust based on expected content size */
+  transition: max-height 0.3s ease-in-out;
+}
+
+.dropdownContent.closed {
+  max-height: 0;
 }

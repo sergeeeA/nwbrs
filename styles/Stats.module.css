@@ -1,99 +1,277 @@
-/* styles/Chatbox.module.css */
-
-
-@media (max-width: 600px) {
-    .chatbox {
-      width: 90vw;
-      max-height: 60vh; /* Adjust for smaller screens */
-    }
-  }
 .statbox {
-    z-index: 99;
-    position: absolute;
-    overflow: auto;
-    left: 0; /* Align with the right edge of the viewport */
-    width: 50vw; /* 80% of the viewport width */
-    max-width: 30vh; /* Maximum width */
-    min-height: 40vh;
-    max-height: 2vw;
-    background-color: rgba(255, 255, 255, 0); /* Fully transparent background */
-    border: 1px solid rgba(253, 186, 0, 0); /* Fully transparent border */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0); /* Fully transparent shadow */
-  
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for background-color, border-color, and box-shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the container */
+  padding: 20px;
+  border-radius: 2px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  font-family: 'Monofonto';
+  border: 1px solid #C8AC53;
+  text-align: center; /* Center the header text */
+  font-size: 1.5vw;
+  cursor: url('/curs.png'), auto;
 }
-  
-.statbox:hover {
-    background-color: rgba(255, 153, 0, 0.226); /* More opaque background on hover */
-    border-color: #f8d94f63; /* Visible border on hover */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Visible shadow on hover */
-    box-shadow: inset 0 0 10px  #C8AC53;
+.rowContainer {
+  display: flex;           /* Use flexbox */
+  /* Align children to the left */
+  width: 100%;            /* Full width */
+  margin-left: 1vw;              /* Remove any default margin */
 }
-  
-.messages {
-    flex: 1;
-    padding: 5px;
-    overflow-y: auto;
-    font-size: 1vw;
-    color: #000; /* Ensure text is visible */
-    font-family: 'Monofonto';
-    max-height: calc(100% - 50px);
+
+.header {
+  text-align: center; /* Center the header text */
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #C8AC53; /* Set header color */
+  font-size: 1.5vw;
 }
+
+.word, .messages  {
+  text-align: left; /* Align text to the left */
+  width: 100%; /* Full width for the inner contents */
+  margin-bottom: 10px;
+  color: #C8AC53; /* Set text color */
   
-.message {
+}
+
+.leaderboard {
+  display: flex; /* Flexbox for leaderboard layout */
+  justify-content: space-between; /* Space between columns */
+  width: 100%; /* Full width */
+}
+
+.column {
+  flex: 1; /* Equal width for both columns */
+  padding: 0 10px; /* Padding for columns */
+  
+}
+
+.scrollableContainer {
+  max-height: 25vw; /* Adjust as needed */
+  min-height: 25vw;
+  overflow-y: auto; /* Vertical scroll */
+  margin-top: 5px; /* Space below the title */
+  border: 1px solid #C8AC53;
+  border-radius: 2px; /* Optional: adds rounded corners */
+  padding: 10px; /* Optional: adds some padding inside */
+}
+
+          /* Custom scrollbar styles */
+          .scrollableContainer::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+          }
+
+          .scrollableContainer::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Track color */
+            border-radius: 10px; /* Rounded track */
+          }
+
+          .scrollableContainer::-webkit-scrollbar-thumb {
+            background: #C8AC53; /* Scrollbar color */
+            border-radius: 10px; /* Rounded scrollbar */
+          }
+
+          .scrollableContainer::-webkit-scrollbar-thumb:hover {
+            background: #b5943e; /* Darker shade on hover */
+          }
+
+          /* For Firefox */
+          .scrollableContainer {
+            scrollbar-width: thin; /* Make scrollbar thin */
+            scrollbar-color: #C8AC53 #00000000; /* Scrollbar and track color */
+          }
+
+.leaderboard {
+  display: flex; /* Flexbox for leaderboard layout */
+  justify-content: space-between; /* Space between columns */
+  width: 100%; /* Full width */
+ 
+
+}
+
+.column {
+  
+  flex: 1; /* Equal width for both columns */
+  padding: 0 10px; /* Padding for columns */
+}
+
+.titlecontent {
+  font-weight: bold; /* Make title content bold */
+  text-align: center; /* Center the title */
+  margin-bottom: 5px; /* Space below titles */
+  color: #C8AC53; /* Set title color */
+}
+
+.address, .score {
+  color: #C8AC53; /* Set address and score color */
+  margin: 10px 10px; /* Spacing between addresses and scores */
+   
+}
+.score {
+  color: #c8ad538a; /* Set address and score color */
+  margin: 10px 10px; /* Spacing between addresses and scores */
+   
+}
+.yourscore {
+  color: #C8AC53; /* Set address and score color */
+  margin: 10px 10px; /* Spacing between addresses and scores */
+   
+}
+
+.btn {
+  font-family: 'Monofonto';
+  width: fit-content; 
+  display: flex;
+  justify-content: center;
+  place-self: center;
+  color: #C8AC53;
+  padding: 1vw 1vw;
+  text-align: center;
+
+  border-radius: 2px;
+  margin: 15px auto; 
+  cursor: url('../public/curs.png'), auto;
+  font-weight: 500;
   font-size: 1vw;
-    color: #C8AC53;
-    margin-bottom: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: rgba(241, 241, 241, 0); /* Ensure messages background is visible */
-}
-.bigmessage {
-  font-size: 1vw;
-    color: #C8AC53;
-    margin-bottom: 5px;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: inset 0 0 10px  #C8AC53; /* Ensure messages background is visible */
-    border: 1px solid #C8AC53;
-    background: linear-gradient(to bottom, #00000000,  #c8ad5394); /* Add a 2px solid border with the same color as the text */
-}
-
-
-
-.Button {
-  font-size: 1vw;
-    width: 25vh;
-    font-family: 'Monofonto';
-    color: #C8AC53;
-    border: none;
-    background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
-    margin: 15px;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 0;
-    transition: background-color 0.15s ease; /* Smooth transition for background-color */
-    cursor: url('/curs.png'), auto;
-}
-
-.Button:hover {
-    background-color: #C8AC53; /* Change background color on hover */
-    color: #1e2128; /* Change text color on hover */
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    cursor: url('/curs.png'), auto;
-    animation-iteration-count: 1; /* Run the animation only once */
-}
-@keyframes flicker {
-
-
-    50% {
-      box-shadow: 0 0 35px 5px #C8AC53;
-    }
   
-    100% {
-      box-shadow: 0 0 25px rgba(255, 207, 76, 0.5);
-    }
-  }
+}
+.btn:hover {
 
+  background-color: #C8AC53; /* Change background color on hover */
+  color: #1e2128; /* Change text color on hover */
+  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation-iteration-count: 1; /* Run the animation only once */
+
+}
+
+
+
+.topAddressContainer {
+  display: flex;
+  justify-content: space-between; /* Space between top address and score */
+  width: 100%;
+  margin-bottom: 10px; /* Spacing below */
+  justify-content: center;
+  border: 1px solid #C8AC53;
+}
+
+.topAddress {
+  cursor: pointer; /* Change cursor to pointer for top address */
+  color: #C8AC53; /* Set top address color */
+}
+
+.title {
+  text-align: center; /* Center the title */
+  margin-top: 20px; /* Space above the title */
+  font-size: 20px;
+  font-size: 1.5vw;
+  color: #C8AC53; /* Set title color */
+}
+
+
+
+
+/* New styles for flex container */
+
+
+/* Ensure group containers have equal flex growth */
+.groupContainer {
+  flex: 1; /* Equal width for both groups */
+  margin: 10px; /* Space between groups */
+  border: 1px solid #C8AC53;
+}
+.flexContainer {
+  overflow: auto;
+  display: flex;           /* Use flexbox */
+  justify-content: flex-start; /* Align children to the left */
+  width: 100%;            /* Ensure it takes full width of the viewport */
+  margin: 0;              /* Remove any default margin */
+}
+
+/* ProfileContainer */
+.ProfileContainer {
+  min-height: 55vh;
+  flex: 1;                /* Take up remaining space */
+  margin: 0;              /* Remove margin */
+  border: 1px solid #C8AC53;
+  text-align: left;       /* Ensure text aligns to the left */
+  padding: 25px;          /* Optional padding for content */
+}
+.rowContainer {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.ProfileContainer {
+  padding: 1vh;
+}
+
+.nftGrid {
+  display: flex;
+
+  flex-wrap: wrap; /* Allows items to wrap to the next line */
+  gap: 1vh; /* Space between the items */
+  margin-bottom: 1vh; /* Space below each grid */
+}
+
+.nftItem {
+  font-size: 2vh;
+  
+  color: #1e2128;
+  border-radius: 1vh; /* Rounded corners */
+  padding: 2vh 2vh; /* Padding inside the container */
+  transition: background-color 0.3s ease, color 0.4s ease, transform 0.15s ease, box-shadow 0.2s ease; /* Smooth transition for both background and color */
+
+}
+
+.nftItem:hover {
+  
+  color: #C8AC53; /* Change text color on hover */
+  background-color: rgba(0, 0, 0, 0.459); 
+  transform: scale(1.25);
+  padding: 2vh 2vh;
+  box-shadow: 0 4px 250px 55px rgb(0, 0, 0);
+}
+
+.nftItemSecond {
+  font-size: 2vh;
+  
+  color: #1e2128;
+  border-radius: 1vh; /* Rounded corners */
+  padding: 2vh 2vh; /* Padding inside the container */
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for both background and color */
+
+}
+
+.nftItemSecond:hover {
+  color: rgb(162, 0, 255); /* Change text color on hover */
+  background: rgba(0, 0, 0, 0.459); 
+  transform: scale(1.15);
+  padding: 2vh 2vh;
+ 
+  box-shadow: 0 4px 250px 55px rgb(0, 0, 0);/* Change background to black on hover */
+}
+
+.nftId {
+  
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center the text */
+}
+.nftImage {
+  width: 5vh; /* Set the desired width */
+  height: 5vh; /* Maintain aspect ratio */
+  border-radius: 1vh; /* Optional: Add rounded corners */
+  margin-bottom: 0.2vh; /* Optional: Space between image and ID */
+}
+.traitsContainer {
+
+    transition: opacity 0.3s ease, transform 1s ease;
+  background: rgba(255, 255, 255, 0);
+ font-size: 1vh;
+  padding: 2vh;
+  border-radius: 1vh;
+  position: relative; /* Ensure it overlays properly */
+
+}

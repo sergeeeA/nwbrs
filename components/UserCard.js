@@ -7,7 +7,7 @@ const UserCard = ({ address }) => {
         className={`${style.welcome} ${style.loginBtn}`}
         
       >
-        Bera Morning,{' '}
+        {' '}
         <span className={style.welcome}>{truncateEthAddress(address)}</span>
       </div>
     </div>
