@@ -4,43 +4,11 @@ import { useAppContext } from '../context/context';
 
 const PotCard = () => {
   const { lotteryPlayers = [], fetchLotteryPlayers, address: connectedWalletAddress } = useAppContext();
-  const cardRef = useRef(null);
+
   const [isSpinning, setIsSpinning] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  useEffect(() => {
-    const card = cardRef.current;
 
-    const handleMouseMove = (e) => {
-      const { clientWidth: width, clientHeight: height } = card;
-      const { offsetX: x, offsetY: y } = e;
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const deltaX = x - centerX;
-      const deltaY = y - centerY;
-      const normalizedX = deltaX / centerX;
-      const normalizedY = deltaY / centerY;
-      const maxTiltX = 20;
-      const maxTiltY = 10;
-      const tiltX = normalizedX * maxTiltX;
-      const tiltY = -normalizedY * maxTiltY;
-
-      card.style.transform = `rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.05)`;
-    };
-
-    const handleMouseLeave = () => {
-      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
 
   const formatAddress = (address) => {
     if (address === "0x0000000000000000000000000000000000000000") {
@@ -78,7 +46,7 @@ const PotCard = () => {
   };
 
   return (
-    <div className={style.wrapper} ref={cardRef}>
+    <div className={style.wrapper} >
       <div className={style.players}>
         <div className={style.rafflefee}>LUCKY 69 PLAYERS</div>
         <div className={`${style.lineAfter}`}></div>

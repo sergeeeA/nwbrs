@@ -108,7 +108,7 @@ const NftDuel = () => {
 
   return (
     <div className={style.parentcontainer}>
-      <div className={style.wrappernft}>
+      <div className={style.wrappernftsecond}>
         <h2 className={style.title} style={{ textDecoration: 'underline' }}>NFT DUEL</h2>
 
         <label className={style.rafflefeetitle} htmlFor="nftTokenId" style={{ cursor: 'url("/curs.png"), auto' }}>
@@ -122,7 +122,7 @@ const NftDuel = () => {
               value={nftTokenId}
               onChange={(e) => setNftTokenId(e.target.value)}
               required
-              className={style.numberInput}
+              className={style.numberInputsecond}
             />
             <div className={style.tooltiptext}>
               Click any token ID in your NFT Inventory!

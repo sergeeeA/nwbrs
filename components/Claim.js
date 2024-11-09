@@ -1,83 +1,107 @@
 import { useState, useEffect } from 'react';
 import Style from '../styles/Inventory.module.css';
 import { useAppContext } from '../context/context';
-import nftAbi from '../utils/nft';
+import nftAbiData from '../utils/nft'; // Import the ABI object
 import Web3 from 'web3';
 
-const createLotteryContract = (web3Instance) => {
-  const contractAddress = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05'; // Your NFT contract address
-  return new web3Instance.eth.Contract(nftAbi, contractAddress);
-};
+const contractAddress = '0x4Ae3985e45784CB73e1886AC603B5FEed4F08a05';
 
 export default function Claim() {
-  const { accounts, connectWallet } = useAppContext();
+  const { address } = useAppContext(); // Get the user's address from context
   const [web3, setWeb3] = useState(null);
-  const [lotteryContract, setLotteryContract] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    console.log('Connected accounts:', accounts); // Log connected accounts
-
-    if (accounts && accounts.length > 0 && !web3) {
-      const initWeb3 = async () => {
+    const initWeb3 = async () => {
+      if (typeof window.ethereum !== 'undefined') {
         const web3Instance = new Web3(window.ethereum);
         setWeb3(web3Instance);
-
-        const contract = createLotteryContract(web3Instance);
-        setLotteryContract(contract);
-      };
-      initWeb3();
-    }
-  }, [accounts, web3]);
+      } else {
+        setErrorMessage('Ethereum provider not found. Please install a wallet like MetaMask.');
+      }
+    };
+    initWeb3();
+  }, []);
 
   const handleClaim = async () => {
-    if (!web3 || !lotteryContract) {
-      console.error('Web3 or contract not initialized');
-      return;
-    }
+    console.log('Attempting to claim NFTs...');
+    setErrorMessage('');
+    setLoading(true);
 
-    const _receiver = accounts[0];
-    const _quantity = 10; // Adjust as necessary
+    const _quantity = web3.utils.toBN(10); // Set quantity directly in hexadecimal (10 in decimal)
     const _currency = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'; // Native token
-    const _pricePerToken = 0; // Free
+    const _pricePerToken = 0; // Assuming the claim is free
+
+    // Update to use actual proof values
     const _allowlistProof = {
-      proof: ['0x...'], // Your proof data here
-      quantityLimitPerWallet: 10,
-      pricePerToken: 0,
+      proof: [
+        '0x0000000000000000000000000000000000000000000000000000000000000000', // Replace with a valid proof
+      ],
+      quantityLimitPerWallet: 1,
+      pricePerToken: _pricePerToken,
       currency: _currency,
     };
-    const _data = '0x'; // Adjust if you have any data
+
+    const _data = '0x'; // Ensure this is properly formatted as bytes
 
     try {
-      const tx = await lotteryContract.methods.claim(
-        _receiver,
+      if (!web3) {
+        throw new Error('Web3 not initialized.');
+      }
+
+      if (!address) {
+        throw new Error('User address not found. Make sure you are connected to MetaMask.');
+      }
+
+      const contract = new web3.eth.Contract(nftAbiData.nftAbi, contractAddress);
+
+      // Log parameters before sending
+      console.log(`Claiming NFTs with parameters:
+        Receiver: ${address}
+        Quantity: ${_quantity}
+        Currency: ${_currency}
+        Price per Token: ${_pricePerToken}
+        Allowlist Proof: ${JSON.stringify(_allowlistProof)}
+        Data: ${_data}`);
+
+      // Estimate gas
+      const gasEstimate = await contract.methods.claim(
+        address,
         _quantity,
         _currency,
         _pricePerToken,
         _allowlistProof,
         _data
-      ).send({ from: _receiver, value: 0 }); // No payment since it's free
+      ).estimateGas({ from: address });
+
+      console.log(`Estimated gas: ${gasEstimate}`);
+
+      // Send the transaction
+      const tx = await contract.methods.claim(
+        address,
+        _quantity,
+        _currency,
+        _pricePerToken,
+        _allowlistProof,
+        _data
+      ).send({ from: address, value: 0, gas: gasEstimate });
 
       console.log('Claim successful!', tx);
     } catch (err) {
       console.error('Error claiming NFT:', err);
-    }
-  };
-
-  const handleConnectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      await connectWallet(); // Call the context's connectWallet function
-    } else {
-      console.error('Please install MetaMask');
+      setErrorMessage(err.message || 'An unknown error occurred.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className={Style.claimContainer}>
-      {accounts && accounts.length > 0 ? (
-        <button onClick={handleClaim}>Claim NFTs</button>
-      ) : (
-        <button onClick={handleConnectWallet}>Connect Wallet</button>
-      )}
+      <button onClick={handleClaim} disabled={loading}>
+        {loading ? 'Claiming...' : 'Claim NFTs'}
+      </button>
+
     </div>
   );
 }

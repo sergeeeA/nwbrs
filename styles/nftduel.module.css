@@ -127,17 +127,49 @@
   
 
   .wrappernft:hover {
-    animation: pulsate 2s infinite; /* Pulsating animation on hover */
+    animation: pulsate 0.45s forwards ; /* Pulsating animation on hover */
   }
   @keyframes pulsate {
     0% {
-      box-shadow: 0 0 5px #bd9938;
+      border-top: 1px solid transparent; /* Start with transparent borders */
+      border-right: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
+    25% {
+      border-top: 1px solid #bd9938; /* Left side of top border lights up */
+      border-right: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-left: 1px solid transparent;
+  
     }
     50% {
-      box-shadow: 0 0 15px #ffed4c;
+      border-top: 1px solid #bd9938;
+      border-right: 1px solid #ffed4c; /* Right side of top border lights up */
+      border-bottom: 1px solid transparent;
+      border-left: 1px solid transparent;
+    }
+    75% {
+      border-top: 1px solid #bd9938;
+      border-right: 1px solid #ffed4c;
+      border-bottom: 1px solid #ffed4c; /* Top side of right border lights up */
+      border-left: 1px solid transparent;
+      box-shadow: 0px 0px 0px #ffed4c;
+  
+    }
+    80% {
+      border-top: 1px solid #bd9938;
+      border-right: 1px solid #ffed4c;
+      border-bottom: 1px solid #ffed4c;
+      border-left: 1px solid #ffed4c; /* Bottom side of right border lights up */
+      box-shadow: 0px 0px 25px #ffed4c;
     }
     100% {
-      box-shadow: 0 0 5px #bd9938;
+      border-top: 1px solid transparent; 
+      border-right: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      border-left: 1px solid transparent;
+      box-shadow: 0px 0px 10px #ffed4c;
     }
   }
     /*beramonium*/
@@ -163,17 +195,49 @@
 
 
 .wrappernftsecond:hover {
-  animation: pulsatesecond 2s infinite; /* Pulsating animation on hover */
+  animation: pulsatesecond 0.45s forwards; /* Pulsating animation on hover */
 }
 @keyframes pulsatesecond {
   0% {
-    box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
+    border-top: 1px solid transparent; /* Start with transparent borders */
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  25% {
+    border-top: 1px solid rgb(162, 0, 255); /* Left side of top border lights up */
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+
   }
   50% {
-    box-shadow: 0 0 15px rgb(162, 0, 255);
+    border-top: 1px solid rgb(162, 0, 255);
+    border-right: 1px solid rgb(162, 0, 255); /* Right side of top border lights up */
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  75% {
+    border-top: 1px solid rgb(162, 0, 255);
+    border-right: 1px solid rgb(162, 0, 255);
+    border-bottom: 1px solid rgb(162, 0, 255); /* Top side of right border lights up */
+    border-left: 1px solid transparent;
+    box-shadow: 0px 0px 0px rgb(162, 0, 255);
+
+  }
+  80% {
+    border-top: 1px solid rgb(162, 0, 255);
+    border-right: 1px solid rgb(162, 0, 255);
+    border-bottom: 1px solid rgb(162, 0, 255);
+    border-left: 1px solid rgb(162, 0, 255); /* Bottom side of right border lights up */
+    box-shadow: 0px 0px 25px rgb(162, 0, 255);
   }
   100% {
-    box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
+    border-top: 1px solid transparent; 
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    box-shadow: 0px 0px 10px rgb(162, 0, 255);
   }
 }
 
@@ -390,6 +454,7 @@
       background-color: #C8AC53;
     }
   }
+  /*beradweler*/
   .numberInput {
     cursor: url('/curs.png'), auto;
     background-color: transparent;
@@ -425,6 +490,42 @@
   
     box-shadow: inset 0 0 15px  #C8AC53;
   }
+  /*beramonium*/
+  .numberInputsecond {
+    cursor: url('/curs.png'), auto;
+    background-color: transparent;
+    width: 200px; /* Adjust the width as needed */
+    padding: 8px; /* Add some padding inside the input */
+    border: 1px solid #C8AC53; /* Set a border color and style */
+    border-radius: 2px; /* Rounded corners for the input box */
+    font-size: 16px; /* Adjust font size */
+    box-sizing: border-box;
+    font-family: Monofonto;
+    color: #C8AC53;
+    outline: none; /* Remove default outline */
+    text-align: center;
+    /* Remove place-self */
+  }
+  /* Optional: Hide spinners for number input */
+  .numberInputsecond::-webkit-inner-spin-button,
+  .numberInputsecond::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .numberInputsecond {
+    max-width: 300px; /* Set a maximum width for the input */
+    -moz-appearance: textfield;
+    margin: 10px 0; /* Add some margin for spacing */
+  }
+  
+  /* Style for the number input field when focused */
+  .numberInputsecond:focus {
+    
+    border-color: #C8AC53; /* Change border color to yellow on focus */
+  
+    box-shadow: inset 0 0 15px  #C8AC53;
+  }
   .btn {
     font-family: 'Monofonto';
     width: fit-content; 
@@ -450,6 +551,7 @@
     animation-iteration-count: 1; /* Run the animation only once */
   
   }
+ 
   /*berdwellers*/
   .textNotLoaded {
     font-family: 'Monofonto';
@@ -628,51 +730,28 @@
   .visibleImage {
     display: block;
   }
-  @keyframes breatheGlow {
-    0% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
-    }
-    50% {
-      box-shadow: 0 0 30px rgb(255, 207, 76); /* Increase glow intensity */
-    }
-    
-    100% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
-    }
-  }
-  @keyframes breatheGlowsecond {
-    0% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
-    }
-    50% {
-      box-shadow: 0 0 30px rgb(213, 6, 255); /* Increase glow intensity */
-    }
-    
-    100% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
-    }
-  }
-  @keyframes breatheGlowthird {
-    0% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7);
-    }
-    50% {
-      box-shadow: 0 0 30px rgb(0, 217, 255); /* Increase glow intensity */
-    }
-    
-    100% {
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Return to initial glow */
-    }
-  }
+
+  
   @keyframes flicker {
 
 
     50% {
-      box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
+      box-shadow: 0 0 55px rgb(255, 207, 76);
     }
   
     100% {
       box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+    }
+  }
+  @keyframes flicker2 {
+
+
+    50% {
+      box-shadow: 0 0 55px rgb(213, 6, 255);
+    }
+  
+    100% {
+      box-shadow: 0 0 15px rgba(214, 6, 255, 0.658);
     }
   }
   .loading {

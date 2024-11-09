@@ -226,14 +226,14 @@ const NftDuel = () => {
             <span>{displayText}</span>
           </p>
           {nftTokenId !== null && nftPrizePoolContractSecond !== '0x0000000000000000000000000000000000000000' && (
-            <p className={style.textNotLoaded}>TOKEN ID: {nftTokenId}</p>
+            <p className={style.textNotLoadedsecond}>TOKEN ID: {nftTokenId}</p>
           )}
           <p className={style.rafflefeetitle} style={{ textDecoration: 'underline' }}> CHALLENGER </p>
           <p className={`${style.rafflefeetitle} ${depositorClass}`}>
             <span>{challengerText}</span>
           </p>
 
-          <p className={style.textNotLoaded}>
+          <p className={style.textNotLoadedsecond}>
             LAST WINNER: <span>{winnerText}</span>
           </p>
         </div>

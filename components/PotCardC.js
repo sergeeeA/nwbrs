@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
   const { miniGamePool, enterNFT, nftTokenId, lastNFTLotteryWinner } = useAppContext();
-  const cardRef = useRef(null);
+
   const [loading, setLoading] = useState(false); // Added loading state
 
   // Helper function to format Ethereum address
@@ -25,7 +25,7 @@ const PotCard = () => {
         if (currentChainId !== chainId) {
           await provider.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId }],
+            params: [{ chainId }], // Switch to the correct network
           });
         }
       } else {
@@ -43,41 +43,9 @@ const PotCard = () => {
     setLoading(false); // End loading
   };
 
-  useEffect(() => {
-    const card = cardRef.current;
-
-    const handleMouseMove = (e) => {
-      const { clientWidth: width, clientHeight: height } = card;
-      const { offsetX: x, offsetY: y } = e;
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const deltaX = x - centerX;
-      const deltaY = y - centerY;
-      const normalizedX = deltaX / centerX;
-      const normalizedY = deltaY / centerY;
-      const maxTiltX = 20;
-      const maxTiltY = 20;
-      const tiltX = normalizedX * maxTiltX;
-      const tiltY = -normalizedY * maxTiltY;
-
-      card.style.transform = `rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.05)`;
-    };
-
-    const handleMouseLeave = () => {
-      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  const nftText = nftTokenId > 1 ? 'BERA DWELLER' : 'NONE';
+  // Check if the NFT is available (nftTokenId > 1)
+  const isNFTAvailable = nftTokenId > 1;
+  const nftText = isNFTAvailable ? 'BERA DWELLER' : 'NONE';
   const lastWinnerStatus = formatAddress(lastNFTLotteryWinner);
 
   const handleTitleClick = () => {
@@ -85,7 +53,7 @@ const PotCard = () => {
   };
 
   return (
-    <div className={style.wrapper} ref={cardRef}>
+    <div className={style.wrapper}>
       <div className={`${style.bierramadrebg}`}>
         <div className={`${style.title}`} onClick={handleTitleClick}>
           LUCKY 69 NFT
@@ -109,8 +77,8 @@ const PotCard = () => {
           <div className={style.loadingCircle}></div>
         </div>
       ) : (
-        <div className={style.btn} onClick={handleGambooolClick}>
-          ENTER
+        <div className={`${style.btn} ${!isNFTAvailable ? style.btndisabled : ''}`} onClick={handleGambooolClick}>
+          {isNFTAvailable ? 'ENTER' : 'UNAVAILABLE'}
         </div>
       )}
     </div>

@@ -22,13 +22,14 @@
     margin: 15px; /* Space above the wrapper */
   
 
-    transition: transform 0.25s , box-shadow 0.1s ease; /* Smooth transition for scaling and box-shadow */
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s ease; /* Smooth transition for scaling and box-shadow */
     perspective: 1000px; /* Perspective for 3D effect */
   }
   
   /*comment*/
   .wrapper:hover {
-    animation: pulsate 2s infinite; /* Pulsating animation on hover */
+    transform: translateY(-5px); /* Lift the element */
+   
   }
   .scrollableList {
     max-height: 255px; /* Adjust this height as needed */

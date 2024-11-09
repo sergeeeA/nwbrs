@@ -3,9 +3,8 @@ import style from '../styles/PotCard.module.css';
 import { useAppContext } from '../context/context';
 
 const PotCard = () => {
-  const {address, duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor, lastMiniGameNFTWinner } = useAppContext();
-  const cardRef = useRef(null);
-
+  const { address, duelnft, miniGameNFTTokenId, miniGameNFTfirstDepositor, lastMiniGameNFTWinner } = useAppContext();
+  
   // State to track whether the button is disabled and for loading state
   const [isDuelDisabled, setIsDuelDisabled] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -28,7 +27,7 @@ const PotCard = () => {
         if (currentChainId !== chainId) {
           await provider.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId }],
+            params: [{ chainId }], // Switch to the correct network
           });
         }
       } else {
@@ -47,49 +46,17 @@ const PotCard = () => {
     setLoading(false); // End loading
   };
 
-  useEffect(() => {
-    const card = cardRef.current;
-
-    const handleMouseMove = (e) => {
-      const { clientWidth: width, clientHeight: height } = card;
-      const { offsetX: x, offsetY: y } = e;
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const deltaX = x - centerX;
-      const deltaY = y - centerY;
-      const normalizedX = deltaX / centerX;
-      const normalizedY = deltaY / centerY;
-      const maxTiltX = 20;
-      const maxTiltY = 20;
-      const tiltX = normalizedX * maxTiltX;
-      const tiltY = -normalizedY * maxTiltY;
-
-      card.style.transform = `rotateX(${tiltY}deg) rotateY(${tiltX}deg) scale(1.05)`;
-    };
-
-    const handleMouseLeave = () => {
-      card.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
-  const nftText = miniGameNFTTokenId > 0 ? 'BERA DWELLER' : 'NONE';
+  // Determine if the "DUEL" button should be displayed or "UNAVAILABLE"
+  const isMiniGameNFTAvailable = miniGameNFTTokenId > 0;
+  const nftText = isMiniGameNFTAvailable ? 'BERA DWELLER' : 'NONE';
   const isDepositorLoaded = miniGameNFTfirstDepositor && miniGameNFTfirstDepositor !== '0x0000000000000000000000000000000000000000';
   const depositorStatusClass = isDepositorLoaded ? style.textLoaded : style.textNotLoaded;
   const depositorStatus = formatAddress(miniGameNFTfirstDepositor);
 
   // Update duel button state based on NFT presence
   useEffect(() => {
-    setIsDuelDisabled(nftText === 'NONE');
-  }, [nftText]);
+    setIsDuelDisabled(!isMiniGameNFTAvailable);
+  }, [isMiniGameNFTAvailable]);
 
   // Format last winner address
   const lastWinnerStatus = formatAddress(lastMiniGameNFTWinner);
@@ -99,7 +66,7 @@ const PotCard = () => {
   };
 
   return (
-    <div className={style.wrapper} ref={cardRef}>
+    <div className={style.wrapper}>
       <div className={style.titlebigironnftbg}>
         <div className={style.titleBigiron} onClick={handleTitleClick}>
           BIG IRON NFT
@@ -133,13 +100,12 @@ const PotCard = () => {
           You cant duel again.
         </div>
       ) : (
-        <div className={`${style.btnbigiron} ${isDuelDisabled ? style.disabled : ''}`} onClick={handleGambooolClick}>
-          DUEL
+        <div className={`${style.btn} ${isDuelDisabled ? style.btndisabled : ''}`} onClick={handleGambooolClick}>
+          {isMiniGameNFTAvailable ? 'DUEL' : 'UNAVAILABLE'}
         </div>
       ))}
     </div>
   );
-  
 };
 
 export default PotCard;

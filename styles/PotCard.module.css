@@ -26,13 +26,57 @@
   margin: 15px; /* Space above the wrapper */
 
   overflow: hidden; /* Hide overflow content */
-  transition: transform 0.35s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-  perspective: 1000px; /* Perspective for 3D effect */
+  transition: transform 0.1s ease-in-out; /* Smooth transition for scaling and box-shadow */
+
 }
 
 /*comment*/
 .wrapper:hover {
-  animation: pulsate 2s infinite; /* Pulsating animation on hover */
+  transform: translateY(-5px); /* Lift the element */
+  animation: pulsate 0.45s forwards ease-in-out; /* Pulsating animation on hover */
+}
+@keyframes pulsate {
+  0% {
+    border-top: 1px solid transparent; /* Start with transparent borders */
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  25% {
+    border-top: 1px solid #bd9938; /* Left side of top border lights up */
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+
+  }
+  50% {
+    border-top: 1px solid #bd9938;
+    border-right: 1px solid #ffed4c; /* Right side of top border lights up */
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+  }
+  75% {
+    border-top: 1px solid #bd9938;
+    border-right: 1px solid #ffed4c;
+    border-bottom: 1px solid #ffed4c; /* Top side of right border lights up */
+    border-left: 1px solid transparent;
+    box-shadow: 0px 0px 0px #ffed4c;
+
+  }
+  80% {
+    border-top: 1px solid #bd9938;
+    border-right: 1px solid #ffed4c;
+    border-bottom: 1px solid #ffed4c;
+    border-left: 1px solid #ffed4c; /* Bottom side of right border lights up */
+    box-shadow: 0px 0px 25px #ffed4c;
+  }
+  100% {
+    border-top: 1px solid transparent; 
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    box-shadow: 0px 0px 10px #ffed4c;
+  }
 }
 
 
@@ -47,30 +91,7 @@
 
 }
 
-.wrappernft {
-  background: linear-gradient(to bottom, #181818, #181818, #000000);
-  flex: 1; /* Allow each card to grow equally */
-  min-width: 255px;
-  max-width: 555px; /* Example fixed width, adjust as needed */
-  min-height: 455px;
-  max-height: 800px;
-  width: 50%; /* Width of the element */
-  
-  border-radius: 2rem; /* Rounded corners */
-  padding: 5px; /* Space inside the wrapper */
-  display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  margin: 25px; /* Space above the wrapper */
 
-  overflow: hidden; /* Hide overflow content */
-  transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-  perspective: 1000px; /* Perspective for 3D effect */
-}
-
-/*comment*/
-.wrappernft:hover {
-  animation: pulsate 2s infinite; /* Pulsating animation on hover */
-}
 .wrapperinput {
   background: linear-gradient(to bottom, #181818, #000000);
   flex: 1; /* Allow each card to grow equally */
@@ -96,17 +117,6 @@
   animation: pulsate 2s infinite; /* Pulsating animation on hover */
 }
 
-@keyframes pulsate {
-  0% {
-    box-shadow: 0 0 5px #bd9938;
-  }
-  50% {
-    box-shadow: 0 0 10px #ffed4c;
-  }
-  100% {
-    box-shadow: 0 0 5px #bd9938;
-  }
-}
 
 .lineAfter {
   border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
@@ -287,7 +297,7 @@
   animation-iteration-count: 1; /* Run the animation only once */
 
 }
-.btnnft {
+.btndisabled {
   font-family: 'Monofonto';
   width: fit-content; 
   display: flex;
@@ -303,11 +313,11 @@
   font-weight: 500;
   font-size: 25px; 
 }
-.btnnft:hover {
+.btndisabled:hover {
 
-  background-color: #C8AC53; /* Change background color on hover */
+  background-color: #ff3c00; /* Change background color on hover */
   color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+  animation: flickerd 0.2s ease-out; /* Apply flicker animation */
   animation-iteration-count: 1; /* Run the animation only once */
 
 }
@@ -341,11 +351,22 @@
 
 
   50% {
-    box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
+    box-shadow: 0 0 55px rgb(255, 207, 76);
   }
 
   100% {
     box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+  }
+}
+@keyframes flickerd {
+
+
+  50% {
+    box-shadow: 0 0 55px rgb(255, 88, 76);
+  }
+
+  100% {
+    box-shadow: 0 0 15px rgba(255, 88, 76, 0.7);
   }
 }
 .btnbigiron {

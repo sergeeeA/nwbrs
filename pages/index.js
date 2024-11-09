@@ -14,7 +14,8 @@ import Nftduelthird from '../components/Nftduelthird';
 //nftduel history
 import NftDuelhistory from '../components/NftDuelhistory'; 
 import NftDuelhistorySecond from '../components/NftDuelhistorySecond'; 
-
+//claim
+import Claim from '../components/Claim'; 
 
 //this is big iron history
 import PotCardAPlayers from '../components/PotCardAPlayers';
@@ -269,6 +270,7 @@ return (
               
               {showGroupAPlayers ? (
                 <>
+
                   <PotCardBPlayers />
                   <PotCardAPlayers />
                 </>
