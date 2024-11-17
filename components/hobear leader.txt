@@ -1,0 +1,34 @@
+ </div>
+        {/* Group C: Hobear Leaderboard */}
+        <div className={Styles.groupContainer}>
+          <h2 className={Styles.title} style={{ textDecoration: 'underline' }}>HOBEAR LEADERBOARD</h2>
+          <div className={Styles.scrollableContainer}>
+            <div className={Styles.leaderboard}>
+              <div className={Styles.column}>
+              {hobearLeaderboardData.map((entry) => (
+                    <div className={Styles.scoreContainer} key={entry.address}>
+                      <span
+                        ref={el => {
+                          if (entry.address.toLowerCase() === address.toLowerCase()) {
+                            hobearLeaderboardRefs.current[entry.address.toLowerCase()] = el;
+                          }
+                        }}
+                        className={Styles.address}
+                        onClick={() => copyToClipboard(entry.address)}
+                      >
+                        {formatAddress(entry.address)}
+                        {entry.address.toLowerCase() === address.toLowerCase() && " (YOU)"} 
+                      </span>
+                      <span className={Styles.score}>{entry.score}</span>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className={Styles.yourscore}>YOUR DWELLERS BURNED: {hobearWalletScore}</div>
+                {/* Button to scroll to connected wallet address */}
+      {address && (
+        <div onClick={scrollToAddress} className={Styles.btn}>
+          FIND ME
+        </div>
+      )}

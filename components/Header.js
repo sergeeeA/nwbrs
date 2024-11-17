@@ -148,9 +148,8 @@ const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel, onToggleKo
                 <button onClick={handleToggleNftDuel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
                   {isOpenNftduel ? ' DUEL' : 'DUEL'}
                 </button>
-                <button onClick={onToggleKoth} className={`${style.toggleButton} ${isOpenKoth ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
-                  {isOpenKoth ? '  HOBEAR DAM' : ' HOBEAR DAM'}
-                </button>
+                
+
                 <button onClick={toggleStats} className={style.toggleButton}>
                   {isStatsOpen ? ' STATS' : ' STATS'}
                 </button>
@@ -168,9 +167,8 @@ const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel, onToggleKo
             <button onClick={handleToggleNftDuel} className={`${style.toggleButton} ${isOpenNftduel ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
               {isOpenNftduel ? ' DUEL' : 'DUEL'}
             </button>
-            <button onClick={onToggleKoth} className={`${style.toggleButton} ${isOpenKoth ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
-              {isOpenKoth ? '  HOBEAR DAM' : ' HOBEAR DAM'}
-            </button>
+ 
+            
             <button onClick={toggleStats} className={style.toggleButton}>
               {isStatsOpen ? ' STATS' : ' STATS'}
             </button>
@@ -194,3 +192,6 @@ const Header = ({ onToggleA, onToggleNftduel, isOpenA, isOpenNftduel, onToggleKo
 };
 
 export default Header;
+//           <button onClick={onToggleKoth} className={`${style.toggleButton} ${isOpenKoth ? style.toggleButtonLongBetsToggled : style.toggleButtonLongBets}`}>
+// {isOpenKoth ? '  HOBEAR DAM' : ' HOBEAR DAM'}
+// </button>
