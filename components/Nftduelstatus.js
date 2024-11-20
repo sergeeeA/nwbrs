@@ -87,16 +87,6 @@ const NftDuel = () => {
     fetchTokenId();
   }, [nftPrizePoolContract]);
 
-  const fetchNftTraits = async (tokenId) => {
-    try {
-      const response = await fetch(`https://ipfs.io/ipfs/QmVzp3QfDt3v3E1J9Z4ZmXb85gVJFsGGzvKDWMzQSrYpVu/${tokenId}`);
-      const data = await response.json();
-      setNftTraits(data.attributes);
-    } catch (error) {
-      console.error('Error fetching NFT traits:', error);
-      setNftTraits(null);
-    }
-  };
   useEffect(() => {
     const image = imageRef.current;
     const handleMouseMove = (event) => {

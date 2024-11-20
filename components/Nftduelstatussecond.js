@@ -92,7 +92,7 @@ const NftDuel = () => {
     const handleMouseMove = (event) => {
       if (backgroundRef.current) {
         const x = (event.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-        backgroundRef.current.style.backgroundPosition = `${x * 0}px, 
+        backgroundRef.current.style.backgroundPosition = `
                                                           ${x * 12}px, 
                                                           ${x * -9}px,
                                                           ${x * 4}px`;

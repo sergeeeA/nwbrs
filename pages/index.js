@@ -14,6 +14,7 @@ import Nftduelthird from '../components/Nftduelthird';
 //nftduel history
 import NftDuelhistory from '../components/NftDuelhistory'; 
 import NftDuelhistorySecond from '../components/NftDuelhistorySecond'; 
+import NftDuelhistoryThird from '../components/NftDuelhistoryThird'; 
 //claim
 import Claim from '../components/Claim'; 
 
@@ -50,7 +51,7 @@ export default function Home() {
   const [showInventory, setShowInventory] = useState(false);
   const [isDuelHistoryOpen, setIsDuelHistoryOpen] = useState(false);
   const [isDuelHistorySecondOpen, setIsDuelHistorySecondOpen] = useState(false);
-
+  const [isDuelHistoryThirdOpen, setIsDuelHistoryThirdOpen] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % translations.length);
@@ -134,7 +135,9 @@ export default function Home() {
       const toggleDuelHistorySecond = () => {
         setIsDuelHistorySecondOpen((prev) => !prev);
       };
-
+      const toggleDuelHistoryThird = () => {
+        setIsDuelHistoryThirdOpen((prev) => !prev);
+      };
 
   const toggleStats = () => {
     setIsStatsOpen((prev) => !prev);
@@ -214,9 +217,14 @@ return (
                     >
                       BERAMONIUM
                     </button>
+                    <button 
+                      onClick={() => handlePageChange('third')} 
+                      className={`${homeStyle.nftduelbuttonarena} ${activeButton === 'third' ? homeStyle.active : ''}`}
+                    >
+                      BERA OUTLAWS
+                    </button>
                   </div>
                 </div>
-
                 {currentPage === 'duel' ? (
                   <>
                     <Nftduelstatus /> 
@@ -224,7 +232,6 @@ return (
                       <div onClick={toggleDuelHistory} className={homeStyle.toggleButton}>
                         {isDuelHistoryOpen ? '↑' : '↓'} DUEL HISTORY
                       </div>
-                      
                       <div
                         className={`${homeStyle.dropdownContent} ${isDuelHistoryOpen ? homeStyle.open : homeStyle.closed}`}
                       >
@@ -240,7 +247,6 @@ return (
                       <div onClick={toggleDuelHistorySecond} className={homeStyle.toggleButton}>
                         {isDuelHistorySecondOpen ? '↑' : '↓'} DUEL HISTORY 
                       </div>
-                      
                       <div
                         className={`${homeStyle.dropdownContent} ${isDuelHistorySecondOpen ? homeStyle.open : homeStyle.closed}`}
                       >
@@ -249,15 +255,25 @@ return (
                     </div>
                     <Nftduelsecond />
                   </>
-                ) : (
+                ) : currentPage === 'third' ? (
                   <>
                     <Nftduelstatusthird />
+                    <div className={homeStyle.nftDuelHistoryContainer}>
+                      <div onClick={toggleDuelHistoryThird} className={homeStyle.toggleButton}>
+                        {isDuelHistoryThirdOpen ? '↑' : '↓'} DUEL HISTORY
+                      </div>
+
+                      <div
+                        className={`${homeStyle.dropdownContent} ${isDuelHistoryThirdOpen ? homeStyle.open : homeStyle.closed}`}
+                      >
+                        <NftDuelhistoryThird />
+                      </div>
+                    </div>
                     <Nftduelthird />
                   </>
-                )}
+                ) : null}
               </div>
             )}
-
             <div className={`${potCardsContainer.potCardsContainer} ${isOpenKoth ? potCardsContainer.open : potCardsContainer.closed}`}>
               <KOTHLeader/>
               <KOTH /> 

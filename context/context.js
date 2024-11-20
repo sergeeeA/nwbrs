@@ -48,6 +48,7 @@ export const AppProvider = ({ children }) => {
  const [miniGameNFTRounds, setMiniGameNFTRounds] = useState([]);
  const [nftPrizeRounds, setNftPrizeRounds] = useState([]);
  const [nftPrizeSecondRounds, setNftPrizeSecondRounds] = useState([]);
+ const [nftPrizeThirdRounds, setNftPrizeThirdRounds] = useState([]);
 
 
   const fetchLotteryData = async () => {
@@ -108,10 +109,10 @@ export const AppProvider = ({ children }) => {
         await Promise.all([
           fetchLeaderboardKOTH(),
           fetchLeaderboard(),
-        //  fetchNftPrizePoolContractThird(),
-         // fetchNFTFirstDepositorThird(),
-         // fetchLastNFTPrizeWinnerThird(),
-
+          fetchNftPrizePoolContractThird(),
+          fetchNFTFirstDepositorThird(),
+          fetchLastNFTPrizeWinnerThird(),
+           fetchNftPrizePoolTokenIdThird(0),
         ]);
         
       } catch (error) {
@@ -375,7 +376,33 @@ export const AppProvider = ({ children }) => {
       }
     }
   };
+  const fetchAllNftPrizeThirdRounds = async () => {
+    if (nftPrizePoolContractSecond) {
+      try {
+        const allRoundsData = [];
+        let index = 0; // Start from index 0
   
+        while (true) { // Infinite loop, will break when no valid round data is found
+          try {
+            const roundData = await lotteryContract.methods.nftPrizeThirdRounds(index).call();
+  
+            // Check for valid data (adjust according to your contract's return values)
+            if (roundData.winner !== '0x0000000000000000000000000000000000000000') {
+              allRoundsData.push(roundData); // Add valid round data to the array
+              index++; // Move to the next index
+            } else {
+              break; // Exit loop if no valid data is found
+            }
+          } catch (innerError) {
+            break; // Exit loop if there's an error fetching the round
+          }
+        }
+        setNftPrizeThirdRounds(allRoundsData); // Update state with the valid rounds
+      } catch (error) {
+        // Handle any errors here if necessary
+      }
+    }
+  };
 
   const fetchLotteryPlayers = async () => {
     if (lotteryContract) {
@@ -552,6 +579,16 @@ export const AppProvider = ({ children }) => {
         return null;
     }
 };
+const fetchNftPrizePoolTokenIdThird = async (index) => {
+  try {
+      const tokenId = await lotteryContract.methods.nftPrizePoolTokenIdsThird(index).call();
+      return tokenId;
+  } catch (error) {
+
+      return null;
+  }
+};
+
   const fetchNftPrizePoolContract = async () => {
     if (lotteryContract) {
       try {
@@ -1027,7 +1064,7 @@ const enterKOTH = async (tokenId) => {
 
         fetchNftPrizePoolTokenId,
         fetchNftPrizePoolTokenIdSecond,
-
+        fetchNftPrizePoolTokenIdThird,
         depositNFTToPrizePool, 
         depositNFTToPrizePoolSecond, // New function
         depositNFTToPrizePoolThird, // New function
@@ -1047,8 +1084,8 @@ const enterKOTH = async (tokenId) => {
         fetchAllNftPrizeRounds, // Expose the fetch function
         nftPrizeSecondRounds, // Expose the nftPrizeSecondRounds data
         fetchAllNftPrizeSecondRounds, // Expose the fetch function for second rounds
-
-
+        nftPrizeThirdRounds,
+        fetchAllNftPrizeThirdRounds,
       }}
     >
       {children}

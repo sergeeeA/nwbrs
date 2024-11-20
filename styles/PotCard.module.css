@@ -33,49 +33,22 @@
 /*comment*/
 .wrapper:hover {
   transform: translateY(-5px); /* Lift the element */
-  animation: pulsate 0.45s forwards ease-in-out; /* Pulsating animation on hover */
+  animation: pulsate 0.25s forwards ease-in-out; /* Pulsating animation on hover */
 }
 @keyframes pulsate {
-  0% {
-    border-top: 1px solid transparent; /* Start with transparent borders */
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
-  25% {
-    border-top: 1px solid #bd9938; /* Left side of top border lights up */
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
 
-  }
-  50% {
-    border-top: 1px solid #bd9938;
-    border-right: 1px solid #ffed4c; /* Right side of top border lights up */
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
-  75% {
-    border-top: 1px solid #bd9938;
-    border-right: 1px solid #ffed4c;
-    border-bottom: 1px solid #ffed4c; /* Top side of right border lights up */
-    border-left: 1px solid transparent;
+  0% {
+
     box-shadow: 0px 0px 0px #ffed4c;
 
   }
-  80% {
-    border-top: 1px solid #bd9938;
-    border-right: 1px solid #ffed4c;
-    border-bottom: 1px solid #ffed4c;
-    border-left: 1px solid #ffed4c; /* Bottom side of right border lights up */
-    box-shadow: 0px 0px 25px #ffed4c;
+  50% {
+
+    box-shadow: 0px 0px 10px #ffed4c;
   }
   100% {
-    border-top: 1px solid transparent; 
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-    box-shadow: 0px 0px 10px #ffed4c;
+
+    box-shadow: 0px 0px 5px #ffed4c;
   }
 }
 

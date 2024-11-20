@@ -50,7 +50,7 @@
     width: 150%;
     min-height: 15vh; /* Set a minimum height */
     right: 125px;
-    background-image: url('../public/Beramoniumfirst.png'), 
+    background-image: 
                       url('../public/Beramoniumsecnd.png'),
                       url('../public/Beramoniumthird.png'),
                       url('../public/Beramoniumlast.png');
@@ -72,18 +72,18 @@
     position: relative;
     width: 150%;
     min-height: 15vh; /* Set a minimum height */
-    right: 6px;
+    right: 125px;
     background-image: url('../public/beraarenafirst.png'), 
                       url('../public/beraarenamid.png'),
                       url('../public/beraarenalast.png');
     
-    background-size: 75% auto;
+    background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: local;
     pointer-events: none;
     z-index: 0;
-    
+    box-shadow: inset 0vh 0px 5vh 2vh #000000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -243,7 +243,7 @@
 
     /*bear arena*/
     .wrappernftthird {
-      background: linear-gradient(to bottom, #181818, #181818, #000000);
+      background: linear-gradient(to bottom,#000000, #000000, #181818, #181818, #000000, #000000);
       flex: 1; /* Allow each card to grow equally */
       min-width: 255px;
       max-width: 555px; /* Example fixed width, adjust as needed */
@@ -264,17 +264,49 @@
     
     
     .wrappernftthird:hover {
-      animation: pulsatethird 2s infinite; /* Pulsating animation on hover */
+      animation: pulsatethird 0.45s forwards; /* Pulsating animation on hover */
     }
     @keyframes pulsatethird {
       0% {
-        box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
+        border-top: 1px solid transparent; /* Start with transparent borders */
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        border-left: 1px solid transparent;
+      }
+      25% {
+        border-top: 1px solid #2f90ff; /* Left side of top border lights up */
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        border-left: 1px solid transparent;
+    
       }
       50% {
-        box-shadow: 0 0 15px rgb(0, 217, 255);
+        border-top: 1px solid #2f90ff;
+        border-right: 1px solid #2f90ff; /* Right side of top border lights up */
+        border-bottom: 1px solid transparent;
+        border-left: 1px solid transparent;
+      }
+      75% {
+        border-top: 1px solid #2f90ff;
+        border-right: 1px solid #2f90ff;
+        border-bottom: 1px solid #2f90ff; /* Top side of right border lights up */
+        border-left: 1px solid transparent;
+        box-shadow: 0px 0px 0px #2f90ff;
+    
+      }
+      80% {
+        border-top: 1px solid #2f90ff;
+        border-right: 1px solid #2f90ff;
+        border-bottom: 1px solid #2f90ff;
+        border-left: 1px solid #2f90ff; /* Bottom side of right border lights up */
+        box-shadow: 0px 0px 25px #2f90ff;
       }
       100% {
-        box-shadow: 0 0 5px rgba(255, 207, 76, 0.7);
+        border-top: 1px solid transparent; 
+        border-right: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        border-left: 1px solid transparent;
+        box-shadow: 0px 0px 10px #2f90ff;
       }
     }
 
@@ -418,7 +450,48 @@
 
     }
   }
+  @keyframes expandTooltipsecond {
+    0% {
+      color: #C8AC53;
+      transform: scaleY(0);
+      opacity: 0;
+      filter: blur(5px); 
   
+    }
+    25% {
+      transform: scaleY(0.25);
+      color: #2f90ff;
+      background-color:#2f90ff;
+      opacity: 1;
+      box-shadow: 0 0 45px #2f90ff;
+      filter: blur(10px); 
+  
+    }
+    50% {
+      transform: scaleY(0.5);
+      color: #2f90ff;
+      background-color: #2f90ff;
+      opacity: 1;
+      box-shadow: 0 0 35px #2f90ff;
+      filter: blur(15px); 
+  
+    }
+    70% {
+      transform: scaleY(0.75);
+      color: #2f90ff;
+      background-color: #2f90ff;
+      opacity: 1;
+      box-shadow: 0 0 25px #2f90ff;
+      filter: blur(5px); 
+  
+    }
+
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+
+    }
+  }  
   .tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
@@ -644,7 +717,7 @@
     .textLoadedthird {
       font-family: 'Monofonto';
       color: #ffffff;
-      background: linear-gradient(to bottom,#2fbdff ,#C8AC53 );  /* Background color */
+      background: linear-gradient(to bottom,#2f90ff ,#C8AC53 );  /* Background color */
       border-radius: 0.5rem; /* Optional: rounded corners */
       padding: 10px 20px;
       margin: 5px;
@@ -659,7 +732,7 @@
       box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
       animation: breatheGlowthird 2s ease-in-out infinite;
     }
-    .nftImage {
+  .nftImage {
       width: 200px; /* Adjust size as needed */
       height: 200px;
       border-radius: 2px; /* Rounded corners for the image */
@@ -682,7 +755,18 @@
     animation: fadeInAnimation2 0.5s forwards ; 
   
   }
-
+  .nftImagethird {
+    width: 200px; /* Adjust size as needed */
+    height: 200px;
+    border-radius: 2px; /* Rounded corners for the image */
+    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
+    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
+    transform: perspective(1000px); /* Perspective for the 3D effect */
+    cursor: pointer; /* Indicate that the image is interactive */
+    cursor: url('/curs.png'), auto;
+    animation: fadeInAnimation3 0.5s forwards ; 
+  
+  }
 
 /* Define the keyframes for the fade-in animation */
 @keyframes fadeInAnimation {
@@ -707,6 +791,17 @@
 
   }
 }
+@keyframes fadeInAnimation3 {
+  0% {
+    box-shadow: 0 0 75px 15px #2f90ff;
+      opacity: 0.5; /* Start invisible */
+
+  }
+  100% {
+      opacity: 1; /* Fully visible */
+
+  }
+}
   /* Apply box-shadow on hover */
   .nftImage:hover {
     
@@ -720,7 +815,7 @@
   }
   .nftImagethird:hover {
     
-    box-shadow: 0 0 25px #00aeff;
+    box-shadow: 0 0 25px #2f90ff;
     border-radius: 5px; /* Rounded corners for the image */
   }
   .hiddenImage {
@@ -837,4 +932,47 @@
 
 .traitsContainerSecond div {
   margin: 5px 0; /* Add spacing between traits */
+}
+.traitsContainerThird {
+  
+  font-family: 'Monofonto';
+  font-size: 1.3vh;
+  position: absolute; /* Position it absolutely within the relative parent */
+  top: 45vh; /* Adjust as needed */
+  color:  #C8AC53;
+  background: #2f90ff  ; /* Semi-transparent background */
+  padding: 2vh; /* Add some padding for aesthetics */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 55px #2f90ff; /* Subtle shadow for depth */
+  z-index: 10; /* Ensure it appears above other elements */
+  pointer-events: none; 
+
+  transform: scaleY(0); /* Start scaled down to 0 */
+  transform-origin: center; /* Scale from the top */
+  animation: expandTooltipsecond 0.12s  ease-in-out forwards; /* Animation */
+}
+
+.traitsContainerThird h3 {
+  margin: 0; /* Remove default margin */
+}
+
+.traitsContainerThird div {
+  margin: 5px 0; /* Add spacing between traits */
+}
+
+/*for third NFT Duel*/
+.common {
+  color: rgb(0, 255, 0);
+}
+
+.uncommon {
+  color: rgb(0, 255, 255);
+}
+
+.rare {
+  color: rgb(212, 0, 255); /* You can define neon purple in CSS */
+}
+
+.legendary {
+  color: rgb(217, 255, 0);
 }
