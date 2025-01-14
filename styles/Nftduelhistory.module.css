@@ -16,20 +16,20 @@
 
   }
   .centeredContainer {
-    background: linear-gradient(to bottom, #000000,#000000, #181818, #181818, #000000, #000000);
+    background:   #131313;
     flex: 1; /* Allow each card to grow equally */
     min-width: 255px;
     max-width: 555px; /* Example fixed width, adjust as needed */
-    min-height: 455px;
+    min-height: 255px;
     max-height: 800px;
-    width: 50%; /* Width of the element */
+    width: 25%; /* Width of the element */
     
     border-radius: 3px; /* Rounded corners */
     padding: 5px; /* Space inside the wrapper */
     display: flex;
     flex-direction: column; /* Arrange children in a column */
     margin: 25px; /* Space above the wrapper */
-  
+
     overflow: hidden; /* Hide overflow content */
     transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
     perspective: 1000px; /* Perspective for 3D effect */
@@ -40,7 +40,7 @@
     overflow-y: auto; /* Enable vertical scrolling */
     padding: 10px; /* Optional: add some padding */
     cursor: url('/curs.png'), auto;
-    
+    outline: 1px solid #2c2c2c;
   }
   .rafflefee {
     font-family: 'Monofonto';
@@ -109,46 +109,54 @@
   }
   .refreshButton {
     cursor: url('/curs.png'), auto;
-    background-color: #C8AC53; /* Green background */
+    background-color: #00000000; /* Green background */
+    color:#C8AC53;
     border: none;
     border-radius: 50%; /* Circular shape */
     cursor: pointer;
     width: 40px; /* Size of the button */
+    outline: 2px solid #2c2c2c;
     height: 40px; /* Size of the button */
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.15s ease-in-out, transform 0.3s ease-in-out;
+    transition: 
+    background-color 0.1s ease-in, 
+    transform 0.1s ease-in,
+    outline 0.1s ease-in ;
+   
     position: absolute; /* Position relative to the wrapper */
     top: 20px; /* Adjust position as needed */
     right: 20px; /* Adjust position as needed */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+ 
   }
   
   .refreshButton:hover {
-    background-color: #C8AC53;
+    box-shadow: 0 6px 7px rgb(0, 0, 0); /* Shadow for depth */
+    outline: 1px solid #C8AC53;
+
     cursor: url('/curs.png'), auto;
     transform: scale(1.1); /* Slightly enlarge on hover */
   }
   
   .spinning {
-    animation: spin 0.3s linear; /* Spin animation */
+    animation: spin 0.5s ease-in;
   }
-  
   @keyframes spin {
     0% {
       color: #C8AC53;
       background-color: #c8ad5300;
-      box-shadow: 0 0 35px 5px rgba(255, 207, 76, 0.5);
+
       transform: rotate(0deg);
     }
     50% {
-      color: #c8ad5386;
-      background-color: #c8ad537a;
-      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
+      color: #03030386;
+      background-color: #C8AC53;
+
       transform: rotate(180deg);
     }
     100% {
+      background-color: #c8ad5300;
       transform: rotate(360deg);
     }
   }
@@ -166,33 +174,24 @@
     color: #C8AC53;
     padding: 10px 10px;
     text-align: center;
-  
+    outline: 2px solid #2c2c2c;
     border-radius: 3px;
     margin: 10px auto; 
     cursor: url('/curs.png'), auto;
- 
+    transition: 
+
+    outline 0.1s ease-in ;
     font-size: 10px;
     
   }
   .btn:hover {
   
-    background-color: #C8AC53; /* Change background color on hover */
-    color: #1e2128; /* Change text color on hover */
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    animation-iteration-count: 1; /* Run the animation only once */
+
+    outline: 1px solid #C8AC53;
+
   
   }
-  @keyframes flicker {
-
-
-    50% {
-      box-shadow: 0 0 25px rgba(255, 207, 76, 0.7);
-    }
-  
-    100% {
-      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
-    }
-  }
+ 
   .nftDuelHistoryContainer {
     margin: 10px 0;
   }

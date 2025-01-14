@@ -5,8 +5,8 @@ import { useAppContext } from '../context/context';
 const PotCard = () => {
   const {
     address: connectedWalletAddress,
-    nftPrizeThirdRounds = [], // Use nftPrizeSecondRounds instead
-    fetchAllNftPrizeThirdRounds, // Fetch function for NFT prize second rounds
+    nftPrizeThirdRounds = { addresses1: [], addresses2: [] }, // Default to empty arrays
+    fetchNFTPrizeThirdRounds, // Fetch function for NFT prize third rounds
   } = useAppContext();
 
   const cardRef = useRef(null);
@@ -25,7 +25,7 @@ const PotCard = () => {
     if (isButtonDisabled) return;
 
     setIsSpinning(true);
-    fetchAllNftPrizeThirdRounds(); // Refresh NFT prize second rounds
+    fetchNFTPrizeThirdRounds(); // Refresh NFT prize third rounds
 
     setTimeout(() => {
       setIsSpinning(false);
@@ -37,9 +37,18 @@ const PotCard = () => {
     }, 5000);
   };
 
+  // Combine both address arrays into one, with winners and losers
+  const combinedRounds = [];
+  nftPrizeThirdRounds.addresses1.forEach((address, index) => {
+    combinedRounds.push({
+      winner: address,
+      loser: nftPrizeThirdRounds.addresses2[index] || "None",
+    });
+  });
+
   const filteredRounds = showOnlyConnected
-    ? nftPrizeThirdRounds.filter(round => round.winner === connectedWalletAddress || round.loser === connectedWalletAddress)
-    : nftPrizeThirdRounds;
+    ? combinedRounds.filter(round => round.winner === connectedWalletAddress || round.loser === connectedWalletAddress)
+    : combinedRounds;
 
   return (
     <div className={style.wrapper}>
@@ -52,7 +61,7 @@ const PotCard = () => {
           >
             {showOnlyConnected ? 'Show All' : 'Show My Games'}
           </div>
-          <div className={`${style.lineAfter}`}></div>
+      
           <div className={style.scrollableList}>
             {filteredRounds.length > 0 ? (
               [...filteredRounds].reverse().map((round, index) => ( // Reverse the order here

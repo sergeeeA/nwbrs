@@ -1,16 +1,27 @@
-.wrapper {
 
-  padding-bottom: 30px;
-  cursor: url('/curs.png'), auto;
+.wrapper {
+  width: 100vw;       /* 100% of the viewport width */
+  height: 100vw;  
+  background-color: #0e0e0e;
+  background-image: linear-gradient(
+    32deg,
+    rgba(8, 8, 8, 0.74) 30px,
+    transparent
+  );
+  background-size: 60px 60px;
+  background-position: -5px -5px;
+  background-repeat: repeat; /* Ensures the background repeats */
 
 }
+
+
 /*comment*/
 .lineAfter {
   background: linear-gradient(to right, rgba(255, 207, 76, 0) 0%, rgba(255, 207, 76, 1) 50%, rgba(255, 207, 76, 0) 100%);
   width: 50%; /* Width of the line */
   margin: 0 auto; /* Center the line horizontally */
   /* Optional: Adjust the line height or add spacing */
-  height: 2px; /* Ensure this matches the border thickness */
+  height: 1px; /* Ensure this matches the border thickness */
 }
 
 .nftduelbutton {
@@ -99,52 +110,7 @@
   justify-content: center; /* Centers buttons horizontally */
   margin-bottom: 10px; /* Adjust as needed */
 }
-.statsboxToggleButton {
-  position: fixed;
-  z-index: 100;
-  left: 20px;  /* Adjust as needed */
-  font-family: 'Monofonto';
-  color: #c8ad5360;
-  border: none;
-  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
-  z-index: 1000;
-  padding: 10px;
-  cursor: url('/curs.png'), auto;
-  border-radius: 0;
-  transition: background-color 0.15s ease;
-  font-size: 1vw;
-}
-.statsboxToggleButton:hover {
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
 
-}
-.chatboxToggleButton {
-  position: fixed;
-  z-index: 100;
-  right: 20px;  /* Adjust as needed */
-  font-family: 'Monofonto';
-  color: #c8ad5360;
-  border: none;
-  background-color: rgba(0, 123, 255, 0); /* Fully transparent blue background */
-  z-index: 1000;
-  padding: 10px;
-  cursor: url('/curs.png'), auto;
-  border-radius: 0;
-  transition: background-color 0.15s ease;
-  font-size: 1vw; /* Smooth transition for background-color */
-}
-
-.chatboxToggleButton:hover {
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
-  cursor: url('/curs.png'), auto;
-
-}
 .boardboxToggleButton {
   position: fixed;
   z-index: 100;
@@ -197,24 +163,6 @@
 }
 /* Update Home.module.css */
 
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-                    url('../public/Goingto.gif'), 
-                    url('../public/thirdlayer.png'), 
-                    url('../public/secondlayer.png'),
-                    url('../public/firstlayer.png');
-  background-size: cover, cover, cover, cover; /* Adjust the size of each image as needed */
-  background-position: center; /* Simplified to a single position */
-  background-repeat: no-repeat; /* Simplified to a single repeat */
-  background-attachment: fixed;
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* Media queries for mobile responsiveness */
 @media (max-width: 768px) {
@@ -275,15 +223,15 @@
 }
 
 .toggleButton {
+  user-select: none;
   font-family: 'Monofonto';
   width: fit-content; 
   display: flex;
   justify-content: center;
   place-self: center;
-  color: #C8AC53;
+  color: #c8ad5377;
   padding: 15px 32px;
   text-align: center;
-
   border-radius: 2px;
   margin: 15px auto; 
   cursor: url('../public/curs.png'), auto;
@@ -292,9 +240,9 @@
 }
 .toggleButton:hover {
 
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
+ 
+  color: #C8AC53; /* Change text color on hover */
+
   animation-iteration-count: 1; /* Run the animation only once */
 
 }
@@ -311,4 +259,54 @@
 
 .dropdownContent.closed {
   max-height: 0;
+}
+.sideBySideContainer {
+  display: flex;
+  justify-content: center; /* Center the groups */
+  position: relative;
+  width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.group {
+  flex: 0 0 33%; /* Make each group take 1/3 of the width */
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  opacity: 0.3; /* Initially set all groups as transparent */
+  
+}
+
+.activeGroup {
+  opacity: 1; /* Center group is fully opaque */
+  transform: translateX(0); /* Center the active group */
+  align-items: center;
+}
+
+.inactiveGroup {
+  display: none; /* Inactive groups are transparent */
+}
+
+.arrowButtons {
+  position: relative;
+
+
+  display: flex;
+  justify-content: space-between;
+
+
+}
+
+.arrowButtons button {
+  background-color: transparent;
+  color: #ffcf4c;
+  outline: 1px solid #00000000;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 25px;
+
+  transition: outline 0.3s;
+}
+
+.arrowButtons button:hover {
+  outline: 1px solid #ffcf4c;
+ 
 }

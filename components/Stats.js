@@ -74,31 +74,47 @@ const CombinedComponent = () => {
     }
   };
 
-  const fetchNftTraits = async (tokenId, isNewNft = false, isThirdNft = false) => {
-    let apiUrl = '';
-    
-    if (isThirdNft) {
-      apiUrl = `https://ipfs.io/ipfs/QmYcWNeYX72iMaNAxGPPsDTkN1XrUHbnTjhzxzhzUkXwtE/${tokenId}`; // Correct the URL to use the tokenId
-    } else if (isNewNft) {
-      apiUrl = `https://beramonium-gemhunters-api-bartio-2wsvsugfrq-wl.a.run.app/api/armory/genesis/metadata/${tokenId}`;
-    } else {
-      apiUrl = `https://ipfs.io/ipfs/QmVzp3QfDt3v3E1J9Z4ZmXb85gVJFsGGzvKDWMzQSrYpVu/${tokenId}`;
-    }
+  let lastFetchTime = 0;
+const COOLDOWN_TIME = 10000; // 10 seconds
+
+const fetchNftTraits = async (tokenId, isNewNft = false, isThirdNft = false) => {
+  // Get the current time
+  const currentTime = Date.now();
   
-    try {
-      const response = await fetch(apiUrl);
-      const data = await response.json();
-      if (data.attributes) {
-        setNftTraits(data.attributes);
-      } else {
-        console.error("No traits found for this NFT.");
-        setNftTraits(null);
-      }
-    } catch (error) {
-      console.error('Error fetching NFT traits:', error);
+  // Check if enough time has passed since the last fetch
+  if (currentTime - lastFetchTime < COOLDOWN_TIME) {
+    console.log("Cooldown active. Please wait before fetching again.");
+    return;
+  }
+  
+  let apiUrl = '';
+  
+  if (isThirdNft) {
+    apiUrl = `https://ipfs.io/ipfs/QmYcWNeYX72iMaNAxGPPsDTkN1XrUHbnTjhzxzhzUkXwtE/${tokenId}`;
+  } else if (isNewNft) {
+    apiUrl = `https://beramonium-gemhunters-api-bartio-2wsvsugfrq-wl.a.run.app/api/armory/genesis/metadata/${tokenId}`;
+  } else {
+    apiUrl = `https://ipfs.io/ipfs/QmVzp3QfDt3v3E1J9Z4ZmXb85gVJFsGGzvKDWMzQSrYpVu/${tokenId}`;
+  }
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    
+    if (data.attributes) {
+      setNftTraits(data.attributes);
+    } else {
+ 
       setNftTraits(null);
     }
-  };
+
+    // Update the last fetch time
+    lastFetchTime = Date.now();
+  } catch (error) {
+
+    setNftTraits(null);
+  }
+};
 
   useEffect(() => {
     if (address) {
@@ -136,12 +152,6 @@ const CombinedComponent = () => {
 
   const connectedWalletScore = generalLeaderboardData.find(entry => entry.address === address)?.score || 0;
 
-  const hobearLeaderboardData = kothLeaderboardAddresses.map((addr, index) => ({
-    address: addr,
-    score: kothLeaderboardScores[index],
-  })).sort((a, b) => b.score - a.score);
-
-  const hobearWalletScore = hobearLeaderboardData.find(entry => entry.address === address)?.score || 0;
 
 
   const scrollToAddress = () => {

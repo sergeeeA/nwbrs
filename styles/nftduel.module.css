@@ -12,7 +12,7 @@
     place-content: center; /* Align items to the start of the flex container's cross axis */
     flex-direction: column;
     width: 100%;             /* Full width */
-  
+
   }
   .centeredContainer {
     display: flex;
@@ -22,77 +22,11 @@
     text-align: center; /* Center text if necessary */
   }
 
-  .nftduelbg {
-    position: relative;
-    width: 150%;
-    min-height: 15vh; /* Set a minimum height */
 
-    right: 125px;
-    background-image: url('../public/nftduelFirst.png'), 
-                      url('../public/nftduelSecond.png'),
-                      url('../public/nftduelThird.png'),
-                      url('../public/nftduellast.png');
-    
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    pointer-events: none;
-    z-index: 0;
-    box-shadow: inset 0vh 0px 5vh 2vh #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
-  .nftduelbgseconds {
-    position: relative;
-    width: 150%;
-    min-height: 15vh; /* Set a minimum height */
-    right: 125px;
-    background-image: 
-                      url('../public/Beramoniumsecnd.png'),
-                      url('../public/Beramoniumthird.png'),
-                      url('../public/Beramoniumlast.png');
-    
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    pointer-events: none;
-    z-index: 0;
-    box-shadow: inset 0vh 0px 5vh 2vh #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
-
-  .nftduelbgthirds {
-    position: relative;
-    width: 150%;
-    min-height: 15vh; /* Set a minimum height */
-    right: 125px;
-    background-image: url('../public/beraarenafirst.png'), 
-                      url('../public/beraarenamid.png'),
-                      url('../public/beraarenalast.png');
-    
-    background-size: 100% auto;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: local;
-    pointer-events: none;
-    z-index: 0;
-    box-shadow: inset 0vh 0px 5vh 2vh #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-}
 
   .title {
     font-family: 'Monofonto', cursive; /* Apply the custom font here */
-    font-size: 2rem;
+    font-size: 15px;
     color: #ffcf4c;
   
     cursor: pointer;
@@ -101,26 +35,26 @@
     align-items: center;
     justify-content: center;
     cursor: url('/curslink.png'), auto;
-    padding: 10px; /* space for title below*/
-    
+    padding: 15px; /* space for title below*/
+    margin: 52px;
   }
   /*beradweller*/
 .wrappernft {
-    background: linear-gradient(to bottom, #000000,#000000, #181818, #181818, #000000, #000000);
+    background:   #131313;
     flex: 1; /* Allow each card to grow equally */
-    min-width: 255px;
-    max-width: 555px; /* Example fixed width, adjust as needed */
-    min-height: 455px;
-    max-height: 800px;
+    min-width: 225px;
+    max-width: 255px; /* Example fixed width, adjust as needed */
+    min-height: 100px;
+    max-height: 500px;
     width: 50%; /* Width of the element */
-    
-    border-radius: 3px; /* Rounded corners */
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.5); 
+    border-radius: 5px; /* Rounded corners */
     padding: 5px; /* Space inside the wrapper */
     display: flex;
     flex-direction: column; /* Arrange children in a column */
     margin: 25px; /* Space above the wrapper */
   
-    overflow: hidden; /* Hide overflow content */
+    overflow: visible; /* Hide overflow content */
     transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
     perspective: 1000px; /* Perspective for 3D effect */
   }
@@ -129,217 +63,12 @@
   .wrappernft:hover {
     animation: pulsate 0.45s forwards ; /* Pulsating animation on hover */
   }
-  @keyframes pulsate {
-    0% {
-      border-top: 1px solid transparent; /* Start with transparent borders */
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-    }
-    25% {
-      border-top: 1px solid #bd9938; /* Left side of top border lights up */
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-  
-    }
-    50% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c; /* Right side of top border lights up */
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-    }
-    75% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c;
-      border-bottom: 1px solid #ffed4c; /* Top side of right border lights up */
-      border-left: 1px solid transparent;
-      box-shadow: 0px 0px 0px #ffed4c;
-  
-    }
-    80% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c;
-      border-bottom: 1px solid #ffed4c;
-      border-left: 1px solid #ffed4c; /* Bottom side of right border lights up */
-      box-shadow: 0px 0px 25px #ffed4c;
-    }
-    100% {
-      border-top: 1px solid transparent; 
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-      box-shadow: 0px 0px 10px #ffed4c;
-    }
-  }
-    /*beramonium*/
-.wrappernftsecond {
-  background: linear-gradient(to bottom,#000000, #000000, #181818, #181818, #000000, #000000);
-  flex: 1; /* Allow each card to grow equally */
-  min-width: 255px;
-  max-width: 555px; /* Example fixed width, adjust as needed */
-  min-height: 455px;
-  max-height: 800px;
-  width: 50%; /* Width of the element */
-  
-  border-radius: 3px; /* Rounded corners */
-  padding: 5px; /* Space inside the wrapper */
-  display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  margin: 25px; /* Space above the wrapper */
 
-  overflow: hidden; /* Hide overflow content */
-  transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-  perspective: 1000px; /* Perspective for 3D effect */
-}
-
-
-.wrappernftsecond:hover {
-  animation: pulsatesecond 0.45s forwards; /* Pulsating animation on hover */
-}
-@keyframes pulsatesecond {
-  0% {
-    border-top: 1px solid transparent; /* Start with transparent borders */
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
-  25% {
-    border-top: 1px solid rgb(162, 0, 255); /* Left side of top border lights up */
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-
-  }
-  50% {
-    border-top: 1px solid rgb(162, 0, 255);
-    border-right: 1px solid rgb(162, 0, 255); /* Right side of top border lights up */
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-  }
-  75% {
-    border-top: 1px solid rgb(162, 0, 255);
-    border-right: 1px solid rgb(162, 0, 255);
-    border-bottom: 1px solid rgb(162, 0, 255); /* Top side of right border lights up */
-    border-left: 1px solid transparent;
-    box-shadow: 0px 0px 0px rgb(162, 0, 255);
-
-  }
-  80% {
-    border-top: 1px solid rgb(162, 0, 255);
-    border-right: 1px solid rgb(162, 0, 255);
-    border-bottom: 1px solid rgb(162, 0, 255);
-    border-left: 1px solid rgb(162, 0, 255); /* Bottom side of right border lights up */
-    box-shadow: 0px 0px 25px rgb(162, 0, 255);
-  }
-  100% {
-    border-top: 1px solid transparent; 
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
-    box-shadow: 0px 0px 10px rgb(162, 0, 255);
-  }
-}
-
-    /*bear arena*/
-    .wrappernftthird {
-      background: linear-gradient(to bottom,#000000, #000000, #181818, #181818, #000000, #000000);
-      flex: 1; /* Allow each card to grow equally */
-      min-width: 255px;
-      max-width: 555px; /* Example fixed width, adjust as needed */
-      min-height: 455px;
-      max-height: 800px;
-      width: 50%; /* Width of the element */
-      
-      border-radius: 3px; /* Rounded corners */
-      padding: 5px; /* Space inside the wrapper */
-      display: flex;
-      flex-direction: column; /* Arrange children in a column */
-      margin: 25px; /* Space above the wrapper */
-    
-      overflow: hidden; /* Hide overflow content */
-      transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-      perspective: 1000px; /* Perspective for 3D effect */
-    }
-    
-    
-    .wrappernftthird:hover {
-      animation: pulsatethird 0.45s forwards; /* Pulsating animation on hover */
-    }
-    @keyframes pulsatethird {
-      0% {
-        border-top: 1px solid transparent; /* Start with transparent borders */
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
-        border-left: 1px solid transparent;
-      }
-      25% {
-        border-top: 1px solid #2f90ff; /* Left side of top border lights up */
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
-        border-left: 1px solid transparent;
-    
-      }
-      50% {
-        border-top: 1px solid #2f90ff;
-        border-right: 1px solid #2f90ff; /* Right side of top border lights up */
-        border-bottom: 1px solid transparent;
-        border-left: 1px solid transparent;
-      }
-      75% {
-        border-top: 1px solid #2f90ff;
-        border-right: 1px solid #2f90ff;
-        border-bottom: 1px solid #2f90ff; /* Top side of right border lights up */
-        border-left: 1px solid transparent;
-        box-shadow: 0px 0px 0px #2f90ff;
-    
-      }
-      80% {
-        border-top: 1px solid #2f90ff;
-        border-right: 1px solid #2f90ff;
-        border-bottom: 1px solid #2f90ff;
-        border-left: 1px solid #2f90ff; /* Bottom side of right border lights up */
-        box-shadow: 0px 0px 25px #2f90ff;
-      }
-      100% {
-        border-top: 1px solid transparent; 
-        border-right: 1px solid transparent;
-        border-bottom: 1px solid transparent;
-        border-left: 1px solid transparent;
-        box-shadow: 0px 0px 10px #2f90ff;
-      }
-    }
-
-  .wrapperinput {
-    background: linear-gradient(to bottom, #181818, #000000);
-    flex: 1; /* Allow each card to grow equally */
-    min-width: 25vh;
-    max-width: 50vh; /* Example fixed width, adjust as needed */
-    min-height: 355px;
-    max-height: 100vh;
-    width: 100%; /* Width of the element */
-  
-    border-radius: 25px; /* Rounded corners */
-    padding: 5px; /* Space inside the wrapper */
-    display: flex;
-    flex-direction: column; /* Arrange children in a column */
-    margin: 40px; /* Space above the wrapper */
-  
-    overflow: scroll; /* Hide overflow content */
-    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-    perspective: 1000px; /* Perspective for 3D effect */
-  }
-  
-  /*comment*/
-  .wrapperinput:hover {
-    animation: pulsate 2s infinite; /* Pulsating animation on hover */
-  }
-  
 
   
   .rafflefeetitle {
     font-family: 'Monofonto';
-    font-size: 1.5rem;
+    font-size: 15px;
     font-weight: 250;
     color: #C8AC53;
     text-align: center;
@@ -347,23 +76,25 @@
   }
   .rafflefeetitlesmol {
     font-family: 'Monofonto';
-    font-size: 1rem;
+    font-size: 15px;
     font-weight: 250;
     color: #C8AC53;
     text-align: center;
   
   }
   .dropdown {
+    text-align: center;
     font-family: 'Monofonto';
-    width: 100%; /* Adjust width as needed */
+    box-shadow: 0 0 0px rgba(255, 207, 76, 0.418);
     padding: 8px;
-    border: 1px solid #C8AC53;
+    outline: 2px solid #c8ad533f;
     border-radius: 2px;
     font-size: 16px;
     background: linear-gradient(to bottom, #2c2c2c, #000000);
     color: #C8AC53;
     margin-bottom: 15px;
     cursor: url('/curs.png'), auto;
+    transition: outline 0.25s ease-in,   box-shadow 1s ease-out, background 0.25s ease, color 0.25s ease ;
   }
   .dropdown option {
     background: #2c2c2c; /* Limited styling support */
@@ -374,254 +105,38 @@
   }
   .dropdown:hover {
     cursor: url('/curs.png'), auto;
+    outline: 2px solid #C8AC53;
     background: #C8AC53;
     color: black;
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    animation-iteration-count: 1; /* Run the animation only once */
-  }
-  .tooltip {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 0 25px rgba(255, 207, 76, 0.356);
   }
   
-  .tooltip .tooltiptext {
-    font-family: 'Monofonto';
-    visibility: hidden;
-    width: 220px;
-    background-color: #2c2c2c;
-    color: #C8AC53;
-    text-align: center;
-    border-radius: 3px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the input */
-    left: 50%;
-    margin-left: -110px; /* Center the tooltip */
-    opacity: 0;
-    transform: scaleY(0); /* Start with zero scale on Y axis */
-    transform-origin: center; /* Ensures scaling happens from the center */
-    transition: opacity 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
-  }
-  
-  @keyframes expandTooltip {
-    0% {
-      color: #C8AC53;
-      transform: scaleY(0);
-      opacity: 0;
-      filter: blur(5px); 
-  
-    }
-    25% {
-      transform: scaleY(0.25);
-      color: #C8AC53;
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 45px #C8AC53;
-      filter: blur(10px); 
-  
-    }
-    50% {
-      transform: scaleY(0.5);
-      color: #C8AC53;
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 35px #C8AC53;
-      filter: blur(15px); 
-  
-    }
-    70% {
-      transform: scaleY(0.75);
-      color: #C8AC53;
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 25px #C8AC53;
-      filter: blur(5px); 
-  
-    }
 
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-
-    }
-  }
-  @keyframes expandTooltipsecond {
-    0% {
-      color: #C8AC53;
-      transform: scaleY(0);
-      opacity: 0;
-      filter: blur(5px); 
-  
-    }
-    25% {
-      transform: scaleY(0.25);
-      color: #2f90ff;
-      background-color:#2f90ff;
-      opacity: 1;
-      box-shadow: 0 0 45px #2f90ff;
-      filter: blur(10px); 
-  
-    }
-    50% {
-      transform: scaleY(0.5);
-      color: #2f90ff;
-      background-color: #2f90ff;
-      opacity: 1;
-      box-shadow: 0 0 35px #2f90ff;
-      filter: blur(15px); 
-  
-    }
-    70% {
-      transform: scaleY(0.75);
-      color: #2f90ff;
-      background-color: #2f90ff;
-      opacity: 1;
-      box-shadow: 0 0 25px #2f90ff;
-      filter: blur(5px); 
-  
-    }
-
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-
-    }
-  }  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-    animation: expandTooltip 0.2s ease-in both;
-  }
-  
-  
-  .tooltip:not(:hover) .tooltiptext {
-    visibility: visible;
-    animation: expandCollapse 0.15s ease-out reverse forwards;
-  }
-  @keyframes expandCollapse {
-    0% {
-      background-color: #C8AC53;
-  
-      transform: scaleY(0);
-      opacity: 0.25;
-  
-    }
-    50% {
-      transform: scaleY(1);
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 55px #C8AC53;
-  
-    }
-  
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-  
-   
-      background-color: #C8AC53;
-    }
-  }
-  /*beradweler*/
-  .numberInput {
-    cursor: url('/curs.png'), auto;
-    background-color: transparent;
-    width: 200px; /* Adjust the width as needed */
-    padding: 8px; /* Add some padding inside the input */
-    border: 1px solid #C8AC53; /* Set a border color and style */
-    border-radius: 2px; /* Rounded corners for the input box */
-    font-size: 16px; /* Adjust font size */
-    box-sizing: border-box;
-    font-family: Monofonto;
-    color: #C8AC53;
-    outline: none; /* Remove default outline */
-    text-align: center;
-    /* Remove place-self */
-  }
-  /* Optional: Hide spinners for number input */
-  .numberInput::-webkit-inner-spin-button,
-  .numberInput::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .numberInput {
-    max-width: 300px; /* Set a maximum width for the input */
-    -moz-appearance: textfield;
-    margin: 10px 0; /* Add some margin for spacing */
-  }
-  
-  /* Style for the number input field when focused */
-  .numberInput:focus {
-    
-    border-color: #C8AC53; /* Change border color to yellow on focus */
-  
-    box-shadow: inset 0 0 15px  #C8AC53;
-  }
-  /*beramonium*/
-  .numberInputsecond {
-    cursor: url('/curs.png'), auto;
-    background-color: transparent;
-    width: 200px; /* Adjust the width as needed */
-    padding: 8px; /* Add some padding inside the input */
-    border: 1px solid #C8AC53; /* Set a border color and style */
-    border-radius: 2px; /* Rounded corners for the input box */
-    font-size: 16px; /* Adjust font size */
-    box-sizing: border-box;
-    font-family: Monofonto;
-    color: #C8AC53;
-    outline: none; /* Remove default outline */
-    text-align: center;
-    /* Remove place-self */
-  }
-  /* Optional: Hide spinners for number input */
-  .numberInputsecond::-webkit-inner-spin-button,
-  .numberInputsecond::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .numberInputsecond {
-    max-width: 300px; /* Set a maximum width for the input */
-    -moz-appearance: textfield;
-    margin: 10px 0; /* Add some margin for spacing */
-  }
-  
-  /* Style for the number input field when focused */
-  .numberInputsecond:focus {
-    
-    border-color: #C8AC53; /* Change border color to yellow on focus */
-  
-    box-shadow: inset 0 0 15px  #C8AC53;
-  }
+ 
   .btn {
     font-family: 'Monofonto';
     width: fit-content; 
     display: flex;
     justify-content: center;
     place-self: center;
-    color: #C8AC53;
-    padding: 15px 32px;
     text-align: center;
+    color: #C8AC53;
+    padding: 15px 15px;
   
-    border-radius: 2px;
-    margin: 15px auto; 
-    cursor: url('/curs.png'), auto;
-    font-weight: 500;
-    font-size: 25px;
-    
+  
+    border-radius: 3px;
+    margin: 5px auto; 
+    outline: 2px solid #2c2c2c;
+    font-weight: thin;
+    font-size: 15px;
+    transition: outline 0.1s ease-in;
+  
   }
   .btn:hover {
   
-    background-color: #C8AC53; /* Change background color on hover */
-    color: #1e2128; /* Change text color on hover */
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    animation-iteration-count: 1; /* Run the animation only once */
+    outline: 1px solid #C8AC53;
+  
+  
   
   }
  
@@ -629,15 +144,15 @@
   .textNotLoaded {
     font-family: 'Monofonto';
     color: #C8AC53;
-    background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
-    border-radius: 0.5rem; /* Optional: rounded corners */
+
+    border-radius: 2px; /* Optional: rounded corners */
     padding: 10px 20px;
     margin: 5px;
     border-left: none;
     border-right: none;
     border-top: none;
-    border-bottom: 1px solid #C8AC53;
-    
+    border-bottom: 1px solid #2c2c2c;
+
     /* Centering the text */
     display: column;           /* Use flexbox for centering */
     justify-content: center; /* Center horizontally */
@@ -645,136 +160,66 @@
     text-align: center;      /* Center text within the flex container */
   }
   .textLoaded {
-    font-family: 'Monofonto';
-    color: #ffffff;
-    background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
-    border-radius: 0.5rem; /* Optional: rounded corners */
-    padding: 10px 20px;
-    margin: 5px;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: 1px solid #C8AC53;
-    display: flex;           /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center;     /* Center vertically */
-    text-align: center;      /* Center text within the flex container */
-    box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
-    animation: breatheGlow 2s ease-in-out infinite;
+    display: none;
   }
-    /*beramonium*/
-    .textNotLoadedsecond {
-      font-family: 'Monofonto';
-      color: #C8AC53;
-      background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
-      border-radius: 0.5rem; /* Optional: rounded corners */
-      padding: 10px 20px;
-      margin: 5px;
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      border-bottom: 1px solid #C8AC53;
-      display: column;           /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center;     /* Center vertically */
-      text-align: center;      /* Center text within the flex container */
-    }
-    .textLoadedsecond {
-      font-family: 'Monofonto';
-      color: #ffffff;
-      background: linear-gradient(to bottom,#ad02e094, #ba04c06b,#C8AC53  ); /* Background color */
-      border-radius: 0.5rem; /* Optional: rounded corners */
-      padding: 10px 20px;
-      margin: 5px;
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      border-bottom: 1px solid #C8AC53;
-      display: flex;           /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center;     /* Center vertically */
-      text-align: center;      /* Center text within the flex container */
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
-      animation: breatheGlowsecond 2s ease-in-out infinite;
-    }
-    /*Beararena*/
-    .textNotLoadedthird {
-      font-family: 'Monofonto';
-      color: #C8AC53;
-      background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
-      border-radius: 0.5rem; /* Optional: rounded corners */
-      padding: 10px 20px;
-      margin: 5px;
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      border-bottom: 1px solid #C8AC53;
-      display: column;           /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center;     /* Center vertically */
-      text-align: center;      /* Center text within the flex container */
-    }
-    .textLoadedthird {
-      font-family: 'Monofonto';
-      color: #ffffff;
-      background: linear-gradient(to bottom,#2f90ff ,#C8AC53 );  /* Background color */
-      border-radius: 0.5rem; /* Optional: rounded corners */
-      padding: 10px 20px;
-      margin: 5px;
-      border-left: none;
-      border-right: none;
-      border-top: none;
-      border-bottom: 1px solid #C8AC53;
-      display: flex;           /* Use flexbox for centering */
-      justify-content: center; /* Center horizontally */
-      align-items: center;     /* Center vertically */
-      text-align: center;      /* Center text within the flex container */
-      box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
-      animation: breatheGlowthird 2s ease-in-out infinite;
-    }
+   
   .nftImage {
       width: 200px; /* Adjust size as needed */
       height: 200px;
       border-radius: 2px; /* Rounded corners for the image */
-      transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
-      transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
-      transform: perspective(1000px); /* Perspective for the 3D effect */
      
+      outline: 1px solid #c8ad533f;
+      box-shadow: 0 0 15px #C8AC53;
       cursor: url('/curs.png'), auto;
+     
       animation: fadeInAnimation 0.5s forwards; /* Trigger the fade-in animation */
   }
   .nftImagesecond {
     width: 200px; /* Adjust size as needed */
     height: 200px;
     border-radius: 2px; /* Rounded corners for the image */
-    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
-    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
-    transform: perspective(1000px); /* Perspective for the 3D effect */
-    cursor: pointer; /* Indicate that the image is interactive */
-    cursor: url('/curs.png'), auto;
-    animation: fadeInAnimation2 0.5s forwards ; 
-  
-  }
-  .nftImagethird {
-    width: 200px; /* Adjust size as needed */
-    height: 200px;
-    border-radius: 2px; /* Rounded corners for the image */
-    transition: transform 0.1s ease-out, box-shadow 0.2s ease-out; /* Smooth transition for the 3D effect */
-    transform-style: preserve-3d; /* Ensure 3D transforms are preserved */
-    transform: perspective(1000px); /* Perspective for the 3D effect */
-    cursor: pointer; /* Indicate that the image is interactive */
-    cursor: url('/curs.png'), auto;
-    animation: fadeInAnimation3 0.5s forwards ; 
-  
-  }
 
+    box-shadow: 0 0 15px #f700ff;
+    cursor: url('/curs.png'), auto;
+    animation: fadeInAnimation2 0.5s forwards; /* Trigger the fade-in animation */
+}
+.nftImagethird {
+  width: 200px; /* Adjust size as needed */
+  height: 200px;
+  border-radius: 2px; /* Rounded corners for the image */
+
+  box-shadow: 0 0 15px #06d4f8;
+  cursor: url('/curs.png'), auto;
+  animation: fadeInAnimation3 0.5s forwards; /* Trigger the fade-in animation */
+}
+
+
+  /* Apply box-shadow on hover */
+  .nftImage:hover {
+    outline: 1px solid #C8AC53;
+    box-shadow: 0 0 25px #C8AC53;
+    border-radius: 5px; /* Rounded corners for the image */
+
+  }
+  .nftImagesecond:hover {
+    outline: 1px solid #f700ff;
+    box-shadow: 0 0 25px #f700ff;
+    border-radius: 5px; /* Rounded corners for the image */
+  }
+  .nftImagethird:hover {
+    outline: 1px solid #06d4f8;
+    box-shadow: 0 0 25px #06d4f8;
+    border-radius: 5px; /* Rounded corners for the image */
+  }
 /* Define the keyframes for the fade-in animation */
 @keyframes fadeInAnimation {
     0% {
-      box-shadow: 0 0 75px 15px #ffed4c;
-        opacity: 0.5; /* Start invisible */
+      box-shadow: 0 0 35px 5px #ffed4c;
+      
+      filter: blur(5px); 
 
     }
+    
     100% {
         opacity: 1; /* Fully visible */
 
@@ -782,42 +227,32 @@
 }
 @keyframes fadeInAnimation2 {
   0% {
-    box-shadow: 0 0 75px 15px #f700ff;
-      opacity: 0.5; /* Start invisible */
+    box-shadow: 0 0 55px 5px #b74cff;
+    filter: blur(5px); 
+
 
   }
+  
   100% {
       opacity: 1; /* Fully visible */
 
   }
 }
+
 @keyframes fadeInAnimation3 {
   0% {
-    box-shadow: 0 0 75px 15px #2f90ff;
-      opacity: 0.5; /* Start invisible */
+    
+    box-shadow: 0 0 35px 5px #06d4f8 ;
+    
+    filter: blur(5px); 
 
   }
   100% {
       opacity: 1; /* Fully visible */
-
   }
 }
-  /* Apply box-shadow on hover */
-  .nftImage:hover {
-    
-    box-shadow: 0 0 25px #C8AC53;
-    border-radius: 5px; /* Rounded corners for the image */
-  }
-  .nftImagesecond:hover {
-    
-    box-shadow: 0 0 25px #f700ff;
-    border-radius: 5px; /* Rounded corners for the image */
-  }
-  .nftImagethird:hover {
-    
-    box-shadow: 0 0 25px #2f90ff;
-    border-radius: 5px; /* Rounded corners for the image */
-  }
+
+
   .hiddenImage {
     display: none;
   }
@@ -826,29 +261,7 @@
     display: block;
   }
 
-  
-  @keyframes flicker {
 
-
-    50% {
-      box-shadow: 0 0 55px rgb(255, 207, 76);
-    }
-  
-    100% {
-      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
-    }
-  }
-  @keyframes flicker2 {
-
-
-    50% {
-      box-shadow: 0 0 55px rgb(213, 6, 255);
-    }
-  
-    100% {
-      box-shadow: 0 0 15px rgba(214, 6, 255, 0.658);
-    }
-  }
   .loading {
     display: flex;
     align-items: center;
@@ -880,7 +293,49 @@
     100% { transform: rotate(360deg); }
 }
 /*NFT TRAITS */
+@keyframes expandTooltip {
+  0% {
+    color: #C8AC53;
+    transform: scaleY(0);
+    opacity: 0;
+    filter: blur(5px); 
 
+  }
+  25% {
+    transform: scaleY(0.25);
+    color: #C8AC53;
+    background-color: #C8AC53;
+    opacity: 1;
+    box-shadow: 0 0 45px #C8AC53;
+    filter: blur(10px); 
+
+  }
+  50% {
+    transform: scaleY(0.5);
+    color: #C8AC53;
+    background-color: #C8AC53;
+    opacity: 1;
+    box-shadow: 0 0 35px #C8AC53;
+    filter: blur(15px); 
+
+  }
+  70% {
+    transform: scaleY(0.75);
+    color: #C8AC53;
+    background-color: #C8AC53;
+    opacity: 1;
+    box-shadow: 0 0 25px #C8AC53;
+    filter: blur(0px); 
+
+  }
+
+  100% {
+
+    transform: scaleY(1);
+    opacity: 1;
+
+  }
+}
 .traitsContainer {
   
   font-family: 'Monofonto';
@@ -897,7 +352,7 @@
 
   transform: scaleY(0); /* Start scaled down to 0 */
   transform-origin: center; /* Scale from the top */
-  animation: expandTooltip 0.12s  ease-in-out forwards; /* Animation */
+  animation: expandTooltip 0.12s  ease forwards; /* Animation */
 }
 
 .traitsContainer h3 {
@@ -923,7 +378,7 @@
 
   transform: scaleY(0); /* Start scaled down to 0 */
   transform-origin: center; /* Scale from the top */
-  animation: expandTooltip 0.12s  ease-in-out forwards; /* Animation */
+  animation: expandTooltip 0.12s  ease forwards; /* Animation */
 }
 
 .traitsContainerSecond h3 {
@@ -949,7 +404,7 @@
 
   transform: scaleY(0); /* Start scaled down to 0 */
   transform-origin: center; /* Scale from the top */
-  animation: expandTooltipsecond 0.12s  ease-in-out forwards; /* Animation */
+  animation: expandTooltip 0.12s  ease-in-out forwards; /* Animation */
 }
 
 .traitsContainerThird h3 {
@@ -976,3 +431,43 @@
 .legendary {
   color: rgb(217, 255, 0);
 }
+/* Styles for the "More Info" trigger */
+.moreInfoContainer {
+  position: relative;
+}
+
+.moreInfo {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Hidden content that will appear on hover */
+.infoContent {
+  opacity: 0; /* Initially hide the content */
+  max-height: 0; /* Set a max-height of 0 to hide the content */
+  overflow: hidden; /* Ensure anything beyond max-height is hidden */
+  position: relative; /* Position content below the trigger */
+  top: 100%;
+  left: 0;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  transition: opacity 0.3s ease, max-height 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px); /* Slight downward shift for the sliding effect */
+}
+
+/* Show the content when hovering over the container */
+.moreInfoContainer:hover .infoContent {
+  opacity: 1; /* Fade in */
+  max-height: 200px; /* Set a max-height large enough to fit the content */
+  transform: translateY(0); /* Slide content into place */
+}
+.lineAfter {
+  background: #0f0f0f;
+  width: 100%; /* Width of the line */
+  margin: 5px auto; /* Center the line horizontally */
+  /* Optional: Adjust the line height or add spacing */
+  height: 2px; /* Ensure this matches the border thickness */
+}
+

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 .wrapper {
-  background-color: #2e2e2e;
+
   width: 100%;
-  min-height: 3vw;
-  max-height: 5vw;
-  color: #f1f1f3;
+  min-height: 10px;
+  max-height: 500px;
+ 
   display: flex;
   align-items: center;
   padding: 10px;
@@ -12,18 +12,58 @@
   position: sticky;
   top: 0;
   left: 0;
-  border-bottom: 1px solid #C8AC53;
-  box-shadow: 0 0 40px rgba(255, 207, 76, 0.7);
+  background: linear-gradient(to bottom, #000000, #000000, #00000041, #00000000);
+ 
   cursor: url('/curs.png'), auto;
-  background-image: url('/tec.png');
-  background-repeat: repeat;
-  background-size: 30px 30px;
-  z-index: 10;
+  backdrop-filter: blur(2px); /* Apply background blur */
+  z-index: 10001;
   /* Add a clearfix if needed */
 }
 /*comment*/
-.title {
-  font-size: 2vw;
+/* Wrapper for logo and text */
+.logoWrapper {
+  position: relative; /* To allow absolute positioning for the text */
+  text-align: center; /* Centers the image and text */
+}
+
+/* Style for the logo image */
+.logo {
+  width: auto;              
+  height: 5rem;             
+  max-height: 5rem;        
+  display: block;           
+  object-fit: contain;      
+  margin: 0 auto;           
+  padding: 5px;             
+  transition: opacity 0.25s ease-out;     
+  
+}
+
+/* Style for the text behind the logo */
+.logoText {
+  font-size: 20px;
+  position: absolute; /* Position text behind the logo */
+  top: 25%; /* Vertically center the text behind the logo */
+  left: 50%; /* Horizontally center the text */
+  transform: translate(-50%, -50%); /* Offset to truly center the text */
+ 
+  color: #ffcf4c; /* Light color for text behind the logo */
+  opacity: 0; /* Text is initially hidden */
+  pointer-events: none; /* Ensure text doesn't interfere with interactions */
+  transition: opacity 0.25s ease-out; /* Smooth fade-in effect */
+}
+
+/* On hover, reveal the text behind the logo */
+.logoWrapper:hover .logoText {
+  opacity: 1; /* Text becomes visible when logo is hovered */
+}
+
+/* Hover effect on the logo */
+.logo:hover {
+  opacity: 0;
+}
+.navbar {
+  font-size: 20px;
   font-family: 'Monofonto'; /* Name you’ll use to refer to the font */
   src: url('/monofonto rg.otf') format('opentype'); /* Path and format */
 
@@ -34,50 +74,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: url('/curslink.png'), auto;
+  cursor: url('/curs.png'), auto;
 }
-.nav {
-  font-family: 'Monofonto'; /* Apply the custom font here */
-  font-size: 2rem;
-  color: #ffcf4c;
-  margin-left: 20px;
-  cursor: pointer;
-  font-weight: bolder;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: url('/curslink.png'), auto;
 
-}
 .loginBtn {
 
-  margin-right: 20px;
-  font-size: 1vw;
+
+  font-size: 20px;
   cursor: url('/curs.png'), auto;
   background-color: transparent;
   padding: 10px;
   color: #C8AC53;
   font-weight: bolder;
-  cursor: url('/cursconnect.png'), auto;
+  z-index: 999999; /* ensure it's on top */
   border: none;
 }
 .loginBtn:hover {
   background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
+  color: #28201e; /* Change text color on hover */
 
-}
-@keyframes flicker {
-
-
-  50% {
-    box-shadow: 0 0 15px rgba(255, 207, 76, 0.7);
-  }
-
-  100% {
-    box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
-  }
 }
 
 .beta {
@@ -95,72 +110,66 @@
   justify-content: space-between;
   align-items: center;
 }
-
 .toggleButton {
   cursor: url('/curs.png'), auto;
   font-family: 'Monofonto';
-  font-size: 1vw;
+  font-size: 20px;
   position: relative;
   top: 10px; /* Adjust as needed */
   left: 10px; /* Adjust as needed */
-
+  user-select: none;
   margin-bottom: 1rem; 
   margin-right: 1rem; 
   padding: 0.5rem 1rem;
   background-color: transparent;
-  color: #C8AC53;
+  color: #c8ad539a;
   border: none;
   border-radius: 2px;
- 
   z-index: 1;
 }
-.toggleButton:hover {
-  cursor: url('/curs.png'), auto;
+
+.toggleButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Thickness of the top border */
   background-color: #C8AC53;
-  color: #1e2128; /* Change text color on hover */
+  transform-origin: left;
+  transform: scaleX(0); /* Initially, the border is hidden */
+  transition: transform 0.25s ease-out; /* Smooth transition */
+}
+
+.toggleButton:hover {
+  color: #C8AC53; /* Change text color on hover */
   animation: flicker 0.2s ease-out; /* Apply flicker animation */
   animation-iteration-count: 1; /* Run the animation only once */
-  
 }
 
-        .toggleButton:active {
-          animation: clickEffect 0.2s ease;
-        }
-
-
-/*toggled*/
-.toggleButtonQuickBetsToggled {
-  color: #1e2128; 
-  background-color: #C8AC53; /* Toggled color */
-}
-.toggleButtonLongBetsToggled {
-  color: #1e2128; 
-  background-color: #C8AC53; /* Toggled color */
+.toggleButton:hover::before {
+  transform: scaleX(1); /* Make the top border visible on hover */
 }
 
-.potCardsContainer.open {
-  max-height: 500px; /* Adjust based on your content */
-  opacity: 1; /* Fully visible */
-  animation: holographicOpen 0.2s ease-in-out; /* Apply the holographic animation */
-}
-.potCardsContainer.closed {
-  max-height: 0;
-  opacity: 0;
-}
+
+
 .dropdownMenu {
-  position: absolute;
-  background-color: #c8ad5381; /* Match header background */
+  position: absolute; /* Absolute positioning relative to its parent */
+  top: 100%; /* Position the dropdown directly below the button */
+  left: 50px;
+  background: #131313;
   border: 1px solid #C8AC53;
   box-shadow: 0 0 10px rgba(255, 207, 76, 0.5);
   z-index: 100; /* Ensure it appears above other elements */
-  margin-top: 5px; /* Space between button and dropdown */
+border-radius: 5px;
+  margin-top: 5px; /* Adjust for spacing between the button and dropdown */
   display: flex;
   flex-direction: column;
 }
 
-@media (max-width: 768px) { /* Adjust based on your breakpoint */
-  .toggleButtons {
-    flex-direction: column; /* Stack buttons vertically */
-    align-items: flex-start; /* Align items to the start */
+/* Mobile adjustments for the dropdown */
+@media (max-width: 768px) {
+  .dropdownMenu {
+    width: 25%; /* Ensure it takes up full width of the container */
   }
 }

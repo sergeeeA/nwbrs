@@ -1,0 +1,53 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background */
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Vertically center the contents */
+    align-items: center; /* Horizontally center the contents */
+    z-index: 10025; /* ensure it's on top */
+}
+.Word {
+    font-size: 20px;
+    cursor: url('/curs.png'), auto;
+    background-color: transparent;
+    padding: 10px;
+    color: #C8AC53;
+    font-weight: bolder;
+    border: none;
+    position: relative;
+    text-align: center; 
+}
+.loginBtn {
+  font-size: 20px;
+  cursor: url('/curs.png'), auto;
+  background-color: transparent;
+  padding: 10px;
+  color: #C8AC53;
+  font-weight: bolder;
+  z-index: 999999; /* ensure it's on top */
+  border: none;
+  position: relative;
+}
+
+.loginBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* thickness of the top border */
+  background-color: #C8AC53;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s ease-in-out;
+}
+
+
+.loginBtn:hover::before {
+  transform: scaleX(1);
+}

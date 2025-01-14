@@ -4,7 +4,9 @@
     font-weight: normal;
     font-style: normal;
   }
+
 .parentcontainer {
+  
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center;
@@ -13,104 +15,45 @@
     width: 100%;             /* Full width */
    
   }
-  .background {
-    position: fixed;
-    place-self: center;
-    top: 0;
-    left: 0;
-    box-shadow: inset 0vh  0px  4vh 2vh  #000000;
-    width: 150%;
-    height: 35%;
-    min-height: 35%;
-    background-image: url('../public/Hobeardamnfront.png'), 
-                      url('../public/Hobeardamnsecond.png'), 
-                      url('../public/Hobeardamnthird.png'),
-                      url('../public/Hobeardamnfourth.png'); 
+  .wrapper {
+    outline: 1px solid #2c2c2c;
+    flex: 1; /* Allow each card to grow equally */
     
-    background-size: 85% auto; /* Make second image 100% wide */
-    background-position: center;/* Adjust second image to the left */
-    background-repeat: no-repeat; /* Ensure no repetition of images */
-    background-attachment: local;
-    pointer-events: none;
-    z-index: 0;
-    display: flex; /* Add this to make the background a flex container */
-  align-items: center; /* Center items vertically */
-  justify-content: center; /* Center items horizontally */
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Arrange children in a column */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    
+   
+    padding: 15px; /* Space inside the wrapper */
+    margin: 25px; /* Space above the wrapper */
+    
+    overflow: auto; /* Hide overflow content */
   }
   .wrappernft {
-    background: linear-gradient(to bottom,#000000, #161616,#1f1f1f,#000000, #000000);
+    background:   #131313;
     flex: 1; /* Allow each card to grow equally */
-    min-width: 255px;
-    max-width: 555px; /* Example fixed width, adjust as needed */
-    min-height: 455px;
-    max-height: 800px;
-    width: 50%; /* Width of the element */
+
     justify-content: center; /* Center horizontally */
     align-items: center;
     place-content: center; /* Align items to the start of the flex container's cross axis */
  
     border-radius: 1vh; /* Rounded corners */
-    padding: 5px; /* Space inside the wrapper */
+    padding: 25px; /* Space inside the wrapper */
     display: flex;
     flex-direction: column; /* Arrange children in a column */
-    margin: 25px; /* Space above the wrapper */
-  
-    overflow: hidden; /* Hide overflow content */
-    transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-    perspective: 1000px; /* Perspective for 3D effect */
+    margin: 15px; /* Space above the wrapper */
+    box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.5); 
+    overflow: auto; /* Hide overflow content */
+
   }
   
 
-  .wrappernft:hover {
-    animation: pulsate 0.45s forwards; /* Pulsating animation on hover */
-  }
-  @keyframes pulsate {
-    0% {
-      border-top: 1px solid transparent; /* Start with transparent borders */
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-    }
-    25% {
-      border-top: 1px solid #bd9938; /* Left side of top border lights up */
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-  
-    }
-    50% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c; /* Right side of top border lights up */
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-    }
-    75% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c;
-      border-bottom: 1px solid #ffed4c; /* Top side of right border lights up */
-      border-left: 1px solid transparent;
-      box-shadow: 0px 0px 0px #ffed4c;
-  
-    }
-    80% {
-      border-top: 1px solid #bd9938;
-      border-right: 1px solid #ffed4c;
-      border-bottom: 1px solid #ffed4c;
-      border-left: 1px solid #ffed4c; /* Bottom side of right border lights up */
-      box-shadow: 0px 0px 25px #ffed4c;
-    }
-    100% {
-      border-top: 1px solid transparent; 
-      border-right: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      border-left: 1px solid transparent;
-      box-shadow: 0px 0px 10px #ffed4c;
-    }
-  }
+
+
   .title {
     font-family: 'Monofonto', cursive; /* Apply the custom font here */
-    font-size: 2rem;
+    font-size: 25px;
     color: #ffcf4c;
     text-align: center; /* Center text in case of wrapping */
     cursor: pointer;
@@ -121,181 +64,63 @@
     cursor: url('/curslink.png'), auto;
     padding: 10px; /* space for title below*/
     z-index: 1;
-    margin-top: 50px;
+    
   }
-  .rafflefeetitle {
+  .Info {
     font-family: 'Monofonto';
-    font-size: 1.5rem;
+    color: #C8AC53;
+    outline: 1px solid #2c2c2c;;
+
+    padding: 10px 20px;
+    margin: 5px;
+
+
+    /* Centering the text */
+    display: column;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
+  }
+  .InfoSmol {
+    font-family: 'Monofonto';
+    font-size: 15px;
+    color: #C8AC53;
+
+   
+    padding: 2px 5px;
+    margin: 2px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+
+
+    /* Centering the text */
+    display: column;           /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    text-align: center;      /* Center text within the flex container */
+  }
+  .scrollableList {
+
+
+
+    max-height: 150px;
+    overflow-y: scroll; /* Always shows both vertical and horizontal scrollbars */
+    scrollbar-width: thin; /* Firefox-specific - makes the scrollbar thinner */
+    scrollbar-color: #C8AC53 #c8ad5386; /* Firefox-specific - sets the scrollbar color (thumb and track) */
+  }
+
+ 
+  .numberInput {
+    font-family: 'Monofonto';
+    font-size: 15px;
     font-weight: 250;
     color: #C8AC53;
     text-align: center;
-    margin: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    overflow: auto
+ 
   }
 
-  .tooltip {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .tooltipw {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .tooltip .tooltiptext {
-    font-family: 'Monofonto';
-    visibility: hidden;
-    width: 220px;
-    background-color: #2c2c2c;
-    color: #C8AC53;
-    text-align: center;
-    border-radius: 3px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the input */
-    left: 50%;
-    margin-left: -110px; /* Center the tooltip */
-    opacity: 0;
-    transform: scaleY(0); /* Start with zero scale on Y axis */
-    transform-origin: center; /* Ensures scaling happens from the center */
-    transition: opacity 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
-  }
-  .tooltipw .tooltiptextw {
-    font-family: 'Monofonto';
-    visibility: hidden;
-    width: 220px;
-    background-color: #2c2c2c;
-    color: #fc0000;
-    text-align: center;
-    border-radius: 3px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%; /* Position the tooltip above the input */
-    left: 50%;
-    margin-left: -110px; /* Center the tooltip */
-    opacity: 0;
-    transform: scaleY(0); /* Start with zero scale on Y axis */
-    transform-origin: center; /* Ensures scaling happens from the center */
-    transition: opacity 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
-  }
-
-  @keyframes expandTooltip {
-    0% {
-  
-      transform: scaleY(0);
-      opacity: 0;
-      filter: blur(5px); 
-  
-    }
-    50% {
-      transform: scaleY(1);
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 45px #C8AC53;
-      filter: blur(5px); 
-  
-    }
-
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-
-    }
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-    animation: expandTooltip 0.2s ease-in both;
-  }
-  .tooltipw:hover .tooltiptextw {
-    visibility: visible;
-    opacity: 1;
-    animation: expandTooltip 0.2s ease-in both;
-  }
-  
-  
-  .tooltip:not(:hover) .tooltiptext {
-    visibility: visible;
-    animation: expandCollapse 0.15s ease-out reverse forwards;
-  }
-  .tooltipw:not(:hover) .tooltiptextw {
-    visibility: visible;
-    animation: expandCollapse 0.15s ease-out reverse forwards;
-  }
-  @keyframes expandCollapse {
-    0% {
-      background-color: #C8AC53;
-  
-      transform: scaleY(0);
-      opacity: 0.25;
-  
-    }
-    50% {
-      transform: scaleY(1);
-      background-color: #C8AC53;
-      opacity: 1;
-      box-shadow: 0 0 55px #C8AC53;
-  
-    }
-  
-    100% {
-      transform: scaleY(1);
-      opacity: 1;
-  
-   
-      background-color: #C8AC53;
-    }
-  }
-  .numberInput {
-    cursor: url('/curs.png'), auto;
-    background-color: transparent;
-    width: 200px; /* Adjust the width as needed */
-    padding: 8px; /* Add some padding inside the input */
-    border: 1px solid #C8AC53; /* Set a border color and style */
-    border-radius: 2px; /* Rounded corners for the input box */
-    font-size: 16px; /* Adjust font size */
-    box-sizing: border-box;
-    font-family: Monofonto;
-    color: #C8AC53;
-    outline: none; /* Remove default outline */
-    text-align: center;
-    /* Remove place-self */
-  }
-  /* Optional: Hide spinners for number input */
-  .numberInput::-webkit-inner-spin-button,
-  .numberInput::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .numberInput {
-    max-width: 300px; /* Set a maximum width for the input */
-    -moz-appearance: textfield;
-    margin: 10px 0; /* Add some margin for spacing */
-  }
-  
-  /* Style for the number input field when focused */
-  .numberInput:focus {
-    
-    border-color: #C8AC53; /* Change border color to yellow on focus */
-  
-    box-shadow: inset 0 0 15px  #C8AC53;
-  }
   .btnWrapper {
     display: flex;
     justify-content: center;
@@ -303,44 +128,7 @@
     width: 100%;
     background: transparent; /* Make the background transparent */
 }
-  .btn {
-    font-family: 'Monofonto';
-    width: fit-content;
-    max-width: 300px; /* adjust as needed */
-    color: #C8AC53;
-    padding: 15px 32px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
-    cursor: url('../public/curslott.png'), auto;
-    font-weight: 500;
-    font-size: 25px;
-    margin: auto;
-    display: block;
-    background: transparent; /* Make button background transparent */
-    border: none; /* Remove any default borders */
-  }
-  .btn:hover {
-  
-    background-color: #C8AC53; /* Change background color on hover */
-    color: #1e2128; /* Change text color on hover */
-    animation: flicker 0.2s ease-out; /* Apply flicker animation */
-    animation-iteration-count: 1; /* Run the animation only once */
-  
-  }
-  @keyframes flicker {
 
-
-    50% {
-      box-shadow: 0 0 55px rgba(255, 207, 76, 0.7);
-    }
-  
-    100% {
-      box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
-    }
-  }
   .address {
 
     color: #C8AC53;
@@ -363,4 +151,33 @@
 @keyframes spin {
   0% { box-shadow: 0 0 15px rgba(255, 207, 76, 0.5); transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.dropdown {
+  text-align: center;
+  font-family: 'Monofonto';
+  box-shadow: 0 0 0px rgba(255, 207, 76, 0.418);
+  padding: 8px;
+  outline: 2px solid #c8ad533f;
+  border-radius: 2px;
+  font-size: 16px;
+  background: linear-gradient(to bottom, #2c2c2c, #000000);
+  color: #C8AC53;
+  margin-bottom: 15px;
+  cursor: url('/curs.png'), auto;
+  transition: outline 0.25s ease-in,   box-shadow 1s ease-out, background 0.25s ease, color 0.25s ease ;
+}
+.dropdown option {
+  background: #2c2c2c; /* Limited styling support */
+  color: #C8AC53;
+  border: 1px solid #C8AC53;
+  cursor: url('/curs.png'), auto;
+  
+}
+.dropdown:hover {
+  cursor: url('/curs.png'), auto;
+  outline: 2px solid #C8AC53;
+  background: #C8AC53;
+  color: black;
+  box-shadow: 0 0 25px rgba(255, 207, 76, 0.356);
 }

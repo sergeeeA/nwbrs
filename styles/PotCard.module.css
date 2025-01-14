@@ -8,53 +8,26 @@
 
 
 /* styles/Home.module.css */
-
-
 .wrapper {
-  background: linear-gradient(to bottom, #2c2c2c,#1f1f1f,#000000, #000000);
-  flex: 1; /* Allow each card to grow equally */
-  min-width: 255px;
-  max-width: 455px; /* Example fixed width, adjust as needed */
-  min-height: 355px;
-  max-height: 455px;
-  width: 50%; /* Width of the element */
-
-  border-radius: 3px; /* Rounded corners */
-  padding: 5px; /* Space inside the wrapper */
+  background: #131313;
   display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  margin: 15px; /* Space above the wrapper */
-
-  overflow: hidden; /* Hide overflow content */
-  transition: transform 0.1s ease-in-out; /* Smooth transition for scaling and box-shadow */
-
+  flex-direction: column;  /* Horizontal layout */
+  flex-wrap: nowrap; /* Allow wrapping of children if they exceed the width */
+  min-height: 100px;
+  min-width: 350px; /* Set a constant width for the wrapper */
+  box-sizing: border-box; /* Ensure padding and borders are included in the width */
+  gap: 5px;
+  margin: 2px;
+  padding: 10px;
+border-radius: 5px;
+box-shadow: 7px 7px 15px rgba(0, 0, 0, 0.5); 
 }
 
-/*comment*/
-.wrapper:hover {
-  transform: translateY(-5px); /* Lift the element */
-  animation: pulsate 0.25s forwards ease-in-out; /* Pulsating animation on hover */
-}
-@keyframes pulsate {
-
-  0% {
-
-    box-shadow: 0px 0px 0px #ffed4c;
-
-  }
-  50% {
-
-    box-shadow: 0px 0px 10px #ffed4c;
-  }
-  100% {
-
-    box-shadow: 0px 0px 5px #ffed4c;
-  }
-}
 
 
 /*======NFTDUEL*/
 .parentcontainer {
+  
   display: flex;
   justify-content: center; /* Center horizontally */
   align-items: center;
@@ -65,141 +38,51 @@
 }
 
 
-.wrapperinput {
-  background: linear-gradient(to bottom, #181818, #000000);
-  flex: 1; /* Allow each card to grow equally */
-  min-width: 25vh;
-  max-width: 50vh; /* Example fixed width, adjust as needed */
-  min-height: 355px;
-  max-height: 100vh;
-  width: 100%; /* Width of the element */
 
-  border-radius: 25px; /* Rounded corners */
-  padding: 5px; /* Space inside the wrapper */
-  display: flex;
-  flex-direction: column; /* Arrange children in a column */
-  margin: 40px; /* Space above the wrapper */
 
-  overflow: scroll; /* Hide overflow content */
-  transition: transform 0.15s ease-out, box-shadow 0.3s ease; /* Smooth transition for scaling and box-shadow */
-  perspective: 1000px; /* Perspective for 3D effect */
-}
-
-/*comment*/
-.wrapperinput:hover {
-  animation: pulsate 2s infinite; /* Pulsating animation on hover */
-}
 
 
 .lineAfter {
-  border-bottom: 2px solid #ffcf4c; /* Line color and thickness */
+  background: #0f0f0f;
   width: 100%; /* Width of the line */
   margin: 0 auto; /* Center the line horizontally */
   /* Optional: Adjust the line height or add spacing */
   height: 2px; /* Ensure this matches the border thickness */
 }
 .title {
-  font-family: 'Monofonto', cursive; /* Apply the custom font here */
-  font-size: 2rem;
+  justify-content: center;
+  place-self: center;
+  text-align: center;
+
+  font-family: 'Monofonto', cursive;
+  font-size: 25px;
   color: #ffcf4c;
 
-
-  font-weight: bolder;
+  background: #131313;
+  box-shadow: 0px 0px 0px 0px inset #0000008c;
+  font-weight: 100; /* Use numeric font weight for thin text */
   display: flex;
   align-items: center;
-  justify-content: center;
+
   cursor: url('/curslink.png'), auto;
-  padding: 10px; /* space for title below*/
-  
+  padding: 10px;
+  min-width: 100px;
+  width: 100px;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+  border-radius: 2px;
 }
-.titleBigiron {
-  font-family: 'Monofonto', cursive; /* Apply the custom font here */
-  font-size: 2rem;
-  color: #ffcf4c;
-  margin-left: 20px;
-  cursor: pointer;
-  font-weight: bolder;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: url('/curslink.png'), auto;
-  padding: 10px; /* space for title below*/
-  
-  
+
+.title:hover {
+
+  box-shadow: 0px 0px 25px 1px inset #0000008c;
+
 }
-.titlebigironbg {
-  background: url('../public/test.png') no-repeat center center;
-  background-size: cover; /* Scale the background image to cover the entire element */
-  color: #ffcf4c;
-  cursor: url('../public/curslink.png'), auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px; /* Space for title below */
 
-  box-sizing: border-box; /* Ensure padding is included in width */
-  width: 100vw; /* 50% of the viewport width */
 
-  max-width: 555px; /* Maximum width */
-  margin: 0; /* Remove margin to use full width */
-  place-self: center;
-}
-.titlebigironnftbg {
-  background: url('../public/bigironNFTbanner.png') no-repeat center center;
-  background-size: cover; /* Scale the background image to cover the entire element */
-  color: #ffcf4c;
-  cursor: url('../public/curslink.png'), auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px; /* Space for title below */
-
-  box-sizing: border-box; /* Ensure padding is included in width */
-  width: 100vw; /* 50% of the viewport width */
-
-  max-width: 555px; /* Maximum width */
-  margin: 0; /* Remove margin to use full width */
-  place-self: center;
-}
-.titlebglucky69bg {
-  background: url('../public/Lucky69banner.png') no-repeat center center;
-  background-size: cover; /* Scale the background image to cover the entire element */
-  color: #ffcf4c;
-  cursor: url('../public/curslink.png'), auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px; /* Space for title below */
-
-  box-sizing: border-box; /* Ensure padding is included in width */
-  width: 100vw; /* 50% of the viewport width */
-
-  max-width: 555px; /* Maximum width */
-  margin: 0; /* Remove margin to use full width */
-  place-self: center;
-}
-.bierramadrebg {
-  background: url('../public/bierramadre.png') no-repeat center center;
-  background-size: cover; /* Scale the background image to cover the entire element */
-  color: #ffcf4c;
-  cursor: url('../public/curslink.png'), auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px; /* Space for title below */
-
-  box-sizing: border-box; /* Ensure padding is included in width */
-  width: 100vw; /* 50% of the viewport width */
-
-  max-width: 555px; /* Maximum width */
-  margin: 0; /* Remove margin to use full width */
-  place-self: center;
-  
-}
 
 .pot {
   font-family: 'Monofonto' ;
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: 250;
   color: #C8AC53;
   text-align: center;
@@ -208,7 +91,7 @@
   justify-content: center;
   place-self: center;
   display: flex;
-
+  outline: 1px solid #2c2c2c;;
 }
 .potsmall {
   font-family: 'Monofonto' ;
@@ -221,16 +104,7 @@
 }
 
 
-.goldAccent {
-  font-family: 'Monofonto', cursive;
-  background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
-  color: white; /* Text color for better contrast */
-  padding: 5px 10px; /* Add some padding around the text */
-  border-radius: 3px; /* Optional: rounded corners */
-  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
-  animation: breatheGlow 2s ease-in-out infinite; /* Apply the breathing animation */
-  
-}
+
 
 @keyframes breatheGlow {
   0% {
@@ -251,23 +125,24 @@
   display: flex;
   justify-content: center;
   place-self: center;
-  color: #C8AC53;
-  padding: 15px 32px;
   text-align: center;
+  color: #C8AC53;
+  padding: 15px 15px;
 
-  border-radius: 2px;
-  margin: 15px auto; 
-  cursor: url('/curs.png'), auto;
-  font-weight: 500;
-  font-size: 25px;
-  
+
+  border-radius: 3px;
+  margin: 5px auto; 
+  outline: 2px solid #2c2c2c;
+  font-weight: thin;
+  font-size: 15px;
+  transition: outline 0.1s ease-in;
+
 }
 .btn:hover {
 
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
+  outline: 1px solid #C8AC53;
+
+
 
 }
 .btndisabled {
@@ -277,60 +152,24 @@
   justify-content: center;
   place-self: center;
   color: #C8AC53;
-  padding: 15px 32px;
+  padding: 15px 15px;
   text-align: center;
-
+  outline: 1px solid #ff3c0077;
   border-radius: 2px;
-  margin: 15px auto; 
+  margin: 5px auto; 
   cursor: url('/curs.png'), auto;
-  font-weight: 500;
-  font-size: 25px; 
+  font-weight: thin;
+  font-size: 12px;
+  transition: outline 0.2s ease;
 }
 .btndisabled:hover {
 
-  background-color: #ff3c00; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flickerd 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
+  outline: 1px solid #ff3c00; /* Change background color on hover */
+
 
 }
-.btnbip {
-  font-family: 'Monofonto';
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  place-self: center;
-  color: #C8AC53;
-  padding: 15px 32px;
-  text-align: center;
-
-  border-radius: 5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  cursor: url('/bip.png'), auto;
-  font-weight: 500;
-  font-size: 25px;
-  
-}
-.btnbip:hover {
-
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
-
-}
-@keyframes flicker {
 
 
-  50% {
-    box-shadow: 0 0 55px rgb(255, 207, 76);
-  }
-
-  100% {
-    box-shadow: 0 0 15px rgba(255, 207, 76, 0.5);
-  }
-}
 @keyframes flickerd {
 
 
@@ -342,34 +181,11 @@
     box-shadow: 0 0 15px rgba(255, 88, 76, 0.7);
   }
 }
-.btnbigiron {
-  font-family: 'Monofonto';
-  width: fit-content; 
-  display: flex;
-  justify-content: center;
-  place-self: center;
-  color: #C8AC53;
-  padding: 15px 32px;
-  text-align: center;
 
-  border-radius: 2px;
-  margin: 15px auto; 
-  cursor: url('/curs.png'), auto;
-  font-weight: 500;
-  font-size: 25px;
-}
-.btnbigiron:hover {
-
-  background-color: #C8AC53; /* Change background color on hover */
-  color: #1e2128; /* Change text color on hover */
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
-
-}
 
 .rafflefeetitle {
   font-family: 'Monofonto';
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: 250;
   color: #C8AC53;
   text-align: center;
@@ -381,7 +197,7 @@
   font-family: 'Monofonto';
   text-align: center;
   color: #C8AC53;
-
+  font-size: 15px;
   padding: 2px 2px;
   margin: 5px;
 
@@ -413,49 +229,45 @@
   font-family: 'Monofonto';
   color: #C8AC53;
   background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
-  border-radius: 0.5rem; /* Optional: rounded corners */
-  padding: 10px 20px;
-  margin: 5px;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #C8AC53;
-  
+  border-radius: 0.1rem; /* Optional: rounded corners */
+
+  border-radius: 3px; /* Optional: rounded corners */
+  padding: 10px 10px; /* Add some padding around the text */
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #C8AC53;
+    font-size: 15px;
+
   /* Centering the text */
-  display: column;           /* Use flexbox for centering */
+  display: flex;           /* Use flexbox for centering */
   justify-content: center; /* Center horizontally */
   align-items: center;     /* Center vertically */
   text-align: center;      /* Center text within the flex container */
 }
-.textNotLoadedsmol {
-  font-family: 'Monofonto';
-  color: #C8AC53;
-  background: linear-gradient(to bottom, #00000000, #00000000, #c8ad5336); /* Gradient from dark to lighter color */
-  border-radius: 0.5rem; /* Optional: rounded corners */
-  padding: 10px 20px;
-  margin: 5px;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #C8AC53;
-  font-size: 1rem;
-  /* Centering the text */
-  display: column;           /* Use flexbox for centering */
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  text-align: center;      /* Center text within the flex container */
+.goldAccent {
+  font-family: 'Monofonto', cursive;
+  font-size: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
+  color: white; /* Text color for better contrast */
+  padding: 5px 5px; /* Add some padding around the text */
+  border-radius: 3px; /* Optional: rounded corners */
+  box-shadow: 0 0 20px rgba(255, 207, 76, 0.7); /* Initial glow */
+  animation: breatheGlow 2s ease-in-out infinite; /* Apply the breathing animation */
+  
 }
 .textLoaded {
   font-family: 'Monofonto';
   color: #ffffff;
   background: linear-gradient(to bottom,#e6ca70, #C8AC53, #e6ca70);  /* Background color */
-  border-radius: 0.5rem; /* Optional: rounded corners */
-  padding: 10px 20px;
-  margin: 5px;
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  border-bottom: 1px solid #C8AC53;
+  border-radius: 0.1rem; /* Optional: rounded corners */
+  padding: 10px 10px; /* Add some padding around the text */
+
+  margin-right: 10px;
+
+  font-size: 15px;
   
   /* Centering the text */
   display: flex;           /* Use flexbox for centering */
@@ -466,187 +278,11 @@
   animation: breatheGlow 2s ease-in-out infinite;
 }
 
-.drawWinnerBtn {
-  font-family: 'Monofonto', ;
-  background-color: #242833;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 20%;
-  border: 1px solid #C8AC53;
-  border-radius: 1.2rem;
-  padding: 10px 20px;
-  font-size: 1.3rem;
-  font-weight: bolder;
-  cursor: pointer;
-  color: #C8AC53;
-}
-.titlebglucky69bg {
-  position: relative;
-  /* Add any other styles you need */
-}
-
-/* Add this to PotCard.module.css */
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.tooltip .tooltiptext {
-  font-family: 'Monofonto';
-  visibility: hidden;
-  width: 220px;
-  background-color: #2c2c2c;
-  color: #C8AC53;
-  text-align: center;
-  border-radius: 3px;
-  padding: 5px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%; /* Position the tooltip above the input */
-  left: 50%;
-  margin-left: -110px; /* Center the tooltip */
-  opacity: 0;
-  transform: scaleY(0); /* Start with zero scale on Y axis */
-  transform-origin: center; /* Ensures scaling happens from the center */
-  transition: opacity 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 55px 25px rgba(0, 0, 0, 0.644);
-}
-
-@keyframes expandTooltip {
-  0% {
-
-    transform: scaleY(0);
-    opacity: 0;
-
-  }
-  50% {
-    transform: scaleY(1);
-    background-color: #C8AC53;
-    opacity: 1;
-    box-shadow: 0 0 45px #C8AC53;
-
-  }
-
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-
- 
-    
-  }
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-  animation: expandTooltip 0.2s ease-in both;
-}
 
 
-.tooltip:not(:hover) .tooltiptext {
-  visibility: visible;
-  animation: expandCollapse 0.15s ease-out reverse forwards;
-}
-@keyframes expandCollapse {
-  0% {
-    background-color: #C8AC53;
-
-    transform: scaleY(0);
-    opacity: 0.25;
-
-  }
-  50% {
-    transform: scaleY(1);
-    background-color: #C8AC53;
-    opacity: 1;
-    box-shadow: 0 0 55px #C8AC53;
-
-  }
-
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-
- 
-    background-color: #C8AC53;
-  }
-}
 
 
-.titlebglucky69bg:hover .tooltip {
-  opacity: 1;
-  visibility: visible;
-}
-/* Tooltip text *//* Tooltip text *//* Tooltip text *//* Tooltip text *//* Tooltip text */
-.dropdown {
-  font-family: 'Monofonto';
-  width: 100%; /* Adjust width as needed */
-  padding: 8px;
-  border: 1px solid #C8AC53;
-  border-radius: 2px;
-  font-size: 16px;
-  background: linear-gradient(to bottom, #2c2c2c, #000000);
-  color: #C8AC53;
-  margin-bottom: 15px;
-  cursor: url('/curs.png'), auto;
-}
-.dropdown option {
-  background: #2c2c2c; /* Limited styling support */
-  color: #C8AC53;
-  border: 1px solid #C8AC53;
-  cursor: url('/curs.png'), auto;
-  
-}
-.dropdown:hover {
-  cursor: url('/curs.png'), auto;
-  background: #C8AC53;
-  color: black;
-  animation: flicker 0.2s ease-out; /* Apply flicker animation */
-  animation-iteration-count: 1; /* Run the animation only once */
-}
 
-/* Style for the number input field */
-.numberInput {
-  cursor: url('/curs.png'), auto;
-  background-color: transparent;
-  width: 200px; /* Adjust the width as needed */
-  padding: 8px; /* Add some padding inside the input */
-  border: 1px solid #C8AC53; /* Set a border color and style */
-  border-radius: 2px; /* Rounded corners for the input box */
-  font-size: 16px; /* Adjust font size */
-  box-sizing: border-box;
-  font-family: Monofonto;
-  color: #C8AC53;
-  outline: none; /* Remove default outline */
-  text-align: center;
-  /* Remove place-self */
-}
-/* Optional: Hide spinners for number input */
-.numberInput::-webkit-inner-spin-button,
-.numberInput::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.numberInput {
-  max-width: 300px; /* Set a maximum width for the input */
-  -moz-appearance: textfield;
-  margin: 10px 0; /* Add some margin for spacing */
-}
-
-/* Style for the number input field when focused */
-.numberInput:focus {
-  
-  border-color: #C8AC53; /* Change border color to yellow on focus */
-
-  box-shadow: inset 0 0 15px  #C8AC53;
-}
 
 
 .nftImage {
@@ -675,33 +311,404 @@
 .visibleImage {
   display: block;
 }
+/* Main loading container */
 .loading {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  
-  margin: 5px;
+  flex-direction: column;        /* Stack text and spinner vertically */
+  align-items: center;           /* Center horizontally */
+  justify-content: center;       /* Center vertically */
+  height: 100%;                  /* Ensure it takes the full height of the parent */
 
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition */
-  
-  height: 100%; /* Ensure it takes the full height of the parent */
+  position: absolute;            /* Position the loading container absolutely */
+  top: 0; left: 0; right: 0; bottom: 0;  /* Ensure it fills the entire parent container */
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.562) 0%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(10px);
+  z-index: 1005;                   /* Ensure it's above other content */
+  transition: opacity 0.3s ease, transform 0.3s ease;  /* Smooth transitions */
 }
 
 
-.loadingCircle {
-  border: 6px solid #f3f3f300; /* Light grey */
 
-  border-left: 6px solid #C8AC53; /* Left border */
+
+
+
+
+  .loadingCircle {
+    width: 54px;
+    height: 54px;
+    position: relative;
+    border-radius: 4px;
+    background-color: #C8AC53;
+
+    background-image: radial-gradient(circle 5px, #5599ff 100%, transparent 0),
+      radial-gradient(circle 5px, #5599ff 100%, transparent 0),
+      radial-gradient(circle 5px, #5599ff 100%, transparent 0),
+      radial-gradient(circle 5px, #5599ff 100%, transparent 0),
+      radial-gradient(circle 5px, #5599ff 100%, transparent 0),
+      radial-gradient(circle 5px, #5599ff 100%, transparent 0);
+    background-repeat: no-repeat;
+    animation: move 4s linear infinite, rotate 2s linear infinite;
+  }
+  
+  @keyframes rotate {
+    0%,
+    20% {
+      transform: rotate(0deg);
+    }
+    30%,
+    40% {
+      transform: rotate(90deg);
+    }
+    50%,
+    60% {
+      transform: rotate(180deg);
+    }
+    70%,
+    80% {
+      transform: rotate(270deg);
+    }
+    90%,
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes move {
+    0%,
+    9% {
+      background-position: -12px -15px, -12px 0px, -12px 15px, 12px -15px,
+        12px 0px, 12px 15px;
+    }
+    10%,
+    25% {
+      background-position: 0px -15px, -12px 0px, -12px 15px, 34px -15px, 12px 0px,
+        12px 15px;
+    }
+    30%,
+    45% {
+      background-position: 0px -34px, -12px -10px, -12px 12px, 34px -15px,
+        12px -10px, 12px 12px;
+    }
+    50%,
+    65% {
+      background-position: 0px -34px, -12px -34px, -12px 12px, 34px -12px,
+        0px -10px, 12px 12px;
+    }
+    70%,
+    85% {
+      background-position: 0px -34px, -12px -34px, 0px 12px, 34px -12px, 0px -10px,
+        34px 12px;
+    }
+    90%,
+    100% {
+      background-position: 0px -34px, -12px -34px, 0px 0px, 34px -12px, 0px 0px,
+        34px 12px;
+    }
+  }
+
+/*FOR RUSSIAN ROULETE*/
+.loader {
+  animation: spin 1.5s linear alternate infinite;
+  background: #C8AC53;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  /* Center the spinner itself */
-  margin: auto; /* Optional: add margin for better centering */
+  height: 120px;
+  width: 120px;
+  box-shadow: 0px 0px 20vh 20vh #000000;
+}
+
+.loader:before {
+  background: #C8AC53;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 0.5em;
+  width: 0.5em;
+  z-index: 2;
+}
+
+.loader:after {
+  background: #262E2A;
+
+  border-radius: 50%;
+  box-shadow: 0em -2.60em #262E2A,
+    2.25em -4.02em #000000,
+    2.25em -1.25em #000000,
+    4.60em 0em #000000,
+    2.25em 1.25em #000000,
+    2.25em 4.02em #000000,
+    0em 2.60em #000000,
+    -2.25em 4.02em #000000,
+    -2.25em 1.25em #000000,
+    -4.60em 0em #000000,
+    -2.25em -1.25em #000000,
+    -2.25em -4.02em #000000;
+  content: '';
+  display: block;
+  height: 2em;
+  width: 2em;
+}
+
+.inner {
+  animation: load 1.5s linear alternate infinite;
+  border: solid 1px #5599ff;
+  border-radius: 50%;
+  height: 1.75em;
+  width: 1.75em;
+  z-index: 1;
+}
+
+.loader, .loader:before, .loader:after, .inner {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+@keyframes load {
+  0% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #262E2A,
+      2.25em 1.25em #262E2A,
+      0em 2.60em #262E2A,
+      -2.25em 1.25em #262E2A,
+      -2.25em -1.25em #262E2A;
+  }
+
+  15% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #262E2A,
+      2.25em 1.25em #262E2A,
+      0em 2.60em #262E2A,
+      -2.25em 1.25em #262E2A,
+      -2.25em -1.25em #5599ff;
+  }
+
+  30% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #262E2A,
+      2.25em 1.25em #262E2A,
+      0em 2.60em #262E2A,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
+
+  45% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #262E2A,
+      2.25em 1.25em #262E2A,
+      0em 2.60em #5599ff,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
+
+  60% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #5599ff,
+      2.25em 1.25em #5599ff,
+      0em 2.60em #5599ff,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
+
+  75% {
+    box-shadow: 0em -2.60em #262E2A,
+      2.25em -1.25em #5599ff,
+      2.25em 1.25em #5599ff,
+      0em 2.60em #5599ff,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
+
+  90% {
+    box-shadow: 0em -2.60em #5599ff,
+      2.25em -1.25em #5599ff,
+      2.25em 1.25em #5599ff,
+      0em 2.60em #5599ff,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
+
+  100% {
+    box-shadow: 0em -2.60em #5599ff,
+      2.25em -1.25em #5599ff,
+      2.25em 1.25em #5599ff,
+      0em 2.60em #5599ff,
+      -2.25em 1.25em #5599ff,
+      -2.25em -1.25em #5599ff;
+  }
 }
 
 @keyframes spin {
-  0% { box-shadow: 0 0 55px rgba(255, 207, 76, 0.753); transform: rotate(0deg);}
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  15% {
+    transform: rotate(60deg);
+  }
+
+  30% {
+    transform: rotate(120deg);
+  }
+
+  45% {
+    transform: rotate(180deg);
+  }
+
+  60% {
+    transform: rotate(240deg);
+  }
+
+  75% {
+    transform: rotate(300deg);
+  }
+
+  90% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+
+
+/* Text styling for "Please wait for your transaction" */
+.loadingText {
+  color:rgb(255, 207, 76);                 /* White text color */
+  font-size: 16px;              /* Font size */
+  margin-bottom: 10px;          /* Space between the text and the spinner */
+  font-weight: bold;            /* Make the text bold */
+  text-align: center;           /* Center the text */
+}
+
+
+
+
+
+/* Dropdown Toggle Button */
+.dropdownToggle {
+  cursor: pointer;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* Dropdown Content */
+.dropdownContent {
+
+  background: #131313;
+  padding: 5px;
+
+  overflow: visible ; /* Hide content initially */
+  position: relative;
+border-radius: 5px;
+
+  
+  /* Initial state */
+  opacity: 0;
+  transform-origin: top;
+  transform: scaleY(0);
+
+  /* Apply the animation */
+  animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+/* Keyframes for the fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleY(1); /* Unscale to full size */
+  }
+}
+.Details {
+  font-family: 'Monofonto', cursive; /* Apply the custom font here */
+  color: #C8AC53;
+  margin: 5px;
+}
+.Detailscontents {
+  font-family: 'arial', cursive; /* Apply the custom font here */
+  color: #C8AC53;
+  margin: 5px;
+  
+}
+
+.closeButton {
+
+  font-family: 'Monofonto', cursive; /* Apply the custom font here */
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #C8AC53;
+  cursor: pointer;
+  padding: 0;
+}
+
+.closeButton:hover {
+  color: #f00; /* Change color on hover */
+}
+
+
+.you {
+  font-family: 'Monofonto', cursive; /* Apply the custom font here */
+  font-weight: bold;
+  color: #c8ad5386; /* Or any color of your choice */
+  margin-right: 5px; /* Add some space between YOU and the address */
+}
+
+
+
+.horizontalContainer {
+  display: flex;
+  justify-content: space-between;  /* Distribute space between the containers */
+  align-items: flex-start;  /* Align the items to the top */
+  gap: 20px;  /* Optional: Adds space between the containers */
+
+  overflow-x: scroll; /* Always shows both vertical and horizontal scrollbars */
+  scrollbar-width: thin; /* Firefox-specific - makes the scrollbar thinner */
+  scrollbar-color: #C8AC53 #c8ad5386;
+}
+
+.winnerContainer, .playersContainer {
+  flex: 0 1 auto;  /* Prevent stretching and allow the container to grow based on content */
+  padding: 10px;
+
+ 
+  outline: 1px solid #2c2c2c;
+}
+
+
+
+
+.scrollableList {
+text-align: center;
+
+  max-height: 150px;
+  overflow-y: scroll; /* Always shows both vertical and horizontal scrollbars */
+  scrollbar-width: thin; /* Firefox-specific - makes the scrollbar thinner */
+  scrollbar-color: #C8AC53 #c8ad5386; /* Firefox-specific - sets the scrollbar color (thumb and track) */
+}
+
+/* Optionally add more specific styling */
+
+/* Tooltip styling */
+.btn[title]:hover::after {
+  content: attr(title); /* Use the title attribute as the tooltip content */
+  position: absolute;
+  top: -25px; /* Adjust this to position the tooltip above the button */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
 }

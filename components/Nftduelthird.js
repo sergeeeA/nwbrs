@@ -1,39 +1,107 @@
 import React, { useState, useEffect } from 'react';
 import style from '../styles/nftduel.module.css';
 import { useAppContext } from '../context/context';
-import { useNftContext } from '../context/NftContext'; // Import the context
-import nftAbi from '../utils/nft'; // Import ABI
+import { useNftContext } from '../context/NftContext'; // the context
+import nftAbi from '../utils/nft'; // ABI FOR NFT
 import Web3 from 'web3'; // Import Web3
 
 const NFT_CONTRACT_ADDRESS = '0x7424C334EC67DB47768189696813248bf1a16675'; // Fixed contract address
-const APPROVE_ADDRESS = '0x0230959cB5fF0BEa92f49e8bddA49e44446a4768'; // LOTTERY CONTRACT Address to approve
-const TARGET_CHAIN_ID = '0x138D4'; // Chain ID 80084 in hexadecimal
+const APPROVE_ADDRESS = '0x67701281266d13C2Bca291c5Aa9faBb74c9d8B91'; // LOTTERY CONTRACT Address to approve
+const TARGET_CHAIN_ID = '0x138D4'; // berachain ID 80084 in hexadecimal
 
 const NftDuel = () => {
-  const { depositNFTToPrizePoolThird, withdrawNFTFromPrizePoolThird, nftFirstDepositorThird } = useAppContext();
-  const { nftTokenId, setNftTokenId } = useNftContext(); // Use the context
+  const { depositNFTToPrizePoolThird, 
+    withdrawNFTFromPrizePoolThird, 
+    nftFirstDepositorThird,
+    fetchNftPrizePoolTokenIdThird } = useAppContext();
+
   const [nftContract, setNftContract] = useState(null);
-  const [loadingDeposit, setLoadingDeposit] = useState(false); // Loading state for deposit
+  const [loadingDeposit, setLoadingDeposit] = useState(false); // Loaading state for deposit
   const [loadingWithdraw, setLoadingWithdraw] = useState(false); // Loading state for withdraw
   const [isDepositor, setIsDepositor] = useState(false); // Track if the current user is the depositor
+  
+  // States for the new NFT inventory (BERA OUTLAWS)
+  const [additionalNftInventory, setAdditionalNftInventory] = useState([]);
+  const { nftTokenId, setNftTokenId } = useNftContext(); // Use the context
 
-  // Initialize Web3 and the contract
+  //coldown
+    const [lastInventoryFetchTime, setLastInventoryFetchTime] = useState(0);
+    const [fetchedTokenId, setFetchedTokenId] = useState(null);
+    const [lastFetchTime, setLastFetchTime] = useState(0); 
+
   const web3 = new Web3(Web3.givenProvider || 'http://localhost:8545');
+  const [connectedAddress, setConnectedAddress] = useState(null); // State to store the connected address
 
   useEffect(() => {
+    const loadAccount = async () => {
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length > 0) {
+        setConnectedAddress(accounts[0]);
+      } else {
+        setConnectedAddress(null);
+      }
+    };
+    loadAccount();
     setNftContract(new web3.eth.Contract(nftAbi.nftAbi, NFT_CONTRACT_ADDRESS));
   }, []);
 
   useEffect(() => {
     const checkDepositor = async () => {
-      const accounts = await web3.eth.getAccounts();
-      const currentAccount = accounts[0];
-      setIsDepositor(currentAccount === nftFirstDepositorThird); // Check if the current user is the depositor
+      if (connectedAddress) {
+        setIsDepositor(connectedAddress === nftFirstDepositorThird); // Check if the current user is the depositor
+      }
     };
     checkDepositor();
-  }, [nftFirstDepositorThird]);
+  }, [connectedAddress, nftFirstDepositorThird]);
 
-  // Function to check and switch to the correct network
+//TOKEN ID FOR % CHANCES
+
+const fetchTokenId = async () => {
+  const currentTime = Date.now();
+  const cooldownPeriod = 11000; // 11 secondss
+
+
+  if (currentTime - lastFetchTime < cooldownPeriod) {
+
+    return;
+  }
+
+  try {
+    const tokenId = await fetchNftPrizePoolTokenIdThird(0); 
+    if (!tokenId) {
+
+      return; 
+    }
+    setFetchedTokenId(tokenId);
+    setLastFetchTime(currentTime); 
+ 
+  } catch (error) {
+
+  }
+};
+
+
+useEffect(() => {
+  fetchTokenId(); 
+}, [lastFetchTime]); 
+
+  // FETCH INVENTORY FOR DUEl
+  const fetchAdditionalNFTInventory = async () => {
+    try {
+      const address = connectedAddress; // Get the current account
+      const response = await fetch(`https://api.routescan.io/v2/network/testnet/evm/80084/etherscan/api?module=account&action=addresstokennftinventory&address=${address}&contractaddress=0x7424C334EC67DB47768189696813248bf1a16675&page=1&offset=100&apikey=YourApiKeyToken`);
+      const data = await response.json();
+      if (data.status === "1") {
+        setAdditionalNftInventory(data.result || []);
+      } else {
+        setAdditionalError('Failed to fetch additional NFT inventory');
+      }
+    } catch (err) {
+      console.error('Error fetching additional NFT inventory:', err);
+    }
+  };
+
+  // CHECK NETWORK
   const checkAndSwitchNetwork = async () => {
     try {
       const currentChainId = await web3.eth.getChainId();
@@ -52,14 +120,15 @@ const NftDuel = () => {
     }
   };
 
-  const handleDeposit = async (e) => {
-    e.preventDefault();
-    if (nftTokenId && nftContract) {
+  const handleDeposit = async (e, selectedTokenId) => {
+    e.preventDefault(); 
+
+    if (selectedTokenId && nftContract) {
       const isCorrectNetwork = await checkAndSwitchNetwork();
-      if (!isCorrectNetwork) return; // Exit if the network is not correct
+      if (!isCorrectNetwork) return; 
 
       try {
-        const accounts = await web3.eth.getAccounts(); // Get the current user's account
+        const accounts = await web3.eth.getAccounts(); 
 
         if (accounts.length === 0) {
           alert('Please connect your wallet.');
@@ -67,23 +136,20 @@ const NftDuel = () => {
         }
 
         console.log('Approving NFT...');
-        setLoadingDeposit(true); // Set loading state to true during the deposit process
-
-        // Call the approve function
-        const approveResult = await nftContract.methods.approve(APPROVE_ADDRESS, nftTokenId).send({ from: accounts[0] });
+        setLoadingDeposit(true); 
+        
+        const approveResult = await nftContract.methods.approve(APPROVE_ADDRESS, selectedTokenId).send({ from: accounts[0] });
         console.log('Approval result:', approveResult);
 
         console.log('Approval successful. Depositing NFT...');
-
-        // Deposit the NFT to the prize pool
-        await depositNFTToPrizePoolThird(NFT_CONTRACT_ADDRESS, nftTokenId, web3.utils.toWei('1', 'ether'));
+        await depositNFTToPrizePoolThird(NFT_CONTRACT_ADDRESS, selectedTokenId, web3.utils.toWei('1', 'ether'));
         console.log('Deposit successful.');
 
       } catch (error) {
         console.error('Error processing transaction:', error);
         alert('An error occurred: ' + error.message);
       } finally {
-        setLoadingDeposit(false); // Reset loading state after deposit attempt
+        setLoadingDeposit(false); 
       }
     } else {
       alert('Please provide an NFT Token ID.');
@@ -94,12 +160,12 @@ const NftDuel = () => {
     e.preventDefault();
 
     const isCorrectNetwork = await checkAndSwitchNetwork();
-    if (!isCorrectNetwork) return; // Exit if the network is not correct
+    if (!isCorrectNetwork) return; 
 
     try {
-      setLoadingWithdraw(true); // Set loading state to true during the withdrawal process
+      setLoadingWithdraw(true); 
 
-      const index = 0; // Always use index 0 for withdrawal
+      const index = 0; // this withdraws the first nft
       await withdrawNFTFromPrizePoolThird(index);
       console.log('Withdrawal successful.');
 
@@ -107,92 +173,107 @@ const NftDuel = () => {
       console.error('Error processing withdrawal:', error);
       alert('An error occurred: ' + error.message);
     } finally {
-      setLoadingWithdraw(false); // Reset loading state after withdrawal attempt
+      setLoadingWithdraw(false); 
     }
   };
 
   return (
     <div className={style.parentcontainer}>
       <div className={style.wrappernft}>
+        {/* Conditionally hide dropdown if the connected address is the depositor */}
+        {connectedAddress !== nftFirstDepositorThird && (
+          <select
+            value={nftTokenId}
+            onChange={async (e) => {
+              const selectedTokenId = e.target.value;
+              console.log('Selected Token ID:', selectedTokenId);  
+              
+              setNftTokenId(selectedTokenId);  // Update with the selected token ID
+              
+              // Handle deposit and reset nftTokenId to 0 after processing
+              if (selectedTokenId !== "") {
+                await handleDeposit(e, selectedTokenId);
 
-        <h2 className={style.title} style={{ textDecoration: 'underline' }}>NFT DUEL</h2>
+                // Reset nftTokenId after the deposit is handled successfully
+                setNftTokenId(0);
+              }
+            }}
+            onClick={fetchAdditionalNFTInventory}
+            className={style.dropdown}
+          >
+            <option value="">Select NFT to wager</option>
+             {additionalNftInventory
+              .sort((a, b) => Number(b.TokenId) - Number(a.TokenId)) // Sort by TokenId in descending order
+              .map((nft) => {
+                if (fetchedTokenId !== null && fetchedTokenId !== undefined) {
+                  // Ensure both are numbers before adding
+                  const nftTokenIdValue = Number(nft.TokenId);  // Make sure it's a number
+                  const totalTokenId = nftTokenIdValue + Number(fetchedTokenId);  // Correct numeric addition
+            
+                  const calculation = (nftTokenIdValue / totalTokenId) * 100;  // Perform the calculation
+            
+                  // Determine the font color based on the percentage value
+                  let fontColor = '';
+                  if (calculation >= 66) {
+                    fontColor = '#00ff00'; // Neon Green
+                  } 
+                  else if (calculation >= 46) {
+                    fontColor = '#ffff00'; // Neon Yellow
+                  } else if (calculation >= 26) {
+                    fontColor = '#ff6600'; // Neon Orange
+                  } else {
+                    fontColor = '#ff0000'; // Neon Red
+                  }
+            
+                  return (
+                    <option key={nft.TokenId} value={nft.TokenId} style={{ color: fontColor }}>
+                      {nft.TokenId} - {calculation.toFixed(1)}%{/* Correct percentage calculation */}
+                    </option>
+                  );
+                } else {
+                  return (
+                    <option key={nft.TokenId} value={nft.TokenId}>
+                      {nft.TokenId} 
+                    </option>
+                  );
+                }
+              })}
+          </select>
+        )}
 
-        <label className={style.rafflefeetitle} htmlFor="nftTokenId" style={{ cursor: 'url("/curs.png"), auto',}}>
-          TOKEN ID:
-        </label>
-        <form onSubmit={handleDeposit}>
-          <div className={style.tooltip}>
-            <input
-              type="number"
-              id="nftTokenId"
-              value={nftTokenId}
-              onChange={(e) => setNftTokenId(e.target.value)}
-              required
-              className={style.numberInput} // Apply the CSS module class here
-            />
-            <div className={style.tooltiptext}>
-            Click any token ID in your NFT Inventory!
+        {loadingDeposit && (
+          <div className={style.loadingCircle}></div>
+        )}
+
+        {isDepositor && ( 
+          <form onSubmit={handleWithdraw}>
+            <div className={style.parentcontainer}>
+              <button
+                type="submit"
+                disabled={loadingWithdraw} 
+                style={{
+                  padding: '10px 10px',
+                  backgroundColor: 'transparent',
+                  color: '#C8AC53',
+                  fontSize: '20px',
+                  fontFamily: 'Monofonto',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  boxSizing: 'border-box',
+                  transformOrigin: 'center', 
+                  cursor: 'url("/curs.png"), auto',
+                }}
+              >
+                {loadingWithdraw ? (
+                  <div className={style.loadingCircle}></div>
+                ) : (
+                  <div className={style.btn}>WITHDRAW </div>
+                )}
+              </button>
             </div>
-          </div>
-          <div className={style.parentcontainer}>
-            <button
-              type="submit"
-              disabled={loadingDeposit} // Disable button while loading
-              style={{
-                width: '50%', // Makes the button wider than its container
-                height: '40%', // Makes the button taller than its container
-                padding: '10px 10px',
-                backgroundColor: 'transparent',
-                color: '#C8AC53',
-                fontSize: '20px',
-                fontFamily: 'Monofonto',
-                border: 'none',
-                cursor: 'pointer',
-                textAlign: 'center',
-                boxSizing: 'border-box',
-                transformOrigin: 'center', // Optional: ensures the scaling is from the center
-                cursor: 'url("/curs.png"), auto',
-              }}
-            >
-              {loadingDeposit ? (
-                <div className={style.loadingCircle}></div>
-              ) : (
-                <div className={style.btn}>WAGER</div>
-              )}
-            </button>
-          </div>
-        </form>
-
-        <form onSubmit={handleWithdraw}>
-          <div className={style.parentcontainer}>
-            <button
-              type="submit"
-              disabled={loadingWithdraw} // Disable button while loading
-              style={{
-                width: '60%', // Makes the button wider than its container
-                height: '40%', // Makes the button taller than its container
-                padding: '10px 10px',
-                backgroundColor: 'transparent',
-                color: '#C8AC53',
-                fontSize: '20px',
-                fontFamily: 'Monofonto',
-                border: 'none',
-                cursor: 'pointer',
-                textAlign: 'center',
-                boxSizing: 'border-box',
-                transformOrigin: 'center', // Optional: ensures the scaling is from the center
-                cursor: 'url("/curs.png"), auto',
-              }}
-            >
-              {loadingWithdraw ? (
-                <div className={style.loadingCircle}></div>
-              ) : (
-                <div className={style.btn}>WITHDRAW NFT</div>
-              )}
-            </button>
-          </div>
-        </form>
-
+          </form>
+        )}
       </div>
     </div>
   );

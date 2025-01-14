@@ -5,7 +5,7 @@ import { useAppContext } from '../context/context';
 const PotCard = () => {
   const {
     address: connectedWalletAddress,
-    nftPrizeSecondRounds = [], // Use nftPrizeSecondRounds instead
+    nftPrizeSecondRounds = { addresses1: [], addresses2: [] }, // Ensure defaults are empty arrays for addresses1 and addresses2
     fetchAllNftPrizeSecondRounds, // Fetch function for NFT prize second rounds
   } = useAppContext();
 
@@ -37,9 +37,22 @@ const PotCard = () => {
     }, 5000);
   };
 
+  // Ensure addresses1 and addresses2 exist and are arrays
+  const addresses1 = nftPrizeSecondRounds?.addresses1 || [];
+  const addresses2 = nftPrizeSecondRounds?.addresses2 || [];
+
+  // Combine addresses1 and addresses2 into a list of rounds for easier display
+  const rounds = addresses1.map((address1, index) => {
+    return {
+      winner: address1,
+      loser: addresses2[index] || "0x0000000000000000000000000000000000000000", // Default value for missing losers
+    };
+  });
+
+  // Filter rounds based on the "Show My Games" option
   const filteredRounds = showOnlyConnected
-    ? nftPrizeSecondRounds.filter(round => round.winner === connectedWalletAddress || round.loser === connectedWalletAddress)
-    : nftPrizeSecondRounds;
+    ? rounds.filter(round => round.winner === connectedWalletAddress || round.loser === connectedWalletAddress)
+    : rounds;
 
   return (
     <div className={style.wrapper}>
@@ -52,7 +65,7 @@ const PotCard = () => {
           >
             {showOnlyConnected ? 'Show All' : 'Show My Games'}
           </div>
-          <div className={`${style.lineAfter}`}></div>
+  
           <div className={style.scrollableList}>
             {filteredRounds.length > 0 ? (
               [...filteredRounds].reverse().map((round, index) => ( // Reverse the order here
