@@ -53,15 +53,15 @@ const NftDuelstatus = () => {
       if (nftPrizePoolContract && nftPrizePoolContract !== '0x0000000000000000000000000000000000000000') {
         try {
           const tokenId = await fetchNftPrizePoolTokenId(0);
-    
+      
           if (tokenId) {
             setNftTokenId(tokenId);
-            const imageUrl = `https://ipfs.io/ipfs/QmbdGEVSdkQtYdK6ahzFxsz3kqoVTKwfYNZ36q6YRiR13V/${tokenId}.png`;
-            setNftImage(imageUrl);
+    
+            // Use CORS Anywhere proxy to fetch IPFS data
+            const imageUrl = `https://ipfs.infura.io/ipfs/QmbdGEVSdkQtYdK6ahzFxsz3kqoVTKwfYNZ36q6YRiR13V/${tokenId}.png`;
 
-            const response = await fetch(`https://ipfs.io/ipfs/QmVzp3QfDt3v3E1J9Z4ZmXb85gVJFsGGzvKDWMzQSrYpVu/${tokenId}`);
-            const traitsData = await response.json();
-            setNftTraits(traitsData.attributes || []); 
+
+            setNftImage(imageUrl);
           } else {
             console.warn('Token ID is null, skibidi or die.');
           }
@@ -75,6 +75,7 @@ const NftDuelstatus = () => {
     };
     
     fetchTokenId();
+    
 
 
 

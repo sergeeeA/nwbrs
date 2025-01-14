@@ -78,13 +78,10 @@ const NftDuel = () => {
           const tokenId = await fetchNftPrizePoolTokenIdThird(0);
           if (tokenId) {
             setNftTokenId(tokenId);
-            const imageUrl = `https://ipfs.io/ipfs/QmUC913AerVHnAYVSVEyYTCvGNaD7yyRkoFoz5tgxy4G1B/${tokenId}.png`;
+            const imageUrl = `https://ipfs.infura.io/ipfs/QmUC913AerVHnAYVSVEyYTCvGNaD7yyRkoFoz5tgxy4G1B/${tokenId}.png`;
             setNftImage(imageUrl);
 
-            // Fetch metadata from the new API
-            const response = await fetch(`https://ipfs.io/ipfs/QmYcWNeYX72iMaNAxGPPsDTkN1XrUHbnTjhzxzhzUkXwtE/${tokenId}`);
-            const traitsData = await response.json();
-            setNftTraits(traitsData.attributes || []); // Ensure it's an array
+   
           }
         } catch (error) {
           console.error('Error fetching NFT Token ID:', error);

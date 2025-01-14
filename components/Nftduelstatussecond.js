@@ -62,7 +62,7 @@ const NftDuel = () => {
           if (tokenId) {
             setNftTokenId(tokenId);
 
-            const imageUrl = `https://ipfs.io/ipfs/bafybeidutrluxzzeo3jjjugitblg634zbkgqbr7oo32g7zvwdvd2pbxjla/${tokenId}.png`;
+            const imageUrl = `https://ipfs.infura.io/ipfs/bafybeidutrluxzzeo3jjjugitblg634zbkgqbr7oo32g7zvwdvd2pbxjla/${tokenId}.png`;
             setNftImage(imageUrl);
 
             // Fetch metadata from the new API
